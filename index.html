@@ -58,7 +58,7 @@ footer{background:#061126;color:#d6dfed;padding:30px 22px}.footer-inner{max-widt
 <link rel="icon" type="image/png" href="./pbsv-crest.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Penya Barcelonista">
-<!-- pbsv-integrated-v1 -->
+<!-- pbsv-integrated-v1 --><!-- pbsv-android-fix-v2 -->
 </head>
 <body>
 <div class="topline"></div>
@@ -214,12 +214,22 @@ renderClubTeams();
  first.addEventListener('change',savePrefs);events.addEventListener('change',savePrefs);
  function showMessage(msg){status.textContent=msg;}
  function render(){list.replaceChildren();items.sort((a,b)=>a.when.localeCompare(b.when));for(const item of items){const div=document.createElement('div');div.className='notify-item';const title=document.createElement('b');title.textContent=item.title;const when=document.createElement('small');const d=new Date(item.when);when.textContent=(item.type==='match'?'⚽ Partido · ':'📅 Evento · ')+(isNaN(d)?item.when:d.toLocaleString('es-ES',{dateStyle:'medium',timeStyle:'short'}));div.append(title,when);const del=document.createElement('button');del.className='notify-delete';del.type='button';del.textContent='Eliminar';del.addEventListener('click',()=>{items=items.filter(x=>x.id!==item.id);save();render();});div.append(del);list.append(div);}if(!items.length)list.textContent='No hay avisos configurados.';}
- async function notify(title,body){if(!('Notification' in window)||Notification.permission!=='granted)return false;try{const reg=await navigator.serviceWorker.ready;await reg.showNotification(title,{body,icon:'./pbsv-crest.png',badge:'./pbsv-crest.png',tag:'pbsv-alert',data:{url:'./index.html'}});return true;}catch(e){console.warn('Aviso:',e);return false;}}
+ async function notify(title,body){
+ if(!('Notification' in window))throw Error('Chrome no admite notificaciones en este contexto');
+ if(Notification.permission!=='granted')throw Error('Permiso actual: '+Notification.permission+'. Pulsa Activar avisos.');
+ if(!('serviceWorker' in navigator))throw Error('El navegador no admite Service Worker');
+ const reg=await navigator.serviceWorker.register('./pbsv-sw.js',{scope:'./'});
+ await reg.showNotification(title,{body,icon:'./pbsv-icon-padded.png',tag:'pbsv-alert',data:{url:'./index.html'}});
+ return true;
+}
  document.getElementById('notifyEnable').addEventListener('click',async()=>{if(!('Notification' in window)){showMessage('Este navegador no admite notificaciones.');return;}if(!window.isSecureContext){showMessage('Para solicitar permiso hay que publicar la web con HTTPS. En un archivo local puede no funcionar.');return;}try{if(!('serviceWorker' in navigator)){showMessage('Tu navegador no admite Service Workers.');return;}await navigator.serviceWorker.register('./pbsv-sw.js',{scope:'./'});const result=Notification.permission==='granted'?'granted':await Notification.requestPermission();showMessage(result==='granted'?'Permiso concedido. Mantén abierta la web para recibir estos recordatorios.':result==='denied'?'Notificaciones bloqueadas en el navegador.':'Permiso no concedido.');}catch(_){showMessage('No se pudo solicitar el permiso.');}});
- document.getElementById('notifyTest').addEventListener('click',async()=>{if(!await notify('🔔 Penya Barcelonista','Aviso de prueba de la web PBSV'))showMessage('Activa los avisos desde esta web HTTPS y vuelve a probar.');else showMessage('Notificación enviada al móvil.');});
+ document.getElementById('notifyTest').addEventListener('click',async()=>{
+ try{await notify('🔔 Penya Barcelonista','Aviso de prueba de la web PBSV');showMessage('Notificación enviada al móvil.');}
+ catch(e){console.error(e);showMessage('No se pudo enviar: '+e.message);}
+});
  document.getElementById('notifyForm').addEventListener('submit',e=>{e.preventDefault();const title=document.getElementById('notifyTitle').value.trim(),when=document.getElementById('notifyWhen').value,type=document.getElementById('notifyType').value;if(!title||!when||!Number.isFinite(new Date(when).getTime()))return;items.push({id:'local-'+Date.now(),title,when,type});save();render();e.target.reset();showMessage('Guardado en este dispositivo.');});
  const sent=new Set();
- async function check(){const now=Date.now();for(const item of items){if((item.type==='match'&&!first.checked)||(item.type==='event'&&!events.checked))continue;const when=new Date(item.when).getTime();if(!Number.isFinite(when))continue;const lead=item.type==='match'?60:24*60;const trigger=when-lead*60000;if(now>=trigger&&now<when&& !sent.has(item.id)){if(await notify('🔔 '+(item.type==='match'?'Partido del primer equipo':'Evento de la Penya'),item.title+' · '+new Date(when).toLocaleString('es-ES',{dateStyle:'short',timeStyle:'short'})))sent.add(item.id);}}}
+ async function check(){const now=Date.now();for(const item of items){if((item.type==='match'&&!first.checked)||(item.type==='event'&&!events.checked))continue;const when=new Date(item.when).getTime();if(!Number.isFinite(when))continue;const lead=item.type==='match'?60:24*60;const trigger=when-lead*60000;if(now>=trigger&&now<when&& !sent.has(item.id)){try{if(await notify('🔔 '+(item.type==='match'?'Partido del primer equipo':'Evento de la Penya'),item.title+' · '+new Date(when).toLocaleString('es-ES',{dateStyle:'short',timeStyle:'short'})))sent.add(item.id);}catch(e){console.warn('Recordatorio pendiente:',e);}}}}
  render();check();setInterval(check,60000);
  showMessage('Avisos compatibles con Chrome Android. Los recordatorios funcionan mientras la web está abierta.');
 })();

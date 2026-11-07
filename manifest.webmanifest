@@ -10,16 +10,10 @@
   "theme_color": "#07152d",
   "icons": [
     {
-      "src": "./pbsv-crest.png",
-      "sizes": "650x650",
+      "src": "./pbsv-icon-padded.png",
+      "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any"
-    },
-    {
-      "src": "./pbsv-crest.png",
-      "sizes": "650x650",
-      "type": "image/png",
-      "purpose": "maskable"
+      "purpose": "any maskable"
     }
   ]
 }
