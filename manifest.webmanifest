@@ -1,0 +1,19 @@
+{
+  "id": "./avisos.html",
+  "name": "Penya Barcelonista Sant Vicenç dels Horts · Avisos",
+  "short_name": "PBSV Avisos",
+  "description": "Avisos de partidos y eventos del club",
+  "start_url": "./avisos.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#07152d",
+  "theme_color": "#07152d",
+  "icons": [
+    {
+      "src": "./pbsv-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
