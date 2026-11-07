@@ -1,19 +1,25 @@
 {
-  "id": "./avisos.html",
-  "name": "Penya Barcelonista Sant Vicenç dels Horts · Avisos",
-  "short_name": "PBSV Avisos",
+  "id": "./index.html",
+  "name": "Penya Barcelonista Sant Vicenç dels Horts",
+  "short_name": "Penya PBSV",
   "description": "Avisos de partidos y eventos del club",
-  "start_url": "./avisos.html",
+  "start_url": "./index.html",
   "scope": "./",
   "display": "standalone",
   "background_color": "#07152d",
   "theme_color": "#07152d",
   "icons": [
     {
-      "src": "./pbsv-icon.svg",
-      "sizes": "any",
-      "type": "image/svg+xml",
-      "purpose": "any maskable"
+      "src": "./pbsv-crest.png",
+      "sizes": "650x650",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "./pbsv-crest.png",
+      "sizes": "650x650",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
