@@ -4,6 +4,7 @@ on:
     paths:
       - '.github/workflows/integrar-pwa.yml'
       - 'scripts/integrar_pwa.py'
+      - 'scripts/reparar_avisos_icono.py'
   workflow_dispatch:
 permissions:
   contents: write
@@ -16,6 +17,8 @@ jobs:
           persist-credentials: true
       - name: Integrar notificaciones y escudo real
         run: python3 scripts/integrar_pwa.py
+      - name: Preparar editor de imágenes
+        run: python3 -m pip install pillow
       - name: Actualizar manifiesto con escudo del club
         run: |
           python3 - <<'PY'
@@ -26,11 +29,13 @@ jobs:
           m.update({'id':'./index.html','name':'Penya Barcelonista Sant Vicenç dels Horts','short_name':'Penya PBSV','start_url':'./index.html','scope':'./','display':'standalone','icons':[{'src':'./pbsv-crest.png','sizes':'650x650','type':'image/png','purpose':'any'},{'src':'./pbsv-crest.png','sizes':'650x650','type':'image/png','purpose':'maskable'}]})
           p.write_text(json.dumps(m,ensure_ascii=False,indent=2)+'\n')
           PY
+      - name: Reparar avisos e icono Android
+        run: python3 scripts/reparar_avisos_icono.py
       - name: Publicar los cambios
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add index.html pbsv-crest.png manifest.webmanifest
+          git add index.html pbsv-crest.png pbsv-icon-padded.png manifest.webmanifest
           if ! git diff --cached --quiet; then
             git commit -m "Integrar avisos Android y escudo oficial en PWA principal"
             git push
