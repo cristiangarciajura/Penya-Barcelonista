@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="ca"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Editor de notícies · PBSV</title>
+<style>
+:root{font-family:system-ui,Arial,sans-serif;color:#172947;background:#f3f6fb}*{box-sizing:border-box}body{margin:0}header{background:#142c5d;color:white;padding:18px}header a{color:white}main{max-width:900px;margin:auto;padding:24px 16px}h1{margin-bottom:6px}.panel{background:white;border:1px solid #dce4f0;border-radius:16px;padding:20px;margin:18px 0;box-shadow:0 4px 16px #10244b0a}label{display:block;font-weight:700;margin:15px 0 5px}input,textarea{width:100%;padding:12px;border:1px solid #b8c6dc;border-radius:9px;font:inherit}textarea{min-height:120px;resize:vertical}button,.btn{display:inline-block;border:0;border-radius:9px;padding:11px 15px;background:#174b9d;color:white;font:700 14px system-ui;cursor:pointer;text-decoration:none;margin:5px 6px 5px 0}.secondary{background:#e7edf7;color:#153769}.danger{background:#a52c45}.item{border-top:1px solid #e0e7f1;padding:14px 0}.item p{margin:5px 0;color:#53647c}.muted{color:#5c6c84;font-size:14px;line-height:1.6}.status{min-height:24px;color:#164d83}ol{line-height:1.8}code{overflow-wrap:anywhere}
+</style></head><body><header><a href="./admin.html">← Administració</a></header><main>
+<h1>📰 Editor de notícies</h1><p class="muted">Crea i prepara notícies sense editar JSON a mà. La publicació final es fa amb el teu compte de GitHub.</p>
+<section class="panel"><h2>Nova notícia / Nueva noticia</h2><form id="form">
+<label for="title">Títol / Título *</label><input id="title" maxlength="180" required>
+<label for="date">Data / Fecha *</label><input id="date" type="date" required>
+<label for="summary">Resum / Resumen *</label><textarea id="summary" maxlength="1200" required></textarea>
+<label for="image">URL de la imatge (opcional)</label><input id="image" type="url" placeholder="https://...">
+<label for="link">Enllaç de la notícia (opcional)</label><input id="link" type="url" placeholder="https://...">
+<button type="submit">Afegir notícia</button><button type="button" class="secondary" id="reset">Netejar formulari</button></form><p id="status" class="status" role="status"></p></section>
+<section class="panel"><h2>Notícies preparades</h2><div id="list"></div><button id="download">Descarregar noticies.json</button><button id="copy" class="secondary">Copiar JSON</button></section>
+<section class="panel"><h2>Publicar a la web</h2><ol><li>Prepara les notícies i prem <b>Copiar JSON</b>.</li><li>Obre <a href="https://github.com/cristiangarciajura/Penya-Barcelonista/edit/main/data/noticies.json" target="_blank" rel="noopener">el fitxer de notícies a GitHub</a>.</li><li>Substitueix-ne el contingut pel JSON copiat i prem <b>Commit changes</b>.</li></ol><p class="muted">Només les persones amb permís d'escriptura a GitHub poden publicar. Aquest editor no demana contrasenyes ni tokens. Les notícies es guarden provisionalment en aquest navegador fins que les publiques. La connexió de la portada amb aquest fitxer encara és pendent.</p></section>
+</main><script>
+const KEY='pbsv-news-editor-v1';let items=[];const $=id=>document.getElementById(id);const status=t=>$('status').textContent=t;
+function valid(x){return x&&typeof x.titulo==='string'&&typeof x.fecha==='string'&&typeof x.resumen==='string'}
+function load(x){const a=Array.isArray(x?.noticias)?x.noticias:[];return a.filter(valid).map(n=>({id:String(n.id||'news-'+Math.random().toString(36).slice(2)),titulo:n.titulo,fecha:n.fecha,resumen:n.resumen,imagen:n.imagen||'',enlace:n.enlace||''}))}
+function save(){localStorage.setItem(KEY,JSON.stringify(items));render()}
+function exportData(){return JSON.stringify({version:1,noticias:items},null,2)+'\n'}
+function render(){const root=$('list');root.replaceChildren();if(!items.length){const p=document.createElement('p');p.className='muted';p.textContent='Encara no hi ha notícies preparades.';root.append(p)}for(const n of [...items].sort((a,b)=>b.fecha.localeCompare(a.fecha))){const d=document.createElement('div');d.className='item';const h=document.createElement('strong');h.textContent=n.titulo+' · '+n.fecha;const p=document.createElement('p');p.textContent=n.resumen;const b=document.createElement('button');b.className='danger';b.textContent='Eliminar';b.onclick=()=>{if(confirm('Eliminar aquesta notícia?')){items=items.filter(x=>x.id!==n.id);save()}};d.append(h,p,b);root.append(d)}}
+$('date').value=new Date().toLocaleDateString('en-CA');
+$('form').onsubmit=e=>{e.preventDefault();const n={id:'news-'+Date.now(),titulo:$('title').value.trim(),fecha:$('date').value,resumen:$('summary').value.trim(),imagen:$('image').value.trim(),enlace:$('link').value.trim()};if(!n.titulo||!n.fecha||!n.resumen)return;items.push(n);save();e.target.reset();status('Notícia afegida. Recorda publicar el JSON a GitHub.')};
+$('reset').onclick=()=>$('form').reset();
+$('copy').onclick=async()=>{try{await navigator.clipboard.writeText(exportData());status('JSON copiat. Ja el pots enganxar a GitHub.')}catch{status('No s’ha pogut copiar. Fes servir Descarregar.')}};
+$('download').onclick=()=>{const a=document.createElement('a');const url=URL.createObjectURL(new Blob([exportData()],{type:'application/json'}));a.href=url;a.download='noticies.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status('Fitxer descarregat.')};
+try{const saved=localStorage.getItem(KEY);if(saved){items=load({noticias:JSON.parse(saved)});render()}else{fetch('./data/noticies.json',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{items=load(d);save()}).catch(()=>{render();status('No s’ha pogut carregar el fitxer actual. Revisa les notícies abans de publicar.')})}}catch{render();status('No s’han pogut llegir les dades locals.')}render();
+</script></body></html>
