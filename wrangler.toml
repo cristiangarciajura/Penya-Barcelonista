@@ -1,0 +1,8 @@
+name = "pbsv-admin"
+main = "cloudflare/worker.js"
+compatibility_date = "2026-11-09"
+workers_dev = true
+
+# GITHUB_CLIENT_ID: configure as a plain text environment variable in Cloudflare.
+# GITHUB_CLIENT_SECRET and SESSION_KEY: configure as encrypted secrets.
+# Do not commit OAuth credentials or session secrets.
