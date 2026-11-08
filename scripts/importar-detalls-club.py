@@ -24,7 +24,15 @@ def parse(name,opening):
  raw=literal(name,opening)
  try:return json.loads(raw)
  except json.JSONDecodeError:return ast.literal_eval(raw)
-details=parse('details','{')
+def parse_details():
+ raw=literal('details','{')
+ # Club detail keys are JavaScript identifiers (history, board, ...), not JSON.
+ # Quote only object-property identifiers immediately after an opening brace or comma.
+ normalized=re.sub(r'([,{]\\s*)([A-Za-z_$][A-Za-z0-9_$]*)(\\s*:)',r'\\1"\\2"\\3',raw)
+ try:return json.loads(normalized)
+ except json.JSONDecodeError:
+  return ast.literal_eval(normalized)
+details=parse_details()
 board=parse('clubBoard','[')
 sports=parse('clubSports','[')
 assert isinstance(details,dict) and len(details)>=5
