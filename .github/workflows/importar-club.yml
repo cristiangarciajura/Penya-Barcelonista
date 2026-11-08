@@ -1,0 +1,34 @@
+name: Importar apartats actuals del club
+on:
+  push:
+    paths:
+      - 'scripts/importar-club.py'
+      - '.github/workflows/importar-club.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Recuperar apartats existents
+        run: python3 scripts/importar-club.py
+      - name: Validar dades
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('data/club.json').read_text(encoding='utf-8'))
+          assert len(d['sections'])>=5
+          assert all(x.get('id') and x.get('name') for x in d['sections'])
+          PY
+      - name: Guardar apartats
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/club.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Importar apartats reals del club al panel"
+            git push
+          fi
