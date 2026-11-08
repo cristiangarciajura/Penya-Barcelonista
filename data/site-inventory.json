@@ -1,0 +1,31 @@
+{
+  "version": 1,
+  "source": "index.html",
+  "sections": [
+    {
+      "id": "home",
+      "title": "Avisos de partits i esdeveniments",
+      "preview": "PBSV · NOVEDADES Avisos de partits i esdeveniments Activa els recordatoris del primer equip i dels actes importants. Aquesta primera versió funciona mentre tens la web oberta; els avisos automàtics amb 🔔 Activar avisos Probar aviso Partits del primer equip Actes del club Gestió de prova: afegir partits i actes Els canvis es guarden només en aquest navegador. No és un panell privat segur ni actualitza els altres mòbils. Tipo Primer equipo Evento d"
+    },
+    {
+      "id": "teams",
+      "title": "Els nostres equips",
+      "preview": "Futbol base i competició Els nostres equips Descobreix els 25 equips de la Penya. Cada fitxa tindrà fotografia real, plantilla, cos tècnic i accés a la competició oficial. Tots Masculí Femení Genuïns Ja hi ha fotografies i plantilles reals dels equips disponibles. La resta de fotografies es completaran més endavant."
+    },
+    {
+      "id": "store",
+      "title": "Botiga del club",
+      "preview": "Vesteix els nostres colors Botiga del club Tot el material i la roba oficial de la Penya, en un mateix lloc. Botiga oficial Porta la Penya amb tu. Consulta el catàleg de roba, equipacions i productes oficials del club. Visita la botiga oficial ↗ 🛍️"
+    },
+    {
+      "id": "club",
+      "title": "El club",
+      "preview": "La nostra identitat El club Descobreix qui som, d'on venim i les persones que fan possible la Penya Barcelonista Sant Vicenç dels Horts. 📖 Història Els nostres orígens, els moments destacats i el camí des de 1978. 👥 Junta directiva Les persones que representen i gestionen l'entitat. ⚽ Àrea esportiva Direcció, coordinació i suport esportiu del club. 🏆 Palmarès Títols, reconeixements i fites esportives del club. 📍 Contacte i instal·lacions On som, "
+    },
+    {
+      "id": "sponsors",
+      "title": "Patrocinadors i col·laboradors",
+      "preview": "Gràcies pel vostre suport Patrocinadors i col·laboradors Entitats i empreses que fan costat a la Penya."
+    }
+  ]
+}
