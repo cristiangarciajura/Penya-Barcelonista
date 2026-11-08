@@ -21,7 +21,7 @@ jobs:
           python3 - <<'PY'
           from pathlib import Path
           s=Path('index.html').read_text(encoding='utf-8')
-          assert 'id="pbsv-public-news"' in s
+          assert "section.id='pbsv-public-news'" in s
           assert 'id="pbsv-news-script"' in s
           assert 'data/noticies.json' in s
           PY
