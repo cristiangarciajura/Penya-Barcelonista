@@ -1,0 +1,35 @@
+name: Analitzar continguts actuals
+on:
+  push:
+    paths:
+      - 'scripts/analitzar-contingut.py'
+      - '.github/workflows/analitzar-contingut.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Analitzar equips i club
+        run: python3 scripts/analitzar-contingut.py
+      - name: Comprovar informe
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('data/site-analysis.json').read_text(encoding='utf-8'))
+          assert d['size']>100000 and d['terms']
+          PY
+      - name: Guardar informe
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/site-analysis.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Informe de continguts actuals d'equips i club"
+            git push
+          fi
