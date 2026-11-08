@@ -1,0 +1,36 @@
+name: Integrar notícies a la portada
+on:
+  push:
+    paths:
+      - 'scripts/integrar-noticies.py'
+      - '.github/workflows/integrar-noticies.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Integrar notícies sense reconstruir la web
+        run: python3 scripts/integrar-noticies.py
+      - name: Validar integració
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          s=Path('index.html').read_text(encoding='utf-8')
+          assert 'id="pbsv-public-news"' in s
+          assert 'id="pbsv-news-script"' in s
+          assert 'data/noticies.json' in s
+          PY
+      - name: Guardar canvis
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Mostrar notícies seleccionades a portada"
+            git push
+          fi
