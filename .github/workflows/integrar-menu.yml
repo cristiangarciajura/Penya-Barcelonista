@@ -28,9 +28,9 @@ jobs:
           original=Path('backups/index-antes-menu.html').read_text()
           updated=Path('index.html').read_text()
           if original==updated:
-              print('No se encontró menú compatible: sin cambios')
+              assert 'data-view="sponsors"' in updated, 'Patrocinadors no integrado'
           else:
-              assert 'patrocinadors.html' in updated and 'admin.html' in updated
+              assert 'data-view="sponsors"' in updated and 'id="pbsvSponsorGrid"' in updated
               assert len(updated)>len(original)
               assert updated.count('<nav')==original.count('<nav')
               assert updated.count('</nav>')==original.count('</nav>')
