@@ -28,7 +28,7 @@ def parse_details():
  raw=literal('details','{')
  # Club detail keys are JavaScript identifiers (history, board, ...), not JSON.
  # Quote only object-property identifiers immediately after an opening brace or comma.
- normalized=re.sub(r'([,{]\\s*)([A-Za-z_$][A-Za-z0-9_$]*)(\\s*:)',r'\\1"\\2"\\3',raw)
+ normalized=re.sub(r'([,{]\s*)([A-Za-z_$][A-Za-z0-9_$]*)(\s*:)',r'\1"\2"\3',raw)
  try:return json.loads(normalized)
  except json.JSONDecodeError:
   return ast.literal_eval(normalized)
