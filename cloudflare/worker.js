@@ -6,7 +6,7 @@ function cookies(req){return Object.fromEntries((req.headers.get('Cookie')||'').
 function respond(body,status=200,headers={}){return new Response(body,{status,headers:{'Cache-Control':'no-store','X-Content-Type-Options':'nosniff',...headers}})}
 function redirect(url,headers={}){return Response.redirect(url,302)}
 function cookie(name,value,maxAge){return name+'='+value+'; Path=/; HttpOnly; Secure; SameSite=Lax; Max-Age='+maxAge}
-function b64(bytes){return btoa(String.fromCharCode(...bytes)).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
+function b64(bytes){let value='';for(let i=0;i<bytes.length;i+=8192)value+=String.fromCharCode(...bytes.subarray(i,i+8192));return btoa(value).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')}
 function unb64(s){const str=atob(s.replace(/-/g,'+').replace(/_/g,'/'));return Uint8Array.from(str,c=>c.charCodeAt(0))}
 async function key(env){if(!env.SESSION_KEY)throw Error('SESSION_KEY missing');const hash=await crypto.subtle.digest('SHA-256',encoder.encode(env.SESSION_KEY));return crypto.subtle.importKey('raw',hash,'AES-GCM',false,['encrypt','decrypt'])}
 async function seal(value,env){const iv=crypto.getRandomValues(new Uint8Array(12));const bytes=await crypto.subtle.encrypt({name:'AES-GCM',iv},await key(env),encoder.encode(JSON.stringify(value)));return b64(iv)+'.'+b64(new Uint8Array(bytes))}
@@ -22,7 +22,7 @@ export default {async fetch(req,env){
   const auth=new URL('https://github.com/login/oauth/authorize');
   auth.searchParams.set('client_id',env.GITHUB_CLIENT_ID);
   auth.searchParams.set('redirect_uri',origin+'/auth/callback');
-  auth.searchParams.set('scope','repo');auth.searchParams.set('state',state);
+  auth.searchParams.set('scope','public_repo');auth.searchParams.set('state',state);
   return respond(null,302,{'Location':auth.toString(),'Set-Cookie':cookie('pbsv_state',state,600)});
  }
  if(path==='/auth/callback'){
