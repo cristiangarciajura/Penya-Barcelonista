@@ -3,7 +3,7 @@ const $=id=>document.getElementById(id),key='pbsv-editor-equips-v1';
 let items=[],editing=null,photo='';
 const fields=['name','category','coach','schedule','url'];
 function msg(t){$('status').textContent=t}
-function membersOf(t){return Array.isArray(t.players)?t.players:Array.isArray(t.members)?t.members.map(name=>({name,number:null})):[]}
+function membersOf(t){return Array.isArray(t.players)&&t.players.length?t.players:Array.isArray(t.members)?t.members.map(name=>({name,number:null})):[]}
 function addRow(target,person={},staff=false){
  const row=document.createElement('div');row.className='person-row';
  const name=document.createElement('input');name.placeholder='Nom i cognoms';name.value=person.name||'';name.setAttribute('aria-label','Nom i cognoms');
