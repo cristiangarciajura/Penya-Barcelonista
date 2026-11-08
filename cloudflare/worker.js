@@ -16,7 +16,7 @@ function config(env){return !!(env.GITHUB_CLIENT_ID&&env.GITHUB_CLIENT_SECRET&&e
 async function session(req,env){const value=cookies(req).pbsv_session;if(!value)return null;const s=await unseal(value,env);return s&&s.exp>Date.now()?s:null}
 export default {async fetch(req,env){
  const url=new URL(req.url),origin=url.origin,path=url.pathname;
- if(!config(env))return respond('Configuració pendent: GITHUB_CLIENT_ID, GITHUB_CLIENT_SECRET i SESSION_KEY.',503);
+ if(!config(env)){const missing=['GITHUB_CLIENT_ID','GITHUB_CLIENT_SECRET','SESSION_KEY'].filter(k=>!env[k]);return respond('Configuració pendent. Variables absents: '+missing.join(', ')+'. Revisa Production → Settings → Variables and Secrets.',503);}
  if(path==='/auth/login'){
   const state=b64(crypto.getRandomValues(new Uint8Array(24)));
   const auth=new URL('https://github.com/login/oauth/authorize');
