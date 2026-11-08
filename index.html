@@ -254,6 +254,26 @@ renderClubTeams();
  render();check();setInterval(check,60000);
  showMessage('Avisos compatibles con Chrome Android. Los recordatorios funcionan mientras la web está abierta.');
 })();
+
+/* pbsv-teams-json-integration-v1 */
+(function(){
+ fetch('./data/equips.json',{cache:'no-store'}).then(r=>{if(!r.ok)throw Error('No team data');return r.json()}).then(d=>{
+  if(!Array.isArray(d.teams)||!d.teams.length)return;
+  const valid=d.teams.filter(t=>t&&typeof t.name==='string'&&['masc','fem','genuine'].includes(t.category));
+  if(!valid.length)return;
+  clubTeams.splice(0,clubTeams.length,...valid.map(t=>[t.name,t.category]));
+  for(const k of Object.keys(teamAssets))delete teamAssets[k];
+  for(const k of Object.keys(teamRosters))delete teamRosters[k];
+  for(const k of Object.keys(fcfLinks))delete fcfLinks[k];
+  for(const t of valid){
+   if(t.image&&typeof t.image==='string'&&(/^(\.\/)?assets\//.test(t.image)||t.image.startsWith('data:image/')))teamAssets[t.name]=t.image;
+   teamRosters[t.name]={players:Array.isArray(t.players)?t.players:Array.isArray(t.members)?t.members.map(name=>({name,number:null})):[],staff:Array.isArray(t.staff)?t.staff:[]};
+   if(t.url&&/^https:\/\//.test(t.url))fcfLinks[t.name]=t.url;
+  }
+  const selected=document.querySelector('#teamFilters .team-filter.selected');
+  if(selected)selected.click();
+ }).catch(e=>console.warn('PBSV teams:',e));
+})();
 </script>
 <script>if('serviceWorker' in navigator&&isSecureContext){navigator.serviceWorker.register('./pbsv-sw.js',{scope:'./'}).catch(console.warn)}</script>
 <script id="pbsv-sponsors-script">
