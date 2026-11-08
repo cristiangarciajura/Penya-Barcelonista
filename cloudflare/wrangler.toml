@@ -1,0 +1,8 @@
+name = "pbsv-admin"
+main = "worker.js"
+compatibility_date = "2026-11-01"
+workers_dev = true
+
+# Copia el Client ID de la GitHub OAuth App aquí.
+[vars]
+GITHUB_CLIENT_ID = "SUBSTITUIR_PEL_CLIENT_ID"
