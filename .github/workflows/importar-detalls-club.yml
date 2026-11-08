@@ -1,0 +1,35 @@
+name: Importar detalls del club
+on:
+  push:
+    paths:
+      - 'scripts/importar-detalls-club.py'
+      - '.github/workflows/importar-detalls-club.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extreure continguts originals
+        run: python3 scripts/importar-detalls-club.py
+      - name: Validar dades
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('data/club.json').read_text(encoding='utf-8'))
+          assert len(d['sections'])>=5
+          assert any(x.get('detail') for x in d['sections'])
+          assert any(x.get('people') for x in d['sections'])
+          PY
+      - name: Desar continguts
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/club.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Importar detalls i responsables del club"
+            git push
+          fi
