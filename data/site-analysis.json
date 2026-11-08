@@ -1,7 +1,7 @@
 {
   "version": 1,
   "source": "index.html",
-  "size": 4422537,
+  "size": 4424469,
   "terms": {
     "id=\"teams\"": {
       "count": 1,
@@ -77,6 +77,57 @@
       "examples": [
         "data-detail=\"sports\"><div class=\"symbol\">⚽</div><h3>Àrea esportiva</h3><p>Direcció, coordinació i suport esportiu del club.</p></article> <article class=\"club-card\" data-detail=\"honours\"><div class=\"symbol\">🏆</div><h3>Palmarès</h3><p>Títols, reconeixements i fites esportives del club.</p></article> <article class=\"club-card\" data-detail=\"contact\"><div class=\"symbol\">📍</div><h3>Contacte i instal·lacions</h3><p>On som, com contactar a",
         "Vicenç dels Horts es va fundar l’any 1978. Aquí incorporarem una cronologia amb els moments més importants, fotografies i records de l’entitat.'], board:['Junta directiva',''], sports:['Àrea esportiva',''], honours:['Palmarès','Aquí mostrarem els títols, ascensos, campionats i reconeixements aconseguits pels equips i per l’entitat.'], contact:['Contacte i instal·lacions','Afegirem l’adreça, el correu, el telèfon, les xarxes socials "
+      ]
+    },
+    "PATTERN const\\s+[A-Za-z_$][\\w$]*\\s*=\\s*\\[": {
+      "count": 7,
+      "examples": [
+        "<b id=\"rosterHeading\">Plantilla i cos tècnic</b><div id=\"rosterStatus\">Pendent d’incorporar</div></div></div><div id=\"teamCompetition\"></div></div></div> <footer><div class=\"footer-inner\"><div><strong>Penya Barcelonista Sant Vicenç dels Horts</strong><br><small>Des de 1978 · Una penya, una família</small></div><small><a href=\"https://www.instagram.com/penyabarcelonistasv/?hl=es\" target=\"_blank\" rel=\"noopener noreferrer\">Instagram oficia",
+        "SCO JOSE CRUZ AMAYA\",\"number\":10},{\"name\":\"ZAID GABRIEL TORRES CARLOS\",\"number\":5},{\"name\":\"ADRIÀ CASTELLET PRAT\",\"number\":8},{\"name\":\"JOSE AMAR RUIZ\",\"number\":null},{\"name\":\"ADRIAN VENIMIR PEKTOV\",\"number\":6},{\"name\":\"N'GALLO DIAKITE SIDIBE\",\"number\":4},{\"name\":\"JESUS SANCHEZ MATEOS\",\"number\":7},{\"name\":\"ANDER RODRIGUEZ BUENO\",\"number\":2}],\"staff\":[{\"name\":\"MARTA SANCHEZ\",\"role\":\"ENTRENADORA\"},{\"name\":\"PABLO MONTERO\",\"role\":\"2DO ENTREN",
+        ",{\"name\":\"PABLO MONTERO\",\"role\":\"2DO ENTRENADOR\"},{\"name\":\"IVAN BERLANGA\",\"role\":\"3ER ENTRENADOR\"}]}}; const clubBoard=[{\"name\": \"CARLOS BUCHERAS\", \"role\": \"PRESIDENTE\"}, {\"name\": \"CARLES ROVIRA\", \"role\": \"VICEPRESIDENTE\"}, {\"name\": \"ALBERT ALBAO\", \"role\": \"TRESORER\"}, {\"name\": \"ANTON DURAN\", \"role\": \"VICEPRESIDENTE 2do\"}, {\"name\": \"Mª INES MARTINEZ\", \"role\": \"VOCAL\"}, {\"name\": \"JOSE LINARES\", \"role\": \"VOCAL\"}, {\"name\": \"CAROL PARRA\", \"",
+        "CIA\", \"role\": \"VOCAL\"}]; const clubSports=[{\"name\": \"RICARDO TORREBLANCA\", \"role\": \"DIRECTOR DEPORTIVO\"}, {\"name\": \"IZAN ARTIFO\", \"role\": \"COORDINADOR GENERAL\"}, {\"name\": \"FERNANDO TRONCOSO\", \"role\": \"COORDINADOR F11\"}, {\"name\": \"ERIC MARTINEZ\", \"role\": \"COORDINADOR F7\"}, {\"name\": \"CARLA CATALA\", \"role\": \"COORDINADORA FEMENINA\"}, {\"name\": \"AARON RODRIGUEZ\", \"role\": \"COORDINADOR PORTEROS\"}, {\"name\": \"JORDI VIDAL\", \"role\": \"FISIOTERAPEUTA",
+        ").addEventListener('click',closeClubTeam);document.getElementById('teamOverlay').addEventListener('click',e=>{if(e.target.id==='teamOverlay')closeClubTeam()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeClubTeam()}); document.getElementById('teamFilters').addEventListener('click',e=>{const b=e.target.closest('[data-group]');if(!b)return;chosenGroup=b.dataset.group;document.querySelectorAll('.team-filter').forEach(x=",
+        "; document.getElementById('posterOverlay').addEventListener('click',e=>{if(e.target.id==='posterOverlay')closePoster()}); function closePoster(){document.getElementById('posterOverlay').classList.remove('open');document.getElementById('posterOverlay').setAttribute('aria-hidden','true')} document.addEventListener('keydown',e=>{if(e.key==='Escape')closePoster()}); renderClubTeams(); // Recordatorios locales de demostración. No hay push en",
+        "ring('es-ES',{dateStyle:'short',timeStyle:'short'})))sent.add(item.id);}catch(e){console.warn('Recordatorio pendiente:',e);}}}} render();check();setInterval(check,60000); showMessage('Avisos compatibles con Chrome Android. Los recordatorios funcionan mientras la web está abierta.'); })(); </script> <script>if('serviceWorker' in navigator&&isSecureContext){navigator.serviceWorker.register('./pbsv-sw.js',{scope:'./'}).catch(console.warn)}"
+      ]
+    },
+    "PATTERN const\\s+[A-Za-z_$][\\w$]*\\s*=\\s*\\{": {
+      "count": 5,
+      "examples": [
+        "lassList.remove('open');window.scrollTo({top:0,behavior:'smooth'});} nav.forEach(b=>b.addEventListener('click',()=>showView(b.dataset.view))); document.querySelectorAll('[data-go]').forEach(b=>b.addEventListener('click',e=>{e.preventDefault();showView(b.dataset.go)})); document.querySelector('.brand').addEventListener('click',e=>{e.preventDefault();showView('home')}); document.getElementById('menuToggle').addEventListener('click',()=>do",
+        "iv=document.createElement('div'),n=document.createElement('b'),r=document.createElement('small');n.textContent=person.name;r.textContent=person.role;div.append(n,r);grid.append(div)});target.append(grid)}else target.textContent=d[1];document.getElementById('detailPanel').classList.add('open');document.getElementById('detailPanel').scrollIntoView({behavior:'smooth',block:'nearest'})})); document.querySelectorAll('.placeholder-link').forE",
+        "T0/1ZHsh8bj0eo+Fy6jx5cdIguOkR7D7naJ4nkPVkeyDuconien+rI9kX43Ho9R8Ll1Hjy46RBcdIj2H3OUTxPT/AFZHsg7naJ4nkPVkeyHxuPR6j4XLqPHlx0iC46RHsPucol/7z0/1ZHsg7nKJ4np/qyPZE+Nx6PUfC5dR48uOkQXHSI9h9zlE8T0/1ZHsg7nKJ4np/qyPZD43Ho9R8Ll1Hjy46YLjpEew+52ieJ6f6sj2QdzlE8T0/wBWR7IfG49HqPhcuo8eXHSILjpEew+5yieJ6f6sj2QdzlE8T0/1ZHsi/G49HqPhb6jx5cdIguOkR7D7nKJ4np/qyPZB3O0Qf5np/qyPZE+Nx6PUfC5dR48zDpguOmPYfc7RPE9P9WR7IBh2iH/M9P8AVkeyHxuPR6j4W+o89bFrd82V3fiHf6Mel8p6IZyt",
+        "['Infantil S14','masc'],['Infantil S13','masc'],['Alevín S12 A','masc'],['Alevín S12 B','masc'],['Alevín S12 C','masc'],['Alevín S11 A','masc'],['Alevín S11 B','masc'],['Benjamín S10 A','masc'],['Benjamín S9 A','masc'],['Prebenjamín S7 A','masc'], ['Veteranas','fem'],['Amateur Fem A','fem'],['Amateur Fem B','fem'],['Juvenil Fem A','fem'],['Infantil Fem A','fem'], ['PBSV Genuine Blau','genuine'],['PBSV Genuine Grana','genuine'],['PBSV Ge",
+        "ine'],['PBSV Genuine Grana','genuine'],['PBSV Genuine Groc','genuine'],['PBSV Genuine Taronja','genuine']]; const fcfLinks={'Cadete S15':'https://www.fcf.cat/ca/competicio/2026-2027/cadet-segona-divisio-s15/grup-14/resultats','Amateur A':'https://www.fcf.cat/ca/competicio/2026-2027/tercera-catalana/grup-12/resultats','Amateur Fem B':'https://www.fcf.cat/ca/competicio/2026-2027/segona-divisio-femeni/grup-5/resultats'}; let chosenGroup='a"
+      ]
+    },
+    "PATTERN function\\s+renderTeams": {
+      "count": 0,
+      "examples": []
+    },
+    "PATTERN teamGrid": {
+      "count": 2,
+      "examples": [
+        "m-filters\" id=\"teamFilters\"><button class=\"team-filter selected\" data-group=\"all\" data-ca=\"Tots\" data-es=\"Todos\">Tots</button><button class=\"team-filter\" data-group=\"masc\" data-ca=\"Masculí\" data-es=\"Masculino\">Masculí</button><button class=\"team-filter\" data-group=\"fem\" data-ca=\"Femení\" data-es=\"Femenino\">Femení</button><button class=\"team-filter\" data-group=\"genuine\" data-ca=\"Genuïns\" data-es=\"Genuinos\">Genuïns</button></div> <p class=",
+        "eticio/2026-2027/cadet-segona-divisio-s15/grup-14/resultats','Amateur A':'https://www.fcf.cat/ca/competicio/2026-2027/tercera-catalana/grup-12/resultats','Amateur Fem B':'https://www.fcf.cat/ca/competicio/2026-2027/segona-divisio-femeni/grup-5/resultats'}; let chosenGroup='all',siteLang='ca'; const tr=(ca,es)=>siteLang==='ca'?ca:es; const groups={masc:['Masculí','Masculino'],fem:['Femení','Femenino'],genuine:['Genuïns','Genuinos']}; fun"
+      ]
+    },
+    "PATTERN teamRosters": {
+      "count": 2,
+      "examples": [
+        "sh8bj0eo+Fy6jx5cdIguOkR7D7naJ4nkPVkeyDuconien+rI9kX43Ho9R8Ll1Hjy46RBcdIj2H3OUTxPT/AFZHsg7naJ4nkPVkeyHxuPR6j4XLqPHlx0iC46RHsPucol/7z0/1ZHsg7nKJ4np/qyPZE+Nx6PUfC5dR48uOkQXHSI9h9zlE8T0/1ZHsg7nKJ4np/qyPZD43Ho9R8Ll1Hjy46YLjpEew+52ieJ6f6sj2QdzlE8T0/wBWR7IfG49HqPhcuo8eXHSILjpEew+5yieJ6f6sj2QdzlE8T0/1ZHsi/G49HqPhb6jx5cdIguOkR7D7nKJ4np/qyPZB3O0Qf5np/qyPZE+Nx6PUfC5dR48zDpguOmPYfc7RPE9P9WR7IBh2iH/M9P8AVkeyHxuPR6j4W+o89bFrd82V3fiHf6Mel8p6IZytGpkm/w",
+        "osterHeading').textContent=tr('Plantilla i cos tècnic','Plantilla y cuerpo técnico'); const photoSlot=document.getElementById('photoStatus');photoSlot.replaceChildren(); if(teamAssets[name]){const img=document.createElement('img');img.src=teamAssets[name];img.className='team-photo-large';img.alt=name;photoSlot.append(img)}else photoSlot.textContent=tr('Fotografia pendent','Fotografía pendiente'); const rosterSlot=document.getElementById"
+      ]
+    },
+    "PATTERN teamAssets": {
+      "count": 6,
+      "examples": [
+        "ument.createElement('div'),n=document.createElement('b'),r=document.createElement('small');n.textContent=person.name;r.textContent=person.role;div.append(n,r);grid.append(div)});target.append(grid)}else target.textContent=d[1];document.getElementById('detailPanel').classList.add('open');document.getElementById('detailPanel').scrollIntoView({behavior:'smooth',block:'nearest'})})); document.querySelectorAll('.placeholder-link').forEach(a=",
+        "getElementById('teamCount').textContent=visible.length+' '+tr('equips','equipos');visible.forEach(([name,group])=>{const card=document.createElement('article');card.className='team-card';card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label',tr('Obrir fitxa de ','Abrir ficha de ')+name);const image=document.createElement('div');image.className='team-image';const imText=document.createElement('span');imText.tex",
+        ",'equipos');visible.forEach(([name,group])=>{const card=document.createElement('article');card.className='team-card';card.tabIndex=0;card.setAttribute('role','button');card.setAttribute('aria-label',tr('Obrir fitxa de ','Abrir ficha de ')+name);const image=document.createElement('div');image.className='team-image';const imText=document.createElement('span');imText.textContent=tr('FOTOGRAFIA PENDENT','FOTOGRAFÍA PENDIENTE');if(teamAssets",
+        "up').textContent=groups[group][siteLang==='ca'?0:1]; document.getElementById('teamDescription').textContent=tr('Fitxa individual · Temporada 2026/27','Ficha individual · Temporada 2026/27'); document.getElementById('photoHeading').textContent=tr('Fotografia de l’equip','Fotografía del equipo'); document.getElementById('rosterHeading').textContent=tr('Plantilla i cos tècnic','Plantilla y cuerpo técnico'); const photoSlot=document.getElem",
+        "ElementById('teamDescription').textContent=tr('Fitxa individual · Temporada 2026/27','Ficha individual · Temporada 2026/27'); document.getElementById('photoHeading').textContent=tr('Fotografia de l’equip','Fotografía del equipo'); document.getElementById('rosterHeading').textContent=tr('Plantilla i cos tècnic','Plantilla y cuerpo técnico'); const photoSlot=document.getElementById('photoStatus');photoSlot.replaceChildren(); if(teamAssets",
+        "ntListener('click',()=>{siteLang=siteLang==='ca'?'es':'ca';document.documentElement.lang=siteLang;document.getElementById('langSwitch').textContent=siteLang==='ca'?'ES':'CAT';document.querySelectorAll('[data-ca][data-es]').forEach(el=>{el.textContent=el.dataset[siteLang]});nav.forEach((b,i)=>b.textContent=translations[i][siteLang==='ca'?0:1]);renderClubTeams();}); document.querySelectorAll('[data-poster]').forEach(btn=>btn.addEventListe"
       ]
     }
   },
