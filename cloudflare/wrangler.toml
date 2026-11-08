@@ -2,7 +2,7 @@ name = "pbsv-admin"
 main = "worker.js"
 compatibility_date = "2026-11-01"
 workers_dev = true
+keep_vars = true
 
-# Desplegament automàtic connectat a GitHub. Configura les variables al Worker.
-[vars]
-GITHUB_CLIENT_ID = ""
+# Les credencials OAuth i la clau de sessió es gestionen a Cloudflare.
+# keep_vars evita que els desplegaments de GitHub sobreescriguin les variables.
