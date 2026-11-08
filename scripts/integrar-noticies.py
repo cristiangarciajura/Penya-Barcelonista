@@ -3,7 +3,7 @@
 from pathlib import Path
 p=Path("index.html")
 s=p.read_text(encoding="utf-8")
-marker='id="pbsv-public-news"'
+marker="section.id='pbsv-public-news'"
 if marker in s:
     print("News already integrated")
     raise SystemExit(0)
