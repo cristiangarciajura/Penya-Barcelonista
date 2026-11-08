@@ -16,6 +16,9 @@ teams=''
 if m:
     end=s.find('</section>',m.end())
     teams=s[m.start():end+10] if end!=-1 else s[m.start():m.start()+10000]
+for pattern in [r'const\\s+[A-Za-z_$][\\w$]*\\s*=\\s*\\[',r'const\\s+[A-Za-z_$][\\w$]*\\s*=\\s*\\{',r'function\\s+renderTeams',r'teamGrid',r'teamRosters',r'teamAssets']:
+    matches=list(re.finditer(pattern,s))
+    hits['PATTERN '+pattern]={'count':len(matches),'examples':[excerpt(m.start(),500) for m in matches[:15]]}
 report={'version':1,'source':'index.html','size':len(s),'terms':hits,'teams_section_excerpt':re.sub(r'\s+',' ',teams[:14000])}
 Path('data/site-analysis.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
 print('Wrote inspection report; source unchanged')
