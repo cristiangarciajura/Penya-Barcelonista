@@ -18,10 +18,10 @@
    else value=data();
    JSON.parse(value);
   }catch(e){output.textContent='No es poden preparar les dades: '+e.message;return}
+  const tab=window.open(repo+file,'_blank','noopener,noreferrer');
   try{
    await navigator.clipboard.writeText(value);
    output.textContent='Dades copiades. Obrint GitHub… Enganxa-les al fitxer i prem Commit changes.';
-   const tab=window.open(repo+file,'_blank','noopener,noreferrer');
    if(!tab)output.textContent='Dades copiades. El navegador ha bloquejat la pestanya: obre GitHub amb l’enllaç següent.';
   }catch(e){
    output.textContent='No s’han pogut copiar automàticament. Prem «Descarregar JSON» i utilitza el fitxer a GitHub.';
