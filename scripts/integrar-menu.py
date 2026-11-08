@@ -40,7 +40,7 @@ function render(items){
  grid.replaceChildren(...items.map(s=>{
  const card=document.createElement("article");card.className="pbsv-sponsor-card";
  const logo=document.createElement("div");logo.className="pbsv-sponsor-logo";
- if(s.image&&/^(assets\\/|\\.\\/|https:\\/\\/)/.test(s.image)){const img=document.createElement("img");img.src=s.image;img.alt=s.name;img.onerror=()=>logo.replaceChildren(document.createTextNode(s.name));logo.append(img)}else logo.textContent=s.name;
+ if(s.image&&(/^(assets\\/|\\.\\/|https:\\/\\/)/.test(s.image)||s.image.startsWith("data:image/jpeg;base64,"))){const img=document.createElement("img");img.src=s.image;img.alt=s.name;img.onerror=()=>logo.replaceChildren(document.createTextNode(s.name));logo.append(img)}else logo.textContent=s.name;
  const body=document.createElement("div");body.className="pbsv-sponsor-content";
  const name=document.createElement("h3");name.textContent=s.name;
  const link=document.createElement("a");link.href=s.url;link.target="_blank";link.rel="noopener noreferrer";link.textContent="Visitar ↗";
