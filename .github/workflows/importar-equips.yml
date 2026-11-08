@@ -1,0 +1,38 @@
+name: Importar els 25 equips actuals
+on:
+  push:
+    paths:
+      - 'scripts/importar-equips.py'
+      - '.github/workflows/importar-equips.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar script
+        run: python3 -m py_compile scripts/importar-equips.py
+      - name: Importar equips, fotos i plantilles
+        run: python3 scripts/importar-equips.py
+      - name: Validar importació
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          teams=json.loads(Path('data/equips.json').read_text(encoding='utf-8'))['teams']
+          assert len(teams)==25, f'Expected 25 teams; found {len(teams)}'
+          assert len({t['id'] for t in teams})==25
+          assert all(t['name'] and t['category'] for t in teams)
+          assert all(Path(t['image'][2:]).exists() for t in teams if t['image'] and t['image'].startswith('./assets/'))
+          PY
+      - name: Guardar dades i fotografies
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/equips.json assets/equips/
+          if ! git diff --cached --quiet; then
+            git commit -m "Importar 25 equips i conservar fotografies i plantilles"
+            git push
+          fi
