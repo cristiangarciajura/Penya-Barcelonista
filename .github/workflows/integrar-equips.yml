@@ -1,0 +1,39 @@
+name: Connectar equips amb el panell
+on:
+  push:
+    paths:
+      - 'scripts/integrar-equips.py'
+      - '.github/workflows/integrar-equips.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  integrate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validar script
+        run: python3 -m py_compile scripts/integrar-equips.py
+      - name: Connectar els 25 equips
+        run: python3 scripts/integrar-equips.py
+      - name: Comprovar integració
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import json
+          s=Path('index.html').read_text(encoding='utf-8')
+          d=json.loads(Path('data/equips.json').read_text(encoding='utf-8'))
+          assert len(d['teams'])==25
+          assert '/* pbsv-teams-json-integration-v1 */' in s
+          assert "fetch('./data/equips.json'" in s
+          assert 'teamRosters[t.name]' in s
+          PY
+      - name: Guardar connexió
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Connectar els equips reals al panell"
+            git push
+          fi
