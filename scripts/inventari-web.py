@@ -10,7 +10,8 @@ class Inventory(HTMLParser):
     def handle_starttag(self,tag,attrs):
         a=dict(attrs)
         if self.current is not None:
-            self.depth+=1
+            if tag not in ('area','base','br','col','embed','hr','img','input','link','meta','param','source','track','wbr'):
+                self.depth+=1
             if tag in ('h1','h2','h3') and not self.current['title']:
                 self.capture=tag
         elif tag=='section' and 'view' in a.get('class','').split() and a.get('id'):
