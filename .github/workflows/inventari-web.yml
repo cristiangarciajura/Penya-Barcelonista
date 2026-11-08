@@ -1,0 +1,36 @@
+name: Inventari de continguts actuals
+on:
+  push:
+    paths:
+      - 'scripts/inventari-web.py'
+      - '.github/workflows/inventari-web.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  inventory:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Llegir les seccions actuals
+        run: python3 scripts/inventari-web.py
+      - name: Validar inventari
+        run: |
+          python3 - <<'PY'
+          import json
+          from pathlib import Path
+          d=json.loads(Path('data/site-inventory.json').read_text(encoding='utf-8'))
+          assert isinstance(d['sections'],list) and len(d['sections'])>0, 'No s’han detectat seccions; no es publica inventari buit'
+          assert all(s.get('id') for s in d['sections'])
+          PY
+      - name: Guardar inventari
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/site-inventory.json
+          if ! git diff --cached --quiet; then
+            git commit -m "Inventari de seccions existents de la Penya"
+            git push
+          fi
