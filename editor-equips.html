@@ -76,4 +76,4 @@ async function published(){const r=await fetch('./data/equips.json?t='+Date.now(
 $('reload').onclick=async()=>{if(!confirm('Recarregar els equips publicats? Es perdran els canvis locals no publicats.'))return;try{items=await published();persist();clear();msg('Equips publicats carregats.')}catch(e){msg(e.message)}};
 try{const saved=localStorage.getItem(key);if(saved){items=JSON.parse(saved);render();if(!items.length)published().then(d=>{if(d.length){items=d;persist()}}).catch(()=>{})}else published().then(d=>{items=d;persist()}).catch(e=>msg(e.message))}catch(e){msg('No es poden llegir les dades locals.')}
 render();
-</script></body></html>
+</script><script src="./publicar-github.js?v=1" defer></script></body></html>
