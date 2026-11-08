@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "updated": "2026-11-08",
+  "sponsors": [
+    {
+      "id": "santiago-rubio",
+      "name": "Recuperaciones y Transportes Santiago Rubio",
+      "url": "https://www.instagram.com/recuptrans.santiago?vrfl=MW4zcmtsaWExOWxhNA==",
+      "image": null
+    },
+    {
+      "id": "pneumatics-garcia",
+      "name": "Pneumàtics García",
+      "url": "https://www.instagram.com/pneumaticsgarciagt?xtok=dXZmcGVuajlwZDZj",
+      "image": null
+    },
+    {
+      "id": "transmar",
+      "name": "Transmar",
+      "url": "https://transmar.net/es/",
+      "image": null
+    },
+    {
+      "id": "ajuntament-svh",
+      "name": "Ajuntament Sant Vicenç dels Horts",
+      "url": "https://svh.cat/",
+      "image": null
+    },
+    {
+      "id": "agrupacio-fcb",
+      "name": "Agrupació FCB",
+      "url": "https://agrupaciofcb.cat/",
+      "image": null
+    }
+  ]
+}
