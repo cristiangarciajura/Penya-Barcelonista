@@ -29,4 +29,4 @@ $('reset').onclick=()=>{editing=null;selectedImage='';$('form').reset();$('previ
 $('copy').onclick=async()=>{try{await navigator.clipboard.writeText(exportData());status('JSON copiat. Ja el pots enganxar a GitHub.')}catch{status('No s’ha pogut copiar. Fes servir Descarregar.')}};
 $('download').onclick=()=>{const a=document.createElement('a');const url=URL.createObjectURL(new Blob([exportData()],{type:'application/json'}));a.href=url;a.download='noticies.json';a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);status('Fitxer descarregat.')};
 try{const saved=localStorage.getItem(KEY);if(saved){items=load({noticias:JSON.parse(saved)});render()}else{fetch('./data/noticies.json',{cache:'no-store'}).then(r=>r.ok?r.json():Promise.reject()).then(d=>{items=load(d);save()}).catch(()=>{render();status('No s’ha pogut carregar el fitxer actual. Revisa les notícies abans de publicar.')})}}catch{render();status('No s’han pogut llegir les dades locals.')}render();
-</script></body></html>
+</script><script src="./publicar-github.js?v=1" defer></script></body></html>
