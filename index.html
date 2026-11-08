@@ -59,7 +59,15 @@ footer{background:#061126;color:#d6dfed;padding:30px 22px}.footer-inner{max-widt
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-title" content="Penya Barcelonista">
 <!-- pbsv-integrated-v1 --><!-- pbsv-android-fix-v2 -->
-</head>
+<style id="pbsv-sponsor-styles">
+.pbsv-sponsor-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,1fr));gap:18px;margin-top:24px}
+.pbsv-sponsor-card{background:#fff;border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow);display:flex;flex-direction:column}
+.pbsv-sponsor-logo{height:145px;display:flex;align-items:center;justify-content:center;text-align:center;padding:18px;background:linear-gradient(135deg,#e7effb,#f8e7ed);color:var(--navy2);font-weight:850;font-size:18px}
+.pbsv-sponsor-logo img{max-width:100%;max-height:112px;object-fit:contain}
+.pbsv-sponsor-content{padding:18px;display:flex;flex:1;flex-direction:column;gap:12px}
+.pbsv-sponsor-content h3{margin:0;font-size:17px}
+.pbsv-sponsor-content a{margin-top:auto;align-self:flex-start;background:var(--blue);color:#fff;border-radius:999px;padding:10px 15px;font-size:13px;font-weight:800}
+</style></head>
 <body>
 <div class="topline"></div>
 <header>
@@ -76,6 +84,7 @@ footer{background:#061126;color:#d6dfed;padding:30px 22px}.footer-inner{max-widt
    <button data-view="teams">Equips</button>
    <button data-view="store">Botiga</button>
    <button data-view="club">El club</button>
+   <button data-view="sponsors">Patrocinadors</button>
   </nav>
  </div>
 </header>
@@ -135,6 +144,10 @@ footer{background:#061126;color:#d6dfed;padding:30px 22px}.footer-inner{max-widt
  </div>
  <div class="detail-panel" id="detailPanel"><h3 id="detailTitle">Història</h3><div id="detailText">Contingut pendent d’incorporar.</div></div>
 </section>
+<section class="view" id="sponsors">
+ <div class="page-title"><div class="kicker" data-ca="Gràcies pel vostre suport" data-es="Gracias por vuestro apoyo">Gràcies pel vostre suport</div><h1 data-ca="Patrocinadors i col·laboradors" data-es="Patrocinadores y colaboradores">Patrocinadors i col·laboradors</h1><p data-ca="Entitats i empreses que fan costat a la Penya." data-es="Entidades y empresas que apoyan a la Penya.">Entitats i empreses que fan costat a la Penya.</p></div>
+ <div class="pbsv-sponsor-grid" id="pbsvSponsorGrid"></div>
+</section>
 </main>
 <div class="poster-overlay" id="posterOverlay" aria-hidden="true"><button id="posterClose" aria-label="Tancar cartell">×</button><img id="posterImage" alt="Cartell de partits ampliat"></div>
 <div class="team-overlay" id="teamOverlay" role="presentation"><div class="team-dialog" role="dialog" aria-modal="true" aria-labelledby="teamTitle"><button class="team-close" id="teamClose" aria-label="Tancar">×</button><div class="kicker" id="teamGroup"></div><h2 id="teamTitle"></h2><p id="teamDescription"></p><div class="team-detail-grid"><div><b id="photoHeading">Fotografia de l'equip</b><div id="photoStatus">Pendent d’incorporar</div></div><div><b id="rosterHeading">Plantilla i cos tècnic</b><div id="rosterStatus">Pendent d’incorporar</div></div></div><div id="teamCompetition"></div></div></div>
@@ -188,7 +201,7 @@ function openClubTeam(name,group){
 function closeClubTeam(){document.getElementById('teamOverlay').classList.remove('open')}
 document.getElementById('teamClose').addEventListener('click',closeClubTeam);document.getElementById('teamOverlay').addEventListener('click',e=>{if(e.target.id==='teamOverlay')closeClubTeam()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeClubTeam()});
 document.getElementById('teamFilters').addEventListener('click',e=>{const b=e.target.closest('[data-group]');if(!b)return;chosenGroup=b.dataset.group;document.querySelectorAll('.team-filter').forEach(x=>x.classList.toggle('selected',x===b));renderClubTeams()});
-const translations=[['Inici','Inicio'],['Equips','Equipos'],['Botiga','Tienda'],['El club','El club']];
+const translations=[['Inici','Inicio'],['Equips','Equipos'],['Botiga','Tienda'],['El club','El club'],['Patrocinadors','Patrocinadores']];
 document.getElementById('langSwitch').addEventListener('click',()=>{siteLang=siteLang==='ca'?'es':'ca';document.documentElement.lang=siteLang;document.getElementById('langSwitch').textContent=siteLang==='ca'?'ES':'CAT';document.querySelectorAll('[data-ca][data-es]').forEach(el=>{el.textContent=el.dataset[siteLang]});nav.forEach((b,i)=>b.textContent=translations[i][siteLang==='ca'?0:1]);renderClubTeams();});
 document.querySelectorAll('[data-poster]').forEach(btn=>btn.addEventListener('click',()=>{document.getElementById('posterImage').src=teamAssets[btn.dataset.poster];document.getElementById('posterOverlay').classList.add('open');document.getElementById('posterOverlay').setAttribute('aria-hidden','false')}));
 document.getElementById('posterClose').addEventListener('click',closePoster);
@@ -235,4 +248,28 @@ renderClubTeams();
 })();
 </script>
 <script>if('serviceWorker' in navigator&&isSecureContext){navigator.serviceWorker.register('./pbsv-sw.js',{scope:'./'}).catch(console.warn)}</script>
-</body></html>
+<script id="pbsv-sponsors-script">
+(function(){
+const fallback=[
+{name:"Recuperaciones y Transportes Santiago Rubio",url:"https://www.instagram.com/recuptrans.santiago?vrfl=MW4zcmtsaWExOWxhNA=="},
+{name:"Pneumàtics García",url:"https://www.instagram.com/pneumaticsgarciagt?xtok=dXZmcGVuajlwZDZj"},
+{name:"Transmar",url:"https://transmar.net/es/"},
+{name:"Ajuntament Sant Vicenç dels Horts",url:"https://svh.cat/"},
+{name:"Agrupació FCB",url:"https://agrupaciofcb.cat/"}
+];
+function render(items){
+ const grid=document.getElementById("pbsvSponsorGrid");if(!grid)return;
+ grid.replaceChildren(...items.map(s=>{
+ const card=document.createElement("article");card.className="pbsv-sponsor-card";
+ const logo=document.createElement("div");logo.className="pbsv-sponsor-logo";
+ if(s.image&&/^(assets\/|\.\/|https:\/\/)/.test(s.image)){const img=document.createElement("img");img.src=s.image;img.alt=s.name;img.onerror=()=>logo.replaceChildren(document.createTextNode(s.name));logo.append(img)}else logo.textContent=s.name;
+ const body=document.createElement("div");body.className="pbsv-sponsor-content";
+ const name=document.createElement("h3");name.textContent=s.name;
+ const link=document.createElement("a");link.href=s.url;link.target="_blank";link.rel="noopener noreferrer";link.textContent="Visitar ↗";
+ body.append(name,link);card.append(logo,body);return card;
+ }));
+}
+render(fallback);
+fetch("./data/patrocinadors.json",{cache:"no-store"}).then(r=>{if(!r.ok)throw Error("fetch failed");return r.json()}).then(d=>{if(Array.isArray(d.sponsors)){const items=d.sponsors.filter(s=>typeof s.name==="string"&&typeof s.url==="string"&&s.url.startsWith("https://"));if(items.length)render(items)}}).catch(console.warn);
+})();
+</script></body></html>
