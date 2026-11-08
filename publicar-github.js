@@ -9,6 +9,28 @@
  const main=document.querySelector('main');if(!main)return;
  const old=Array.from(main.querySelectorAll('section')).find(el=>/Publicar|Publicació/.test(el.querySelector('h2')?.textContent||''));
  if(old)old.replaceWith(section);else main.append(section);
+ const auto=document.createElement('button');auto.type='button';auto.id='publishAutomatic';auto.textContent='Guardar i publicar automàticament';auto.hidden=true;auto.style.marginRight='8px';section.insertBefore(auto,document.getElementById('publishGithub'));
+ const manual=document.getElementById('publishGithub');
+ fetch('./api/me',{credentials:'same-origin',cache:'no-store'}).then(r=>r.ok?r.json():null).then(me=>{
+  if(!me?.authenticated)return;
+  auto.hidden=false;manual.hidden=true;
+  const description=section.querySelector('p');if(description)description.textContent='Sessió GitHub autoritzada: '+me.login+'. Desa la fitxa i prem el botó per publicar els canvis a la web.';
+ }).catch(()=>{});
+ auto.onclick=async()=>{
+  const output=document.getElementById('publishResult');
+  let value;
+  try{value=page==='editor-noticies.html'?exportData():page==='editor-club.html'?json():data();JSON.parse(value)}
+  catch(e){output.textContent='Error en preparar les dades: '+e.message;return}
+  if(!confirm('Publicar ara els canvis de '+file+' a la web?'))return;
+  auto.disabled=true;output.textContent='Publicant a GitHub…';
+  try{
+   const r=await fetch('./api/publish',{method:'POST',credentials:'same-origin',headers:{'Content-Type':'application/json','X-PBSV-Action':'publish'},body:JSON.stringify({file,content:value})});
+   const body=await r.text();
+   if(!r.ok)throw Error(body);
+   output.textContent='Publicat correctament a GitHub. La web pot trigar uns minuts a actualitzar-se.';
+  }catch(e){output.textContent='No s’ha pogut publicar: '+e.message}
+  finally{auto.disabled=false}
+ };
  document.getElementById('publishGithub').onclick=async()=>{
   const output=document.getElementById('publishResult');
   let value;
