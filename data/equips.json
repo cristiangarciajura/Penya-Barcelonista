@@ -1,4 +1,2452 @@
 {
   "version": 1,
-  "teams": []
+  "teams": [
+    {
+      "id": "team-4b79c4ccbc7c",
+      "name": "Amateur A",
+      "category": "masc",
+      "coach": "PEREZ DE TUDELA BALLESTER, VICTOR, FERRETE CARBONELL, SERGI, GARCIA GALVEZ, FRANCISCO JAVIER",
+      "schedule": "",
+      "url": "https://www.fcf.cat/ca/competicio/2026-2027/tercera-catalana/grup-12/resultats",
+      "image": null,
+      "members": [
+        "BALDE DIAO, AMADOU TIDIANE",
+        "BURJALES CARRILLO, ROGER",
+        "EL AZZAOUY AOURDOU, RACHID",
+        "EL GHRIM OUAROUS, NAOUFAL",
+        "GAMERO RAMON, RAUL",
+        "GÁMEZ SANCHO, MANUEL",
+        "GARCÍA FERNÁNDEZ, IVAN",
+        "GARCIA-ROSADO DURAN, HUGO",
+        "GINESTAR FERNANDEZ, JOAN",
+        "LUNES SEIJAS, PAU",
+        "MANZANO ARROYO, DANIEL",
+        "MARSOU BEN DRIS, HICHAM",
+        "MARTÍNEZ GÓMEZ, ERIC",
+        "MARTINEZ GRANDA, ALEJANDRO",
+        "MORENO PADILLA, ERIC",
+        "MUÑOZ JIMENEZ, LEO",
+        "PATIÑO HERNANDEZ, JAN",
+        "PEREZ GASPAR, XAVIER",
+        "PEREZ DE TUDELA SANCHEZ, HUGO",
+        "RODRIGUEZ ESCOZ, AARON",
+        "ROMERO NUÑEZ, TOMAS IGNACIO",
+        "RUIZ MARTIN, OMAR",
+        "SANCHEZ URDA, DAVID",
+        "TALKAM, FAYCAL"
+      ],
+      "players": [
+        {
+          "name": "BALDE DIAO, AMADOU TIDIANE",
+          "number": 6
+        },
+        {
+          "name": "BURJALES CARRILLO, ROGER",
+          "number": 21
+        },
+        {
+          "name": "EL AZZAOUY AOURDOU, RACHID",
+          "number": 24
+        },
+        {
+          "name": "EL GHRIM OUAROUS, NAOUFAL",
+          "number": 9
+        },
+        {
+          "name": "GAMERO RAMON, RAUL",
+          "number": 22
+        },
+        {
+          "name": "GÁMEZ SANCHO, MANUEL",
+          "number": 1
+        },
+        {
+          "name": "GARCÍA FERNÁNDEZ, IVAN",
+          "number": 10
+        },
+        {
+          "name": "GARCIA-ROSADO DURAN, HUGO",
+          "number": 16
+        },
+        {
+          "name": "GINESTAR FERNANDEZ, JOAN",
+          "number": 5
+        },
+        {
+          "name": "LUNES SEIJAS, PAU",
+          "number": 15
+        },
+        {
+          "name": "MANZANO ARROYO, DANIEL",
+          "number": 12
+        },
+        {
+          "name": "MARSOU BEN DRIS, HICHAM",
+          "number": 4
+        },
+        {
+          "name": "MARTÍNEZ GÓMEZ, ERIC",
+          "number": 8
+        },
+        {
+          "name": "MARTINEZ GRANDA, ALEJANDRO",
+          "number": 3
+        },
+        {
+          "name": "MORENO PADILLA, ERIC",
+          "number": 11
+        },
+        {
+          "name": "MUÑOZ JIMENEZ, LEO",
+          "number": 2
+        },
+        {
+          "name": "PATIÑO HERNANDEZ, JAN",
+          "number": 23
+        },
+        {
+          "name": "PEREZ GASPAR, XAVIER",
+          "number": 25
+        },
+        {
+          "name": "PEREZ DE TUDELA SANCHEZ, HUGO",
+          "number": 18
+        },
+        {
+          "name": "RODRIGUEZ ESCOZ, AARON",
+          "number": 13
+        },
+        {
+          "name": "ROMERO NUÑEZ, TOMAS IGNACIO",
+          "number": 17
+        },
+        {
+          "name": "RUIZ MARTIN, OMAR",
+          "number": 14
+        },
+        {
+          "name": "SANCHEZ URDA, DAVID",
+          "number": 19
+        },
+        {
+          "name": "TALKAM, FAYCAL",
+          "number": 7
+        }
+      ],
+      "staff": [
+        {
+          "name": "GONZALEZ CANO, ANTONIO",
+          "role": "DELEGADO"
+        },
+        {
+          "name": "VIDAL GONZÁLEZ, JORDI",
+          "role": "FISIOTERAPEUTA"
+        },
+        {
+          "name": "PEREZ DE TUDELA BALLESTER, VICTOR",
+          "role": "2DO ENTRENADOR"
+        },
+        {
+          "name": "FERRETE CARBONELL, SERGI",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "GARCIA GALVEZ, FRANCISCO JAVIER",
+          "role": "3ER ENTRENADOR"
+        },
+        {
+          "name": "ENEKO",
+          "role": "PREPARADOR FISICO"
+        }
+      ]
+    },
+    {
+      "id": "team-20af2108d4c9",
+      "name": "Amateur B",
+      "category": "masc",
+      "coach": "RAMIREZ CORRALES, ANTONIO",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "BRAVO PALOMINO, JOFRE STALIN",
+        "CABELLO GONZALEZ, IAN",
+        "EL BOUKIRI AHARMIM, BILAL",
+        "LOPEZ SANCHEZ, VICTOR",
+        "LORENZO PEREZ, NOAH",
+        "MARIN GÓMEZ, ADRIÀ",
+        "MARQUEZ CARRILLO, TOMAS",
+        "MARTINEZ PADILLA, JUAN PEDRO",
+        "MUÑIZ ROBLEDO, YERAY",
+        "NIEVES FERNANDEZ, ALBERTO",
+        "PEREZ RUIZ, SERGIO",
+        "RICARDO AGUILAR, ADRIAN",
+        "ROJAS HERRANZ, MARTI",
+        "SANCHEZ LUACES, IKER",
+        "SORRIBES LOPEZ, IZAN",
+        "SUGI, SORATO",
+        "TALAYERO CARRASCO, GENIS",
+        "MIGUEL MARTOS LINDEZ",
+        "PAU FERNANDEZ CUADRA",
+        "Miquel Capdevila",
+        "DEMBA DABO",
+        "VICTOR RIPOLL CASTILLO"
+      ],
+      "players": [
+        {
+          "name": "BRAVO PALOMINO, JOFRE STALIN",
+          "number": 15
+        },
+        {
+          "name": "CABELLO GONZALEZ, IAN",
+          "number": 3
+        },
+        {
+          "name": "EL BOUKIRI AHARMIM, BILAL",
+          "number": 8
+        },
+        {
+          "name": "LOPEZ SANCHEZ, VICTOR",
+          "number": 4
+        },
+        {
+          "name": "LORENZO PEREZ, NOAH",
+          "number": 17
+        },
+        {
+          "name": "MARIN GÓMEZ, ADRIÀ",
+          "number": 12
+        },
+        {
+          "name": "MARQUEZ CARRILLO, TOMAS",
+          "number": null
+        },
+        {
+          "name": "MARTINEZ PADILLA, JUAN PEDRO",
+          "number": 13
+        },
+        {
+          "name": "MUÑIZ ROBLEDO, YERAY",
+          "number": 10
+        },
+        {
+          "name": "NIEVES FERNANDEZ, ALBERTO",
+          "number": 1
+        },
+        {
+          "name": "PEREZ RUIZ, SERGIO",
+          "number": 2
+        },
+        {
+          "name": "RICARDO AGUILAR, ADRIAN",
+          "number": 21
+        },
+        {
+          "name": "ROJAS HERRANZ, MARTI",
+          "number": 19
+        },
+        {
+          "name": "SANCHEZ LUACES, IKER",
+          "number": 11
+        },
+        {
+          "name": "SORRIBES LOPEZ, IZAN",
+          "number": 9
+        },
+        {
+          "name": "SUGI, SORATO",
+          "number": 14
+        },
+        {
+          "name": "TALAYERO CARRASCO, GENIS",
+          "number": 6
+        },
+        {
+          "name": "MIGUEL MARTOS LINDEZ",
+          "number": 5
+        },
+        {
+          "name": "PAU FERNANDEZ CUADRA",
+          "number": null
+        },
+        {
+          "name": "Miquel Capdevila",
+          "number": null
+        },
+        {
+          "name": "DEMBA DABO",
+          "number": 16
+        },
+        {
+          "name": "VICTOR RIPOLL CASTILLO",
+          "number": null
+        }
+      ],
+      "staff": [
+        {
+          "name": "RAMIREZ CORRALES, ANTONIO",
+          "role": "ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-74c5669f6832",
+      "name": "Juvenil A",
+      "category": "masc",
+      "coach": "MARTINEZ MONTILLA, MANUEL",
+      "schedule": "",
+      "url": "",
+      "image": "./assets/equips/74c5669f6832.jpg",
+      "members": [
+        "ARTEAGA URRUTIA, WALTER SAUL",
+        "BAÑOL SOTO, POL ESTEBAN",
+        "CLAJER GONZALO, JORDI",
+        "ESCUTE MARTINEZ, MARC",
+        "GARCIA REINA, IKER",
+        "GONZÁLEZ BELLAHNA, YASER",
+        "LOPEZ GAMARRA, FELIX GERARD",
+        "LOPEZ MARTINEZ, VICTOR",
+        "LÓPEZ PÉREZ, MARCOS",
+        "LOPEZ QUESADA, HUGO",
+        "MANJON CARDENAS, PABLO",
+        "MARTINEZ GOMEZ, IZAN",
+        "MONTERO BAÑOS, DANIEL",
+        "MOSCOSO MARTINEZ, RUBEN",
+        "MUÑOZ RAGA, JOEL",
+        "MUÑOZ SANCHEZ, PABLO",
+        "RACHIK, ADAM",
+        "RUA GONZALEZ, SERGI",
+        "TORRECILLAS PEREZ, ALVARO",
+        "VARON OLLE, ALEIX"
+      ],
+      "players": [
+        {
+          "name": "ARTEAGA URRUTIA, WALTER SAUL",
+          "number": 10
+        },
+        {
+          "name": "BAÑOL SOTO, POL ESTEBAN",
+          "number": 24
+        },
+        {
+          "name": "CLAJER GONZALO, JORDI",
+          "number": 19
+        },
+        {
+          "name": "ESCUTE MARTINEZ, MARC",
+          "number": 67
+        },
+        {
+          "name": "GARCIA REINA, IKER",
+          "number": 17
+        },
+        {
+          "name": "GONZÁLEZ BELLAHNA, YASER",
+          "number": 6
+        },
+        {
+          "name": "LOPEZ GAMARRA, FELIX GERARD",
+          "number": 11
+        },
+        {
+          "name": "LOPEZ MARTINEZ, VICTOR",
+          "number": 20
+        },
+        {
+          "name": "LÓPEZ PÉREZ, MARCOS",
+          "number": 77
+        },
+        {
+          "name": "LOPEZ QUESADA, HUGO",
+          "number": 7
+        },
+        {
+          "name": "MANJON CARDENAS, PABLO",
+          "number": 15
+        },
+        {
+          "name": "MARTINEZ GOMEZ, IZAN",
+          "number": 8
+        },
+        {
+          "name": "MONTERO BAÑOS, DANIEL",
+          "number": 9
+        },
+        {
+          "name": "MOSCOSO MARTINEZ, RUBEN",
+          "number": 13
+        },
+        {
+          "name": "MUÑOZ RAGA, JOEL",
+          "number": 5
+        },
+        {
+          "name": "MUÑOZ SANCHEZ, PABLO",
+          "number": 1
+        },
+        {
+          "name": "RACHIK, ADAM",
+          "number": 18
+        },
+        {
+          "name": "RUA GONZALEZ, SERGI",
+          "number": 22
+        },
+        {
+          "name": "TORRECILLAS PEREZ, ALVARO",
+          "number": 14
+        },
+        {
+          "name": "VARON OLLE, ALEIX",
+          "number": 3
+        }
+      ],
+      "staff": [
+        {
+          "name": "GONZALEZ, JUANMA",
+          "role": "DELEGADO"
+        },
+        {
+          "name": "MARTINEZ MONTILLA, MANUEL",
+          "role": "ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-0f6495848167",
+      "name": "Juvenil B",
+      "category": "masc",
+      "coach": "BUCKENS TAFALLA, BRUNO",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "AYALA MARTÍN, SAÜL",
+        "BARCELO CASASAMPERE, ALEIX",
+        "BARRAGAN QUESADA, SAMUEL",
+        "BOLOIX SANTALIESTRA, GERARD",
+        "BOUHLASS BOUHLASS, ISMAEL",
+        "BUCKENS TRONCOSO, IKER",
+        "CAMPOS DEL BARRIO, ALEJANDRO",
+        "CARRASCOSA GINES, ERIC",
+        "GARCIA JURA, DANIEL",
+        "GARCÍA MARTÍNEZ, LEO",
+        "JIMENEZ PRAT, FELIX",
+        "MACHROH LIDALT, YOUSSAD",
+        "MATEOS DIAZ, JESUS",
+        "MATEOS DIAZ, LLUIS",
+        "NOEL PANADES, MARC",
+        "PEREZ CASTELLNOU, MIQUEL",
+        "RODRIGUEZ MANZANO, SERGI",
+        "TINOCO AMADOR, MIGUEL ANGEL",
+        "TIZADO JIMENEZ, NIKO",
+        "DIEGO MORALO",
+        "SANTIAGO GARCIA SALAMANCA"
+      ],
+      "players": [
+        {
+          "name": "AYALA MARTÍN, SAÜL",
+          "number": 19
+        },
+        {
+          "name": "BARCELO CASASAMPERE, ALEIX",
+          "number": 9
+        },
+        {
+          "name": "BARRAGAN QUESADA, SAMUEL",
+          "number": 8
+        },
+        {
+          "name": "BOLOIX SANTALIESTRA, GERARD",
+          "number": 12
+        },
+        {
+          "name": "BOUHLASS BOUHLASS, ISMAEL",
+          "number": 7
+        },
+        {
+          "name": "BUCKENS TRONCOSO, IKER",
+          "number": 14
+        },
+        {
+          "name": "CAMPOS DEL BARRIO, ALEJANDRO",
+          "number": 25
+        },
+        {
+          "name": "CARRASCOSA GINES, ERIC",
+          "number": 6
+        },
+        {
+          "name": "GARCIA JURA, DANIEL",
+          "number": 4
+        },
+        {
+          "name": "GARCÍA MARTÍNEZ, LEO",
+          "number": 3
+        },
+        {
+          "name": "JIMENEZ PRAT, FELIX",
+          "number": 11
+        },
+        {
+          "name": "MACHROH LIDALT, YOUSSAD",
+          "number": 16
+        },
+        {
+          "name": "MATEOS DIAZ, JESUS",
+          "number": 5
+        },
+        {
+          "name": "MATEOS DIAZ, LLUIS",
+          "number": 2
+        },
+        {
+          "name": "NOEL PANADES, MARC",
+          "number": 1
+        },
+        {
+          "name": "PEREZ CASTELLNOU, MIQUEL",
+          "number": 69
+        },
+        {
+          "name": "RODRIGUEZ MANZANO, SERGI",
+          "number": 10
+        },
+        {
+          "name": "TINOCO AMADOR, MIGUEL ANGEL",
+          "number": 67
+        },
+        {
+          "name": "TIZADO JIMENEZ, NIKO",
+          "number": 13
+        },
+        {
+          "name": "DIEGO MORALO",
+          "number": 99
+        },
+        {
+          "name": "SANTIAGO GARCIA SALAMANCA",
+          "number": 15
+        }
+      ],
+      "staff": [
+        {
+          "name": "BUCKENS TAFALLA, BRUNO",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "CASAS, GERARD",
+          "role": "DELEGADO"
+        }
+      ]
+    },
+    {
+      "id": "team-44ba45aa2c85",
+      "name": "Juvenil C",
+      "category": "masc",
+      "coach": "SEÑOR MÉNDEZ, JORGE",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "MORALO GORDON, DIEGO",
+        "BERNIER MONTALBAN, TONI",
+        "CANTARERO COSTA, ERIK",
+        "GASCON MUÑOZ, HUGO",
+        "HERNANDEZ RUIZ, HUGO",
+        "JIN, YANGHAO",
+        "MATA LOZANO, JOSE DAVID",
+        "MIR PEREZ, IKER",
+        "PALAU MARTÍ, GUERAU",
+        "PEÑALVER PÉREZ, IZAN",
+        "QUISPE HUARCAYA, NIJHAT SONYU",
+        "SEGURA GONZALEZ, JOAN",
+        "SEÑOR MONTES, JORGE",
+        "VILA CARRANZA, GONZALO",
+        "ENCINA PAIVA, MISAEL",
+        "MAYORAL ALMEDA, ALEX",
+        "GARCÍA TORRECILLAS, POL"
+      ],
+      "players": [
+        {
+          "name": "MORALO GORDON, DIEGO",
+          "number": null
+        },
+        {
+          "name": "BERNIER MONTALBAN, TONI",
+          "number": 6
+        },
+        {
+          "name": "CANTARERO COSTA, ERIK",
+          "number": 12
+        },
+        {
+          "name": "GASCON MUÑOZ, HUGO",
+          "number": 3
+        },
+        {
+          "name": "HERNANDEZ RUIZ, HUGO",
+          "number": 22
+        },
+        {
+          "name": "JIN, YANGHAO",
+          "number": 10
+        },
+        {
+          "name": "MATA LOZANO, JOSE DAVID",
+          "number": 7
+        },
+        {
+          "name": "MIR PEREZ, IKER",
+          "number": 69
+        },
+        {
+          "name": "PALAU MARTÍ, GUERAU",
+          "number": 18
+        },
+        {
+          "name": "PEÑALVER PÉREZ, IZAN",
+          "number": 5
+        },
+        {
+          "name": "QUISPE HUARCAYA, NIJHAT SONYU",
+          "number": 4
+        },
+        {
+          "name": "SEGURA GONZALEZ, JOAN",
+          "number": 14
+        },
+        {
+          "name": "SEÑOR MONTES, JORGE",
+          "number": 2
+        },
+        {
+          "name": "VILA CARRANZA, GONZALO",
+          "number": 11
+        },
+        {
+          "name": "ENCINA PAIVA, MISAEL",
+          "number": 19
+        },
+        {
+          "name": "MAYORAL ALMEDA, ALEX",
+          "number": 8
+        },
+        {
+          "name": "GARCÍA TORRECILLAS, POL",
+          "number": 9
+        }
+      ],
+      "staff": [
+        {
+          "name": "SEÑOR MÉNDEZ, JORGE",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "VENTAJA, JULI",
+          "role": "DELEGADO"
+        }
+      ]
+    },
+    {
+      "id": "team-5455e79a81e0",
+      "name": "Cadete S15",
+      "category": "masc",
+      "coach": "MARTINEZ EL ABBASSI, SARA, GARCIA JURA, CRISTIAN",
+      "schedule": "",
+      "url": "https://www.fcf.cat/ca/competicio/2026-2027/cadet-segona-divisio-s15/grup-14/resultats",
+      "image": "./assets/equips/5455e79a81e0.jpg",
+      "members": [
+        "ALMEDINA GARCIA, VICTOR",
+        "AYALA MARTIN, ISAAC",
+        "BERLANGA ANAYA, IVAN",
+        "COELLO GARCIA, DEREK ALEXANDER",
+        "GALVEZ LAARBI BEN, RAFA",
+        "GARCIA MARTINEZ, JUAN DIEGO",
+        "GARCIA MARTINEZ, LIONEL",
+        "HIDALGO PEREZ, BIEL",
+        "IKISS FAIZ, AMIN",
+        "MORILLA RODRIGUEZ, POL",
+        "QUIRÓS VILCHEZ, IKER",
+        "RIBOT CHACÓN, BIEL",
+        "ARTEAGA VARGAS, EDUARDO",
+        "AVALOS CABALLERO, DYLAN JOSE MARIA"
+      ],
+      "players": [
+        {
+          "name": "ALMEDINA GARCIA, VICTOR",
+          "number": 9
+        },
+        {
+          "name": "AYALA MARTIN, ISAAC",
+          "number": 5
+        },
+        {
+          "name": "BERLANGA ANAYA, IVAN",
+          "number": 17
+        },
+        {
+          "name": "COELLO GARCIA, DEREK ALEXANDER",
+          "number": 13
+        },
+        {
+          "name": "GALVEZ LAARBI BEN, RAFA",
+          "number": 7
+        },
+        {
+          "name": "GARCIA MARTINEZ, JUAN DIEGO",
+          "number": 8
+        },
+        {
+          "name": "GARCIA MARTINEZ, LIONEL",
+          "number": 10
+        },
+        {
+          "name": "HIDALGO PEREZ, BIEL",
+          "number": 4
+        },
+        {
+          "name": "IKISS FAIZ, AMIN",
+          "number": 11
+        },
+        {
+          "name": "MORILLA RODRIGUEZ, POL",
+          "number": 1
+        },
+        {
+          "name": "QUIRÓS VILCHEZ, IKER",
+          "number": 19
+        },
+        {
+          "name": "RIBOT CHACÓN, BIEL",
+          "number": 2
+        },
+        {
+          "name": "ARTEAGA VARGAS, EDUARDO",
+          "number": 21
+        },
+        {
+          "name": "AVALOS CABALLERO, DYLAN JOSE MARIA",
+          "number": 3
+        }
+      ],
+      "staff": [
+        {
+          "name": "MARTINEZ EL ABBASSI, SARA",
+          "role": "2DA ENTRENADORA"
+        },
+        {
+          "name": "GARCIA JURA, CRISTIAN",
+          "role": "ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-3f4de811b076",
+      "name": "Infantil S14",
+      "category": "masc",
+      "coach": "MARTÍNEZ GÓMEZ, ERIC, GONZALEZ BELLAHNA, YASER",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "ALONSO PIQUÉ, ARNAU",
+        "BIEGUNOV YAROVA, NIKITA",
+        "CABALLERIA BUSTOS, NACHO",
+        "CABAÑAS PAGES, ROC",
+        "CARDONA CARO, JUAN MANUEL",
+        "CESAR TARANCON, JON",
+        "CHICA CAMINALS, ADRIÀ",
+        "CLERICH BARREDO, JOEL",
+        "DIAZ ROCA, BIEL",
+        "FERNANDEZ AGUILERA, BRUNO",
+        "GONZALEZ BELLAHNA, YUSEF",
+        "GUTIERREZ GONZALEZ, ALEJANDRO",
+        "LASA FALZETTA, MATIAS",
+        "MORENO ORDÓÑEZ, SIMÓN",
+        "PRIU RUBIO, HUGO",
+        "RIOS ROSARIO, ADRIAN",
+        "ROYUELA GONZALVES, JOAN",
+        "SOLANAS DEU, LLUC",
+        "VAQUERA HERRERA, ARON",
+        "VARGAS ANTELO, DYLAN"
+      ],
+      "players": [
+        {
+          "name": "ALONSO PIQUÉ, ARNAU",
+          "number": 3
+        },
+        {
+          "name": "BIEGUNOV YAROVA, NIKITA",
+          "number": 15
+        },
+        {
+          "name": "CABALLERIA BUSTOS, NACHO",
+          "number": 14
+        },
+        {
+          "name": "CABAÑAS PAGES, ROC",
+          "number": 7
+        },
+        {
+          "name": "CARDONA CARO, JUAN MANUEL",
+          "number": 23
+        },
+        {
+          "name": "CESAR TARANCON, JON",
+          "number": 29
+        },
+        {
+          "name": "CHICA CAMINALS, ADRIÀ",
+          "number": 11
+        },
+        {
+          "name": "CLERICH BARREDO, JOEL",
+          "number": 8
+        },
+        {
+          "name": "DIAZ ROCA, BIEL",
+          "number": 4
+        },
+        {
+          "name": "FERNANDEZ AGUILERA, BRUNO",
+          "number": 2
+        },
+        {
+          "name": "GONZALEZ BELLAHNA, YUSEF",
+          "number": 16
+        },
+        {
+          "name": "GUTIERREZ GONZALEZ, ALEJANDRO",
+          "number": 5
+        },
+        {
+          "name": "LASA FALZETTA, MATIAS",
+          "number": 19
+        },
+        {
+          "name": "MORENO ORDÓÑEZ, SIMÓN",
+          "number": 13
+        },
+        {
+          "name": "PRIU RUBIO, HUGO",
+          "number": 10
+        },
+        {
+          "name": "RIOS ROSARIO, ADRIAN",
+          "number": 9
+        },
+        {
+          "name": "ROYUELA GONZALVES, JOAN",
+          "number": 22
+        },
+        {
+          "name": "SOLANAS DEU, LLUC",
+          "number": 20
+        },
+        {
+          "name": "VAQUERA HERRERA, ARON",
+          "number": 12
+        },
+        {
+          "name": "VARGAS ANTELO, DYLAN",
+          "number": 6
+        }
+      ],
+      "staff": [
+        {
+          "name": "MARIN GÓMEZ, ADRIÀ",
+          "role": "DELEGADO"
+        },
+        {
+          "name": "MARTÍNEZ GÓMEZ, ERIC",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "GONZALEZ BELLAHNA, YASER",
+          "role": "2DO ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-309600a317b2",
+      "name": "Infantil S13",
+      "category": "masc",
+      "coach": "CATALA DIAZ, CARLA, MARTINEZ, IZAN",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "BRUNA LOPEZ, PABLO",
+        "CUBA PAUCAR, THIAGO ALONSO",
+        "GONZALEZ SERRAN, ARES",
+        "GÜIZ RAMONEDA, JAN",
+        "JARA BAQUE, JORGE JONAS",
+        "LÓPEZ SANTAMARÍA, ADRIÁN",
+        "MAQUEDA MORILLAS, AXEL",
+        "MARTIN SALINAS, DAVID",
+        "MARTINEZ LLORENTE, MARC",
+        "MARTINEZ PEREZ, ANTONIO",
+        "MONSERRATE OSORIO, ERIC",
+        "MORENO HERNANDEZ, THIAGO",
+        "PLAZA GONZALEZ, HECTOR",
+        "SANCHEZ DOMINGUEZ, ERIK",
+        "VILANOVA MEROÑO, NIL",
+        "MOJICA LIZARAZO, SERGIO ANDRES"
+      ],
+      "players": [
+        {
+          "name": "BRUNA LOPEZ, PABLO",
+          "number": 9
+        },
+        {
+          "name": "CUBA PAUCAR, THIAGO ALONSO",
+          "number": 77
+        },
+        {
+          "name": "GONZALEZ SERRAN, ARES",
+          "number": 4
+        },
+        {
+          "name": "GÜIZ RAMONEDA, JAN",
+          "number": 21
+        },
+        {
+          "name": "JARA BAQUE, JORGE JONAS",
+          "number": 18
+        },
+        {
+          "name": "LÓPEZ SANTAMARÍA, ADRIÁN",
+          "number": 2
+        },
+        {
+          "name": "MAQUEDA MORILLAS, AXEL",
+          "number": 7
+        },
+        {
+          "name": "MARTIN SALINAS, DAVID",
+          "number": 15
+        },
+        {
+          "name": "MARTINEZ LLORENTE, MARC",
+          "number": 1
+        },
+        {
+          "name": "MARTINEZ PEREZ, ANTONIO",
+          "number": 10
+        },
+        {
+          "name": "MONSERRATE OSORIO, ERIC",
+          "number": 11
+        },
+        {
+          "name": "MORENO HERNANDEZ, THIAGO",
+          "number": 21
+        },
+        {
+          "name": "PLAZA GONZALEZ, HECTOR",
+          "number": 8
+        },
+        {
+          "name": "SANCHEZ DOMINGUEZ, ERIK",
+          "number": 31
+        },
+        {
+          "name": "VILANOVA MEROÑO, NIL",
+          "number": 17
+        },
+        {
+          "name": "MOJICA LIZARAZO, SERGIO ANDRES",
+          "number": 12
+        }
+      ],
+      "staff": [
+        {
+          "name": "CATALA DIAZ, CARLA",
+          "role": "ENTRENADORA"
+        },
+        {
+          "name": "GARCIA ROSA, JOSE MANUEL",
+          "role": "DELEGADO"
+        },
+        {
+          "name": "MARTINEZ, IZAN",
+          "role": "ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-ed02b24b51d5",
+      "name": "Alevín S12 A",
+      "category": "masc",
+      "coach": "TRILLAS DUEZ, BRUNO",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "BRAVO PALOMINO, JEAN PIERRE",
+        "CHICA CAMINALS, LLUC",
+        "FERNADEZ GIMENO, UNAI",
+        "FERNANDEZ AGUILERA, DAVID",
+        "HENNOUNI, ADEM MOHAMED ISLEM",
+        "MARTINEZ LLORENTE, BIEL",
+        "PARDO CARRO, IZAN",
+        "RACHIK, MOHAMED REDA",
+        "RODRIGUEZ BUENO, ALEJANDRO",
+        "SANCHEZ HERNANDEZ, XAVI"
+      ],
+      "players": [
+        {
+          "name": "BRAVO PALOMINO, JEAN PIERRE",
+          "number": 15
+        },
+        {
+          "name": "CHICA CAMINALS, LLUC",
+          "number": 1
+        },
+        {
+          "name": "FERNADEZ GIMENO, UNAI",
+          "number": 14
+        },
+        {
+          "name": "FERNANDEZ AGUILERA, DAVID",
+          "number": 7
+        },
+        {
+          "name": "HENNOUNI, ADEM MOHAMED ISLEM",
+          "number": 19
+        },
+        {
+          "name": "MARTINEZ LLORENTE, BIEL",
+          "number": 8
+        },
+        {
+          "name": "PARDO CARRO, IZAN",
+          "number": 11
+        },
+        {
+          "name": "RACHIK, MOHAMED REDA",
+          "number": 10
+        },
+        {
+          "name": "RODRIGUEZ BUENO, ALEJANDRO",
+          "number": 2
+        },
+        {
+          "name": "SANCHEZ HERNANDEZ, XAVI",
+          "number": 9
+        }
+      ],
+      "staff": [
+        {
+          "name": "CHICA MARTINEZ, DAVID",
+          "role": "DELEGADO"
+        },
+        {
+          "name": "TRILLAS DUEZ, BRUNO",
+          "role": "ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-5209e32a7698",
+      "name": "Alevín S12 B",
+      "category": "masc",
+      "coach": "MARTINEZ, IZAN, MUÑOZ RAGA, JOEL",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "ALIAGA BORRALLO, DANIEL",
+        "AYALA PRÓSPER, HUGO",
+        "BAIGET PARDO, JAN",
+        "LLIN CRUZ, NIL",
+        "PEREZ HERNANDEZ, BIEL",
+        "PUIG ROMERA, PAU",
+        "RACHI RACHI, MAHER",
+        "ROMERO ILINA, ALAN",
+        "RUA SERRANO, MATEO",
+        "RUEDA DIAZ, ALEJANDRO",
+        "SANTALLA PRIETO, IKER",
+        "VENTURA LOPEZ, MARC"
+      ],
+      "players": [
+        {
+          "name": "ALIAGA BORRALLO, DANIEL",
+          "number": 2
+        },
+        {
+          "name": "AYALA PRÓSPER, HUGO",
+          "number": 19
+        },
+        {
+          "name": "BAIGET PARDO, JAN",
+          "number": 12
+        },
+        {
+          "name": "LLIN CRUZ, NIL",
+          "number": 30
+        },
+        {
+          "name": "PEREZ HERNANDEZ, BIEL",
+          "number": 8
+        },
+        {
+          "name": "PUIG ROMERA, PAU",
+          "number": 1
+        },
+        {
+          "name": "RACHI RACHI, MAHER",
+          "number": 16
+        },
+        {
+          "name": "ROMERO ILINA, ALAN",
+          "number": 11
+        },
+        {
+          "name": "RUA SERRANO, MATEO",
+          "number": 9
+        },
+        {
+          "name": "RUEDA DIAZ, ALEJANDRO",
+          "number": 15
+        },
+        {
+          "name": "SANTALLA PRIETO, IKER",
+          "number": 28
+        },
+        {
+          "name": "VENTURA LOPEZ, MARC",
+          "number": 10
+        }
+      ],
+      "staff": [
+        {
+          "name": "MARTINEZ, IZAN",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "MUÑOZ RAGA, JOEL",
+          "role": "ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-44b11bb728aa",
+      "name": "Alevín S12 C",
+      "category": "masc",
+      "coach": "MOSCOSO MARTINEZ, RUBEN, VERDEJO GOMEZ, NICOLAS",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "CABANILLAS MARTINEZ, DANIEL",
+        "EL FOUNTI EL HADI, ISMAIL",
+        "FLORES GARCIA, CESAR",
+        "GARCIA PEREZ, GERAY",
+        "GOMEZ MOYA, ERIC",
+        "MORGADO SOTO, ARES",
+        "MORUNO SANZ, BIEL",
+        "OLLE PERAN, OT",
+        "PEREGRINA CALVO, XAVIER DAVID",
+        "TIHAMI BELGHITI, MOHAMED AYOUB",
+        "MORENO SIERRA, JUAN ANTONIO"
+      ],
+      "players": [
+        {
+          "name": "CABANILLAS MARTINEZ, DANIEL",
+          "number": 4
+        },
+        {
+          "name": "EL FOUNTI EL HADI, ISMAIL",
+          "number": 9
+        },
+        {
+          "name": "FLORES GARCIA, CESAR",
+          "number": 11
+        },
+        {
+          "name": "GARCIA PEREZ, GERAY",
+          "number": 7
+        },
+        {
+          "name": "GOMEZ MOYA, ERIC",
+          "number": 10
+        },
+        {
+          "name": "MORGADO SOTO, ARES",
+          "number": 6
+        },
+        {
+          "name": "MORUNO SANZ, BIEL",
+          "number": 12
+        },
+        {
+          "name": "OLLE PERAN, OT",
+          "number": 3
+        },
+        {
+          "name": "PEREGRINA CALVO, XAVIER DAVID",
+          "number": 13
+        },
+        {
+          "name": "TIHAMI BELGHITI, MOHAMED AYOUB",
+          "number": 2
+        },
+        {
+          "name": "MORENO SIERRA, JUAN ANTONIO",
+          "number": 1
+        }
+      ],
+      "staff": [
+        {
+          "name": "MOSCOSO MARTINEZ, RUBEN",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "VERDEJO GOMEZ, NICOLAS",
+          "role": "ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-1ad69b4ececc",
+      "name": "Alevín S11 A",
+      "category": "masc",
+      "coach": "GONZÁLEZ BELLAHNA, YASER",
+      "schedule": "",
+      "url": "",
+      "image": "./assets/equips/1ad69b4ececc.jpg",
+      "members": [
+        "AGUDO AVILES, IVAN",
+        "CHFIRA HADRI, ADAM",
+        "DA SILVA PIO SANCHEZ, THIAGO",
+        "EL HAMRI ATANEBA, MUSA",
+        "FALCÓ SÁNCHEZ, JAN",
+        "PARRILLA MOYA, ADRIAN",
+        "SALHI BOURASSI, RAYAN",
+        "SALHI ESAADANI, YOUSEFF"
+      ],
+      "players": [
+        {
+          "name": "AGUDO AVILES, IVAN",
+          "number": 6
+        },
+        {
+          "name": "CHFIRA HADRI, ADAM",
+          "number": 8
+        },
+        {
+          "name": "DA SILVA PIO SANCHEZ, THIAGO",
+          "number": 23
+        },
+        {
+          "name": "EL HAMRI ATANEBA, MUSA",
+          "number": 5
+        },
+        {
+          "name": "FALCÓ SÁNCHEZ, JAN",
+          "number": 9
+        },
+        {
+          "name": "PARRILLA MOYA, ADRIAN",
+          "number": 11
+        },
+        {
+          "name": "SALHI BOURASSI, RAYAN",
+          "number": 7
+        },
+        {
+          "name": "SALHI ESAADANI, YOUSEFF",
+          "number": 10
+        }
+      ],
+      "staff": [
+        {
+          "name": "GONZALEZ ARRABAL, JUAN MANUEL",
+          "role": "DELEGADO"
+        },
+        {
+          "name": "GONZÁLEZ BELLAHNA, YASER",
+          "role": "ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-b0b7b30a9426",
+      "name": "Alevín S11 B",
+      "category": "masc",
+      "coach": "MIR PEREZ, IKER, RACHIK, ADAM",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "AYAT MSAOURI EL MAHBOUBI, IMRAN",
+        "CHELH GARCIA, ABDESLAM",
+        "DELARCA VENTURA, ANDREW PAUL",
+        "FERNANDEZ SANCHEZ, HUGO",
+        "MARTINEZ CARO, LUIS",
+        "YANIS",
+        "ZATARAIZ PADILLA, RUBEN"
+      ],
+      "players": [
+        {
+          "name": "AYAT MSAOURI EL MAHBOUBI, IMRAN",
+          "number": 11
+        },
+        {
+          "name": "CHELH GARCIA, ABDESLAM",
+          "number": 19
+        },
+        {
+          "name": "DELARCA VENTURA, ANDREW PAUL",
+          "number": 8
+        },
+        {
+          "name": "FERNANDEZ SANCHEZ, HUGO",
+          "number": 13
+        },
+        {
+          "name": "MARTINEZ CARO, LUIS",
+          "number": 10
+        },
+        {
+          "name": "YANIS",
+          "number": 9
+        },
+        {
+          "name": "ZATARAIZ PADILLA, RUBEN",
+          "number": 7
+        }
+      ],
+      "staff": [
+        {
+          "name": "MIR PEREZ, IKER",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "RACHIK, ADAM",
+          "role": "ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-733f6c7ccf78",
+      "name": "Benjamín S10 A",
+      "category": "masc",
+      "coach": "MORANTE ROMERO, RUBEN, YEPES BALDO, CARLOS",
+      "schedule": "",
+      "url": "",
+      "image": "./assets/equips/733f6c7ccf78.jpg",
+      "members": [
+        "ASENSIO MONTEJANO, ALVARO",
+        "BUIZA AGUILAR, ALEJANDRO",
+        "CAMPS MAHALEAN, ARNAU",
+        "JARA BAQUE, AITOR EMANUEL",
+        "JIMENEZ SAN VICTORINO, DARÍO",
+        "LEE LARA, NOAH",
+        "MARTINEZ VALVERDE, THEO",
+        "MORANTE ARJONA, JULEN",
+        "RODRIGUEZ HUNGRIA, MAX",
+        "VENDRELL FERNANDEZ, MARC",
+        "MATEO HERNANDEZ",
+        "ANDRES CEPEDA"
+      ],
+      "players": [
+        {
+          "name": "ASENSIO MONTEJANO, ALVARO",
+          "number": null
+        },
+        {
+          "name": "BUIZA AGUILAR, ALEJANDRO",
+          "number": null
+        },
+        {
+          "name": "CAMPS MAHALEAN, ARNAU",
+          "number": null
+        },
+        {
+          "name": "JARA BAQUE, AITOR EMANUEL",
+          "number": null
+        },
+        {
+          "name": "JIMENEZ SAN VICTORINO, DARÍO",
+          "number": null
+        },
+        {
+          "name": "LEE LARA, NOAH",
+          "number": null
+        },
+        {
+          "name": "MARTINEZ VALVERDE, THEO",
+          "number": null
+        },
+        {
+          "name": "MORANTE ARJONA, JULEN",
+          "number": null
+        },
+        {
+          "name": "RODRIGUEZ HUNGRIA, MAX",
+          "number": null
+        },
+        {
+          "name": "VENDRELL FERNANDEZ, MARC",
+          "number": null
+        },
+        {
+          "name": "MATEO HERNANDEZ",
+          "number": null
+        },
+        {
+          "name": "ANDRES CEPEDA",
+          "number": null
+        }
+      ],
+      "staff": [
+        {
+          "name": "MORANTE ROMERO, RUBEN",
+          "role": "2DO ENTRENADOR"
+        },
+        {
+          "name": "YEPES BALDO, CARLOS",
+          "role": "ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-2eeabf6c94db",
+      "name": "Benjamín S9 A",
+      "category": "masc",
+      "coach": "PLAZA GARCIA, JUAN CARLOS",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "FARRÉ CERANTOLA, MATTEO",
+        "MARTINEZ PEREZ, ALAN",
+        "NAVARRO MARTIN, ANGEL JOSE",
+        "RACHI RACHI, SAFOUANE",
+        "RIVERA HERNANDEZ, MARTIN",
+        "RUIZ MARTINEZ, VALERIA",
+        "JOHAN",
+        "ALMA",
+        "MARIA",
+        "QUISPE HUARCAYA, IÑAKI JOSEP",
+        "SANTOS SIGURET, LEONARDO"
+      ],
+      "players": [
+        {
+          "name": "FARRÉ CERANTOLA, MATTEO",
+          "number": 8
+        },
+        {
+          "name": "MARTINEZ PEREZ, ALAN",
+          "number": 10
+        },
+        {
+          "name": "NAVARRO MARTIN, ANGEL JOSE",
+          "number": 1
+        },
+        {
+          "name": "RACHI RACHI, SAFOUANE",
+          "number": 16
+        },
+        {
+          "name": "RIVERA HERNANDEZ, MARTIN",
+          "number": 9
+        },
+        {
+          "name": "RUIZ MARTINEZ, VALERIA",
+          "number": 11
+        },
+        {
+          "name": "JOHAN",
+          "number": null
+        },
+        {
+          "name": "ALMA",
+          "number": 14
+        },
+        {
+          "name": "MARIA",
+          "number": null
+        },
+        {
+          "name": "QUISPE HUARCAYA, IÑAKI JOSEP",
+          "number": 7
+        },
+        {
+          "name": "SANTOS SIGURET, LEONARDO",
+          "number": 6
+        }
+      ],
+      "staff": [
+        {
+          "name": "PLAZA GARCIA, JUAN CARLOS",
+          "role": "ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-75d93182b0df",
+      "name": "Prebenjamín S7 A",
+      "category": "masc",
+      "coach": "MARTA SANCHEZ, PABLO MONTERO, IVAN BERLANGA",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "DANIELA CUADRADO NAVARRO",
+        "ALEX CAZORLA RICO",
+        "FRANCISCO JOSE CRUZ AMAYA",
+        "ZAID GABRIEL TORRES CARLOS",
+        "ADRIÀ CASTELLET PRAT",
+        "JOSE AMAR RUIZ",
+        "ADRIAN VENIMIR PEKTOV",
+        "N'GALLO DIAKITE SIDIBE",
+        "JESUS SANCHEZ MATEOS",
+        "ANDER RODRIGUEZ BUENO"
+      ],
+      "players": [
+        {
+          "name": "DANIELA CUADRADO NAVARRO",
+          "number": 9
+        },
+        {
+          "name": "ALEX CAZORLA RICO",
+          "number": 1
+        },
+        {
+          "name": "FRANCISCO JOSE CRUZ AMAYA",
+          "number": 10
+        },
+        {
+          "name": "ZAID GABRIEL TORRES CARLOS",
+          "number": 5
+        },
+        {
+          "name": "ADRIÀ CASTELLET PRAT",
+          "number": 8
+        },
+        {
+          "name": "JOSE AMAR RUIZ",
+          "number": null
+        },
+        {
+          "name": "ADRIAN VENIMIR PEKTOV",
+          "number": 6
+        },
+        {
+          "name": "N'GALLO DIAKITE SIDIBE",
+          "number": 4
+        },
+        {
+          "name": "JESUS SANCHEZ MATEOS",
+          "number": 7
+        },
+        {
+          "name": "ANDER RODRIGUEZ BUENO",
+          "number": 2
+        }
+      ],
+      "staff": [
+        {
+          "name": "MARTA SANCHEZ",
+          "role": "ENTRENADORA"
+        },
+        {
+          "name": "PABLO MONTERO",
+          "role": "2DO ENTRENADOR"
+        },
+        {
+          "name": "IVAN BERLANGA",
+          "role": "3ER ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-451b84455d81",
+      "name": "Veteranas",
+      "category": "fem",
+      "coach": "IVAN RUEDA, GUILLERMO ALCAIDE LORENTE",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "AINHOA ROJO VICO",
+        "SANDRA VICO VEGA",
+        "LAURA ROMERO LEON",
+        "ESTHER VALERO MARTINEZ",
+        "SUSANA GARCIA CONESA",
+        "ANA MARIA MARTIN ROMERO",
+        "RAQUEL LOPEZ GARCIA",
+        "ELENA MACIAS FRUTOS",
+        "YAIZA SANTOS AVILA",
+        "NOELIA ARA GALLARDO",
+        "NOELIA VAZQUEZ VICO",
+        "PASTORA LOPEZ DOMINGUEZ",
+        "YASMIN HERNANDEZ MARTINEZ",
+        "PATRICIA VELASCO CAMPAN",
+        "CRISTINA MADRID GOMICIA"
+      ],
+      "players": [
+        {
+          "name": "AINHOA ROJO VICO",
+          "number": null
+        },
+        {
+          "name": "SANDRA VICO VEGA",
+          "number": null
+        },
+        {
+          "name": "LAURA ROMERO LEON",
+          "number": null
+        },
+        {
+          "name": "ESTHER VALERO MARTINEZ",
+          "number": null
+        },
+        {
+          "name": "SUSANA GARCIA CONESA",
+          "number": null
+        },
+        {
+          "name": "ANA MARIA MARTIN ROMERO",
+          "number": null
+        },
+        {
+          "name": "RAQUEL LOPEZ GARCIA",
+          "number": null
+        },
+        {
+          "name": "ELENA MACIAS FRUTOS",
+          "number": null
+        },
+        {
+          "name": "YAIZA SANTOS AVILA",
+          "number": null
+        },
+        {
+          "name": "NOELIA ARA GALLARDO",
+          "number": null
+        },
+        {
+          "name": "NOELIA VAZQUEZ VICO",
+          "number": null
+        },
+        {
+          "name": "PASTORA LOPEZ DOMINGUEZ",
+          "number": null
+        },
+        {
+          "name": "YASMIN HERNANDEZ MARTINEZ",
+          "number": null
+        },
+        {
+          "name": "PATRICIA VELASCO CAMPAN",
+          "number": null
+        },
+        {
+          "name": "CRISTINA MADRID GOMICIA",
+          "number": null
+        }
+      ],
+      "staff": [
+        {
+          "name": "IVAN RUEDA",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "GUILLERMO ALCAIDE LORENTE",
+          "role": "2DO ENTRENADOR"
+        },
+        {
+          "name": "NOEMI RAGA DOMINGUEZ",
+          "role": "DELEGADA"
+        }
+      ]
+    },
+    {
+      "id": "team-1c5d62961549",
+      "name": "Amateur Fem A",
+      "category": "fem",
+      "coach": "MOSCOSO MARTINEZ, CRISTIAN, JUAN CARLOS PLAZA",
+      "schedule": "",
+      "url": "",
+      "image": "./assets/equips/1c5d62961549.jpg",
+      "members": [
+        "AGUAYO LACHICA, ANTÒNIA",
+        "ALBANELL BERNAT, CARLOTA",
+        "BAJO AMBRÓS, LAIA",
+        "BARO GONZALEZ, MIREIA",
+        "BLANQUÉ FONT, MARIA",
+        "CATALA DIAZ, CARLA",
+        "CERVELLÓ MARQUÈS, INGRID",
+        "DEL VALLE TRISTANY, BLANCA",
+        "GOMEZ BATET, ANNA",
+        "MARTINEZ EL ABBASSI, SARA",
+        "MEDINA PEREZ, CORAL",
+        "MOLINA MUÑOZ, YAIZA",
+        "NAVARRETE PARDO, CARLA",
+        "PEREZ DOMINGO, CLAUDIA",
+        "SALMON DIANA, SANDRA",
+        "SANCHEZ PUERTAS, ELIA",
+        "SANCHO LOPEZ, LEYRE",
+        "Simon, Emma",
+        "SORIANO GERIZ, NÚRIA",
+        "URGELES QUINTERO, GISEL",
+        "URGELES QUINTERO, JUDIT"
+      ],
+      "players": [
+        {
+          "name": "AGUAYO LACHICA, ANTÒNIA",
+          "number": 11
+        },
+        {
+          "name": "ALBANELL BERNAT, CARLOTA",
+          "number": 23
+        },
+        {
+          "name": "BAJO AMBRÓS, LAIA",
+          "number": 25
+        },
+        {
+          "name": "BARO GONZALEZ, MIREIA",
+          "number": 7
+        },
+        {
+          "name": "BLANQUÉ FONT, MARIA",
+          "number": 18
+        },
+        {
+          "name": "CATALA DIAZ, CARLA",
+          "number": 17
+        },
+        {
+          "name": "CERVELLÓ MARQUÈS, INGRID",
+          "number": 5
+        },
+        {
+          "name": "DEL VALLE TRISTANY, BLANCA",
+          "number": 13
+        },
+        {
+          "name": "GOMEZ BATET, ANNA",
+          "number": 3
+        },
+        {
+          "name": "MARTINEZ EL ABBASSI, SARA",
+          "number": 8
+        },
+        {
+          "name": "MEDINA PEREZ, CORAL",
+          "number": 6
+        },
+        {
+          "name": "MOLINA MUÑOZ, YAIZA",
+          "number": 19
+        },
+        {
+          "name": "NAVARRETE PARDO, CARLA",
+          "number": 1
+        },
+        {
+          "name": "PEREZ DOMINGO, CLAUDIA",
+          "number": 22
+        },
+        {
+          "name": "SALMON DIANA, SANDRA",
+          "number": 9
+        },
+        {
+          "name": "SANCHEZ PUERTAS, ELIA",
+          "number": 2
+        },
+        {
+          "name": "SANCHO LOPEZ, LEYRE",
+          "number": 12
+        },
+        {
+          "name": "Simon, Emma",
+          "number": 14
+        },
+        {
+          "name": "SORIANO GERIZ, NÚRIA",
+          "number": 4
+        },
+        {
+          "name": "URGELES QUINTERO, GISEL",
+          "number": 10
+        },
+        {
+          "name": "URGELES QUINTERO, JUDIT",
+          "number": 21
+        }
+      ],
+      "staff": [
+        {
+          "name": "MOSCOSO MARTINEZ, CRISTIAN",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "JUAN CARLOS PLAZA",
+          "role": "2DO ENTRENADOR"
+        },
+        {
+          "name": "Luna Molina Muñoz",
+          "role": "FISIO"
+        }
+      ]
+    },
+    {
+      "id": "team-03a950fe4e18",
+      "name": "Amateur Fem B",
+      "category": "fem",
+      "coach": "FERNÁNDEZ BERMÚDEZ, DAVID, CAPDEVILA GIL, ARNAU",
+      "schedule": "",
+      "url": "https://www.fcf.cat/ca/competicio/2026-2027/segona-divisio-femeni/grup-5/resultats",
+      "image": "./assets/equips/03a950fe4e18.jpg",
+      "members": [
+        "ALBA SANCHEZ, VALERIA",
+        "BAZ QUERALTÓ, ALBA JIA",
+        "BUJELLA BUENO, CLARA",
+        "CALVO MALO, JUDIT",
+        "CANTILLO CIVICO, VIRGINIA",
+        "CLARAMBO SIERRA, ARIADNA",
+        "DIAZ BURGOS, AROA",
+        "DOMENECH CORTES, GISELA",
+        "FERNANDEZ ESTUDILLO, ALBA",
+        "GARCIA LUCHA, PAULA",
+        "GINABREDA DELGADO, PAULA",
+        "GINER CARRASCULL, SILVIA",
+        "HERNANDEZ GISBERT, KARLA",
+        "LERIN PRIETO, ALESSANDRO",
+        "MORALES SANCHEZ, CRISTINA",
+        "ORTIZ NAVARRO, JUDITH",
+        "REINA TOMICO, ISABEL",
+        "RODRIGUEZ ALONSO, ANDREA",
+        "SANTAEUGENIA SOLA, YEDITH",
+        "VIVANCOS CLAVERAS, PAULA",
+        "REDÓN CAMPOS, AINHOA",
+        "REDONDO MONTOYA, LUCIA",
+        "YANIRA",
+        "IVET VILANOVA MEROÑO",
+        "NURIA ALBARRAN"
+      ],
+      "players": [
+        {
+          "name": "ALBA SANCHEZ, VALERIA",
+          "number": 26
+        },
+        {
+          "name": "BAZ QUERALTÓ, ALBA JIA",
+          "number": 3
+        },
+        {
+          "name": "BUJELLA BUENO, CLARA",
+          "number": 21
+        },
+        {
+          "name": "CALVO MALO, JUDIT",
+          "number": 2
+        },
+        {
+          "name": "CANTILLO CIVICO, VIRGINIA",
+          "number": 18
+        },
+        {
+          "name": "CLARAMBO SIERRA, ARIADNA",
+          "number": 5
+        },
+        {
+          "name": "DIAZ BURGOS, AROA",
+          "number": 20
+        },
+        {
+          "name": "DOMENECH CORTES, GISELA",
+          "number": 8
+        },
+        {
+          "name": "FERNANDEZ ESTUDILLO, ALBA",
+          "number": 24
+        },
+        {
+          "name": "GARCIA LUCHA, PAULA",
+          "number": 4
+        },
+        {
+          "name": "GINABREDA DELGADO, PAULA",
+          "number": 9
+        },
+        {
+          "name": "GINER CARRASCULL, SILVIA",
+          "number": 14
+        },
+        {
+          "name": "HERNANDEZ GISBERT, KARLA",
+          "number": 17
+        },
+        {
+          "name": "LERIN PRIETO, ALESSANDRO",
+          "number": 22
+        },
+        {
+          "name": "MORALES SANCHEZ, CRISTINA",
+          "number": 11
+        },
+        {
+          "name": "ORTIZ NAVARRO, JUDITH",
+          "number": 19
+        },
+        {
+          "name": "REINA TOMICO, ISABEL",
+          "number": 6
+        },
+        {
+          "name": "RODRIGUEZ ALONSO, ANDREA",
+          "number": 23
+        },
+        {
+          "name": "SANTAEUGENIA SOLA, YEDITH",
+          "number": 16
+        },
+        {
+          "name": "VIVANCOS CLAVERAS, PAULA",
+          "number": 12
+        },
+        {
+          "name": "REDÓN CAMPOS, AINHOA",
+          "number": 15
+        },
+        {
+          "name": "REDONDO MONTOYA, LUCIA",
+          "number": 7
+        },
+        {
+          "name": "YANIRA",
+          "number": 10
+        },
+        {
+          "name": "IVET VILANOVA MEROÑO",
+          "number": 1
+        },
+        {
+          "name": "NURIA ALBARRAN",
+          "number": null
+        }
+      ],
+      "staff": [
+        {
+          "name": "FERNÁNDEZ BERMÚDEZ, DAVID",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "CAPDEVILA GIL, ARNAU",
+          "role": "2DO ENTRENADOR"
+        },
+        {
+          "name": "GIMENO GALIMANY, ALBA",
+          "role": "DELEGADA"
+        }
+      ]
+    },
+    {
+      "id": "team-8aa618c9254c",
+      "name": "Juvenil Fem A",
+      "category": "fem",
+      "coach": "BARRERAS DE RIOS, TIAGO, NAVARRO GARCIA, ANGELA, FERNÁNDEZ SOLA, ADRIÀ",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "FERNANDEZ SOLA, ARIADNA",
+        "GONZALEZ VIUDEZ, NADIA",
+        "MARTÍNEZ VALLS, VEGA",
+        "ANDRES PLANS, NOA",
+        "BARRERAS DE RIOS, JANA",
+        "CENTELLES CORTES, ÁMBAR",
+        "CENTELLES CORTES, ROCIO",
+        "DE HARO VALENZUELA, ONA",
+        "GIMENEZ BAKHKHAT, AMIRA",
+        "GUTIÉRREZ ORTEGA, AITANA",
+        "HERNANDEZ SANCHEZ, NAIARA",
+        "MATEOS ALCAIDE, GISELA",
+        "PASTOR GALERA, ARIADNA",
+        "RAMIREZ GARCIA, NAIA",
+        "RODRIGUEZ GONZALEZ, AINHOA",
+        "RUIZ RIVERA, SOFIA",
+        "SANCHEZ HERNANDEZ, MARTA",
+        "ARÉVALO SÁNCHEZ, BERTA"
+      ],
+      "players": [
+        {
+          "name": "FERNANDEZ SOLA, ARIADNA",
+          "number": 8
+        },
+        {
+          "name": "GONZALEZ VIUDEZ, NADIA",
+          "number": 3
+        },
+        {
+          "name": "MARTÍNEZ VALLS, VEGA",
+          "number": 14
+        },
+        {
+          "name": "ANDRES PLANS, NOA",
+          "number": 22
+        },
+        {
+          "name": "BARRERAS DE RIOS, JANA",
+          "number": 16
+        },
+        {
+          "name": "CENTELLES CORTES, ÁMBAR",
+          "number": 19
+        },
+        {
+          "name": "CENTELLES CORTES, ROCIO",
+          "number": 20
+        },
+        {
+          "name": "DE HARO VALENZUELA, ONA",
+          "number": 1
+        },
+        {
+          "name": "GIMENEZ BAKHKHAT, AMIRA",
+          "number": 17
+        },
+        {
+          "name": "GUTIÉRREZ ORTEGA, AITANA",
+          "number": 11
+        },
+        {
+          "name": "HERNANDEZ SANCHEZ, NAIARA",
+          "number": 7
+        },
+        {
+          "name": "MATEOS ALCAIDE, GISELA",
+          "number": 13
+        },
+        {
+          "name": "PASTOR GALERA, ARIADNA",
+          "number": 6
+        },
+        {
+          "name": "RAMIREZ GARCIA, NAIA",
+          "number": 5
+        },
+        {
+          "name": "RODRIGUEZ GONZALEZ, AINHOA",
+          "number": 10
+        },
+        {
+          "name": "RUIZ RIVERA, SOFIA",
+          "number": 12
+        },
+        {
+          "name": "SANCHEZ HERNANDEZ, MARTA",
+          "number": 9
+        },
+        {
+          "name": "ARÉVALO SÁNCHEZ, BERTA",
+          "number": 21
+        }
+      ],
+      "staff": [
+        {
+          "name": "BARRERAS DE RIOS, TIAGO",
+          "role": "3ER ENTRENADOR"
+        },
+        {
+          "name": "NAVARRO GARCIA, ANGELA",
+          "role": "2DA ENTRENADORA"
+        },
+        {
+          "name": "FERNÁNDEZ SOLA, ADRIÀ",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "NAVARRO GARCIA, DAVID",
+          "role": "DELEGADO"
+        }
+      ]
+    },
+    {
+      "id": "team-1296d671c9d8",
+      "name": "Infantil Fem A",
+      "category": "fem",
+      "coach": "MATEOS ALCAIDE, GISELA",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "ARTEAGA URRUTIA, IRIS",
+        "BERLANGA ANAYA, MARTINA",
+        "MERINO MARTINEZ, LEYRE",
+        "PAZOS VALERO, ALBA",
+        "REYES RODRIGUEZ, DANIELA",
+        "GONZALEZ ARIAS, AINARA",
+        "MORA AMADOR, AINHOA",
+        "VILANOVA MEROÑO, VALENTINA",
+        "HERNÁNDEZ MÉNDEZ, ALBA"
+      ],
+      "players": [
+        {
+          "name": "ARTEAGA URRUTIA, IRIS",
+          "number": 4
+        },
+        {
+          "name": "BERLANGA ANAYA, MARTINA",
+          "number": 11
+        },
+        {
+          "name": "MERINO MARTINEZ, LEYRE",
+          "number": 10
+        },
+        {
+          "name": "PAZOS VALERO, ALBA",
+          "number": 18
+        },
+        {
+          "name": "REYES RODRIGUEZ, DANIELA",
+          "number": 2
+        },
+        {
+          "name": "GONZALEZ ARIAS, AINARA",
+          "number": 14
+        },
+        {
+          "name": "MORA AMADOR, AINHOA",
+          "number": 1
+        },
+        {
+          "name": "VILANOVA MEROÑO, VALENTINA",
+          "number": 8
+        },
+        {
+          "name": "HERNÁNDEZ MÉNDEZ, ALBA",
+          "number": null
+        }
+      ],
+      "staff": [
+        {
+          "name": "MATEOS ALCAIDE, GISELA",
+          "role": "ENTRENADORA"
+        },
+        {
+          "name": "MARTINEZ PADILLA, JUAN PEDRO",
+          "role": "2DO ENTRENDOR"
+        },
+        {
+          "name": "LORENZO PEREZ, NOAH",
+          "role": "DELEGADO"
+        }
+      ]
+    },
+    {
+      "id": "team-5fd7f1f3857c",
+      "name": "PBSV Genuine Blau",
+      "category": "genuine",
+      "coach": "OSCAR AYALA, OSCAR AYALA, AROA VICO, AROA VICO",
+      "schedule": "",
+      "url": "",
+      "image": "./assets/equips/5fd7f1f3857c.jpg",
+      "members": [
+        "MANUEL NAVAS",
+        "JUAN ARRIBA",
+        "SERGI JULIA",
+        "MARC HERRERA",
+        "SERGIO AGUILAR",
+        "CARLOS KOURDACI",
+        "BERTA SIO",
+        "ERIC AMADOR",
+        "JORGE VALERA",
+        "CRISTO ORTEGA"
+      ],
+      "players": [
+        {
+          "name": "MANUEL NAVAS",
+          "number": 13
+        },
+        {
+          "name": "JUAN ARRIBA",
+          "number": 12
+        },
+        {
+          "name": "SERGI JULIA",
+          "number": 3
+        },
+        {
+          "name": "MARC HERRERA",
+          "number": 8
+        },
+        {
+          "name": "SERGIO AGUILAR",
+          "number": 31
+        },
+        {
+          "name": "CARLOS KOURDACI",
+          "number": 7
+        },
+        {
+          "name": "BERTA SIO",
+          "number": 34
+        },
+        {
+          "name": "ERIC AMADOR",
+          "number": 30
+        },
+        {
+          "name": "JORGE VALERA",
+          "number": 10
+        },
+        {
+          "name": "CRISTO ORTEGA",
+          "number": 6
+        }
+      ],
+      "staff": [
+        {
+          "name": "MANOLO VICO",
+          "role": "DELEGADO"
+        },
+        {
+          "name": "IVAN RUEDA",
+          "role": "AUXILIAR"
+        },
+        {
+          "name": "OSCAR AYALA",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "MANOLO VICO",
+          "role": "DELEGADO"
+        },
+        {
+          "name": "IVAN RUEDA",
+          "role": "AUXILIAR"
+        },
+        {
+          "name": "OSCAR AYALA",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "CARLES ROVIRA",
+          "role": "DELEGADO"
+        },
+        {
+          "name": "GUILLERMO",
+          "role": "AUXILIAR"
+        },
+        {
+          "name": "AROA VICO",
+          "role": "ENTRENADOR"
+        },
+        {
+          "name": "CARLES ROVIRA",
+          "role": "DELEGADO"
+        },
+        {
+          "name": "GUILLERMO",
+          "role": "AUXILIAR"
+        },
+        {
+          "name": "AROA VICO",
+          "role": "ENTRENADOR"
+        }
+      ]
+    },
+    {
+      "id": "team-0b969a4657ca",
+      "name": "PBSV Genuine Grana",
+      "category": "genuine",
+      "coach": "",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "DANIEL VILA",
+        "RUBEN MATAMORO",
+        "ERIC CLAUDIO",
+        "HUGO ABELLO",
+        "ARIAN SANCHEZ",
+        "PEDRO GARCIA",
+        "MARC GRANADOS",
+        "JAVI MARTIN",
+        "IZAN BAIGET"
+      ],
+      "players": [
+        {
+          "name": "DANIEL VILA",
+          "number": 1
+        },
+        {
+          "name": "RUBEN MATAMORO",
+          "number": 25
+        },
+        {
+          "name": "ERIC CLAUDIO",
+          "number": 17
+        },
+        {
+          "name": "HUGO ABELLO",
+          "number": 4
+        },
+        {
+          "name": "ARIAN SANCHEZ",
+          "number": 20
+        },
+        {
+          "name": "PEDRO GARCIA",
+          "number": 11
+        },
+        {
+          "name": "MARC GRANADOS",
+          "number": 18
+        },
+        {
+          "name": "JAVI MARTIN",
+          "number": 9
+        },
+        {
+          "name": "IZAN BAIGET",
+          "number": 32
+        }
+      ],
+      "staff": []
+    },
+    {
+      "id": "team-12b16d4723a7",
+      "name": "PBSV Genuine Groc",
+      "category": "genuine",
+      "coach": "",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "ALEX CANO",
+        "MIGUEL ANGEL MURILLO",
+        "ALBERT MARFIL",
+        "FERRAN PAGES",
+        "SANTI MATAMOROS",
+        "ALBERT QUILES",
+        "CARLO COLLADO",
+        "IZAN DOMINGUEZ",
+        "ALEX VICO"
+      ],
+      "players": [
+        {
+          "name": "ALEX CANO",
+          "number": null
+        },
+        {
+          "name": "MIGUEL ANGEL MURILLO",
+          "number": 14
+        },
+        {
+          "name": "ALBERT MARFIL",
+          "number": 27
+        },
+        {
+          "name": "FERRAN PAGES",
+          "number": 24
+        },
+        {
+          "name": "SANTI MATAMOROS",
+          "number": 28
+        },
+        {
+          "name": "ALBERT QUILES",
+          "number": 15
+        },
+        {
+          "name": "CARLO COLLADO",
+          "number": null
+        },
+        {
+          "name": "IZAN DOMINGUEZ",
+          "number": null
+        },
+        {
+          "name": "ALEX VICO",
+          "number": 2
+        }
+      ],
+      "staff": []
+    },
+    {
+      "id": "team-7305bfde8aca",
+      "name": "PBSV Genuine Taronja",
+      "category": "genuine",
+      "coach": "",
+      "schedule": "",
+      "url": "",
+      "image": null,
+      "members": [
+        "PIERRE GUILLOU",
+        "JONATHAN VELÁSQUES",
+        "ALBERT ROMERO",
+        "ALBERTO RODRIGUEZ",
+        "HUGO NAVARRO",
+        "DAMIÀ SEGURA",
+        "DABO THIERNO",
+        "IZAN BARRAGAN",
+        "UZIEL ESPINO",
+        "MARTÍ AMBROJO",
+        "MARIO FLORES",
+        "AINOHA"
+      ],
+      "players": [
+        {
+          "name": "PIERRE GUILLOU",
+          "number": 16
+        },
+        {
+          "name": "JONATHAN VELÁSQUES",
+          "number": 22
+        },
+        {
+          "name": "ALBERT ROMERO",
+          "number": 33
+        },
+        {
+          "name": "ALBERTO RODRIGUEZ",
+          "number": 19
+        },
+        {
+          "name": "HUGO NAVARRO",
+          "number": 34
+        },
+        {
+          "name": "DAMIÀ SEGURA",
+          "number": 5
+        },
+        {
+          "name": "DABO THIERNO",
+          "number": 21
+        },
+        {
+          "name": "IZAN BARRAGAN",
+          "number": 37
+        },
+        {
+          "name": "UZIEL ESPINO",
+          "number": 25
+        },
+        {
+          "name": "MARTÍ AMBROJO",
+          "number": null
+        },
+        {
+          "name": "MARIO FLORES",
+          "number": 22
+        },
+        {
+          "name": "AINOHA",
+          "number": null
+        }
+      ],
+      "staff": []
+    }
+  ]
 }
