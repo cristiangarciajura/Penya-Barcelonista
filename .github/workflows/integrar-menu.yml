@@ -1,0 +1,47 @@
+name: Integrar enlaces en menu PBSV
+on:
+  push:
+    paths:
+      - '.github/workflows/integrar-menu.yml'
+      - 'scripts/integrar-menu.py'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  integrar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Copia de seguridad del HTML original
+        run: |
+          mkdir -p backups
+          cp index.html backups/index-antes-menu.html
+      - name: Integrar enlaces sin reconstruir la pagina
+        run: python3 scripts/integrar-menu.py
+      - name: Validar enlaces y estructura
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re
+          original=Path('backups/index-antes-menu.html').read_text()
+          updated=Path('index.html').read_text()
+          if original==updated:
+              print('No se encontró menú compatible: sin cambios')
+          else:
+              assert 'patrocinadors.html' in updated and 'admin.html' in updated
+              assert len(updated)>len(original)
+              assert updated.count('<nav')==original.count('<nav')
+              assert updated.count('</nav>')==original.count('</nav>')
+              print('Menú actualizado y validado')
+          PY
+      - name: Guardar cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html backups/index-antes-menu.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Integrar patrocinadores y administración en menú principal"
+            git push
+          fi
