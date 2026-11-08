@@ -12,6 +12,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Validar sintaxi Python
+        run: python3 -m py_compile scripts/importar-detalls-club.py
       - name: Extreure continguts originals
         run: python3 scripts/importar-detalls-club.py
       - name: Validar dades
