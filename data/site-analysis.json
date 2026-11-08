@@ -1,0 +1,84 @@
+{
+  "version": 1,
+  "source": "index.html",
+  "size": 4422537,
+  "terms": {
+    "id=\"teams\"": {
+      "count": 1,
+      "examples": [
+        "i als productes del club.</p></div> <div class=\"quick\"><div class=\"symbol\">🏅</div><h3>La nostra història</h3><p>Una entitat amb orgull, valors i història des de 1978.</p></div> </div> </section> <section class=\"view\" id=\"teams\"> <div class=\"page-title\"><div class=\"kicker\" data-ca=\"Futbol base i competició\" data-es=\"Fútbol base y competición\">Futbol base i competició</div><h1 data-ca=\"Els nostres equips\" data-es=\"Nuestros equipos\">El"
+      ]
+    },
+    "id=\"club\"": {
+      "count": 1,
+      "examples": [
+        "horts\" target=\"_blank\" rel=\"noopener\" data-ca=\"Visita la botiga oficial ↗\" data-es=\"Visita la tienda oficial ↗\">Visita la botiga oficial ↗</a></div><div class=\"store-icon\">🛍️</div></div> </section> <section class=\"view\" id=\"club\"> <div class=\"page-title\"><div class=\"kicker\">La nostra identitat</div><h1>El club</h1><p>Descobreix qui som, d'on venim i les persones que fan possible la Penya Barcelonista Sant Vicenç dels Horts.</p></div> "
+      ]
+    },
+    "25 equips": {
+      "count": 2,
+      "examples": [
+        "\"kicker\" data-ca=\"Futbol base i competició\" data-es=\"Fútbol base y competición\">Futbol base i competició</div><h1 data-ca=\"Els nostres equips\" data-es=\"Nuestros equipos\">Els nostres equips</h1><p data-ca=\"Descobreix els 25 equips de la Penya. Cada fitxa tindrà fotografia real, plantilla, cos tècnic i accés a la competició oficial.\" data-es=\"Descubre los 25 equipos de la Penya. Cada ficha tendrá fotografía real, plantilla, cuerpo técnico",
+        "real, plantilla, cos tècnic i accés a la competició oficial.\" data-es=\"Descubre los 25 equipos de la Penya. Cada ficha tendrá fotografía real, plantilla, cuerpo técnico y acceso a la competición oficial.\">Descobreix els 25 equips de la Penya. Cada fitxa tindrà fotografia real, plantilla, cos tècnic i accés a la competició oficial.</p></div> <div class=\"team-filters\" id=\"teamFilters\"><button class=\"team-filter selected\" data-group=\"all\""
+      ]
+    },
+    "plantilla": {
+      "count": 9,
+      "examples": [
+        "l base y competición\">Futbol base i competició</div><h1 data-ca=\"Els nostres equips\" data-es=\"Nuestros equipos\">Els nostres equips</h1><p data-ca=\"Descobreix els 25 equips de la Penya. Cada fitxa tindrà fotografia real, plantilla, cos tècnic i accés a la competició oficial.\" data-es=\"Descubre los 25 equipos de la Penya. Cada ficha tendrá fotografía real, plantilla, cuerpo técnico y acceso a la competición oficial.\">Descobreix els 25 equ",
+        " data-ca=\"Descobreix els 25 equips de la Penya. Cada fitxa tindrà fotografia real, plantilla, cos tècnic i accés a la competició oficial.\" data-es=\"Descubre los 25 equipos de la Penya. Cada ficha tendrá fotografía real, plantilla, cuerpo técnico y acceso a la competición oficial.\">Descobreix els 25 equips de la Penya. Cada fitxa tindrà fotografia real, plantilla, cos tècnic i accés a la competició oficial.</p></div> <div class=\"team-fi",
+        "l.\" data-es=\"Descubre los 25 equipos de la Penya. Cada ficha tendrá fotografía real, plantilla, cuerpo técnico y acceso a la competición oficial.\">Descobreix els 25 equips de la Penya. Cada fitxa tindrà fotografia real, plantilla, cos tècnic i accés a la competició oficial.</p></div> <div class=\"team-filters\" id=\"teamFilters\"><button class=\"team-filter selected\" data-group=\"all\" data-ca=\"Tots\" data-es=\"Todos\">Tots</button><button class",
+        "v class=\"team-grid\" id=\"teamGrid\"></div> <div class=\"notice\" data-ca=\"Ja hi ha fotografies i plantilles reals dels equips disponibles. La resta de fotografies es completaran més endavant.\" data-es=\"Ya hay fotografías y plantillas reales de los equipos disponibles. Las fotografías restantes se completarán más adelante.\">Ja hi ha fotografies i plantilles reals dels equips disponibles. La resta de fotografies es completaran més endavant.<",
+        "</div><h2 id=\"teamTitle\"></h2><p id=\"teamDescription\"></p><div class=\"team-detail-grid\"><div><b id=\"photoHeading\">Fotografia de l'equip</b><div id=\"photoStatus\">Pendent d’incorporar</div></div><div><b id=\"rosterHeading\">Plantilla i cos tècnic</b><div id=\"rosterStatus\">Pendent d’incorporar</div></div></div><div id=\"teamCompetition\"></div></div></div> <footer><div class=\"footer-inner\"><div><strong>Penya Barcelonista Sant Vicenç dels Horts"
+      ]
+    },
+    "teamData": {
+      "count": 0,
+      "examples": []
+    },
+    "teamsData": {
+      "count": 0,
+      "examples": []
+    },
+    "const teams": {
+      "count": 0,
+      "examples": []
+    },
+    "const TEAM": {
+      "count": 2,
+      "examples": [
+        "t.add('open');document.getElementById('detailPanel').scrollIntoView({behavior:'smooth',block:'nearest'})})); document.querySelectorAll('.placeholder-link').forEach(a=>a.addEventListener('click',e=>e.preventDefault())); const teamAssets={\"Alevín S11 A\":\"data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAcFBQYFBAcGBgYIBwcICxILCwoKCxYPEA0SGhYbGhkWGRgcICgiHB4mHhgZIzAkJiorLS4tGyIyNTEsNSgsLSz/2wBDAQcICAsJCxULCxUsHRkdLCwsLCwsLCwsLCwsLCw",
+        "yieJ6f6sj2QdzlE8T0/1ZHsi/G49HqPhb6jx5cdIguOkR7D7nKJ4np/qyPZB3O0Qf5np/qyPZE+Nx6PUfC5dR48zDpguOmPYfc7RPE9P9WR7IBh2iH/M9P8AVkeyHxuPR6j4W+o89bFrd82V3fiHf6Mel8p6IZytGpkm/wAtLU6UYdA0W0wlCh5wIfXj4+maStJqaxKx9LRaDoQwN3P/2Q==\"}; const teamRosters={\"Alevín S11 A\":{\"players\":[{\"name\":\"AGUDO AVILES, IVAN\",\"number\":6},{\"name\":\"CHFIRA HADRI, ADAM\",\"number\":8},{\"name\":\"DA SILVA PIO SANCHEZ, THIAGO\",\"number\":23},{\"name\":\"EL HAMRI ATANEBA, MUSA\",\"number"
+      ]
+    },
+    "clubCards": {
+      "count": 0,
+      "examples": []
+    },
+    "Història": {
+      "count": 5,
+      "examples": [
+        "ficacions.</p></div> <div class=\"quick\"><div class=\"symbol\">🛍️</div><h3>Botiga oficial</h3><p>Accés directe a la botiga i als productes del club.</p></div> <div class=\"quick\"><div class=\"symbol\">🏅</div><h3>La nostra història</h3><p>Una entitat amb orgull, valors i història des de 1978.</p></div> </div> </section> <section class=\"view\" id=\"teams\"> <div class=\"page-title\"><div class=\"kicker\" data-ca=\"Futbol base i competició\" data-e",
+        "ass=\"symbol\">🛍️</div><h3>Botiga oficial</h3><p>Accés directe a la botiga i als productes del club.</p></div> <div class=\"quick\"><div class=\"symbol\">🏅</div><h3>La nostra història</h3><p>Una entitat amb orgull, valors i història des de 1978.</p></div> </div> </section> <section class=\"view\" id=\"teams\"> <div class=\"page-title\"><div class=\"kicker\" data-ca=\"Futbol base i competició\" data-es=\"Fútbol base y competición\">Futbol base i compe",
+        "reix qui som, d'on venim i les persones que fan possible la Penya Barcelonista Sant Vicenç dels Horts.</p></div> <div class=\"club-grid\"> <article class=\"club-card\" data-detail=\"history\"><div class=\"symbol\">📖</div><h3>Història</h3><p>Els nostres orígens, els moments destacats i el camí des de 1978.</p></article> <article class=\"club-card\" data-detail=\"board\"><div class=\"symbol\">👥</div><h3>Junta directiva</h3><p>Les persones que repr",
+        "act\"><div class=\"symbol\">📍</div><h3>Contacte i instal·lacions</h3><p>On som, com contactar amb nosaltres i com formar part del club.</p></article> </div> <div class=\"detail-panel\" id=\"detailPanel\"><h3 id=\"detailTitle\">Història</h3><div id=\"detailText\">Contingut pendent d’incorporar.</div></div> </section> <section class=\"view\" id=\"sponsors\"> <div class=\"page-title\"><div class=\"kicker\" data-ca=\"Gràcies pel vostre suport\" data-es=\"Grac",
+        "ventListener('click',e=>{e.preventDefault();showView('home')}); document.getElementById('menuToggle').addEventListener('click',()=>document.getElementById('mainNav').classList.toggle('open')); const details={ history:['Història','La Penya Barcelonista Sant Vicenç dels Horts es va fundar l’any 1978. Aquí incorporarem una cronologia amb els moments més importants, fotografies i records de l’entitat.'], board:['Junta directiva',''], spo"
+      ]
+    },
+    "Junta directiva": {
+      "count": 2,
+      "examples": [
+        "il=\"history\"><div class=\"symbol\">📖</div><h3>Història</h3><p>Els nostres orígens, els moments destacats i el camí des de 1978.</p></article> <article class=\"club-card\" data-detail=\"board\"><div class=\"symbol\">👥</div><h3>Junta directiva</h3><p>Les persones que representen i gestionen l'entitat.</p></article> <article class=\"club-card\" data-detail=\"sports\"><div class=\"symbol\">⚽</div><h3>Àrea esportiva</h3><p>Direcció, coordinació i supo",
+        "onst details={ history:['Història','La Penya Barcelonista Sant Vicenç dels Horts es va fundar l’any 1978. Aquí incorporarem una cronologia amb els moments més importants, fotografies i records de l’entitat.'], board:['Junta directiva',''], sports:['Àrea esportiva',''], honours:['Palmarès','Aquí mostrarem els títols, ascensos, campionats i reconeixements aconseguits pels equips i per l’entitat.'], contact:['Contacte i instal·lacions"
+      ]
+    },
+    "Palmarès": {
+      "count": 2,
+      "examples": [
+        "data-detail=\"sports\"><div class=\"symbol\">⚽</div><h3>Àrea esportiva</h3><p>Direcció, coordinació i suport esportiu del club.</p></article> <article class=\"club-card\" data-detail=\"honours\"><div class=\"symbol\">🏆</div><h3>Palmarès</h3><p>Títols, reconeixements i fites esportives del club.</p></article> <article class=\"club-card\" data-detail=\"contact\"><div class=\"symbol\">📍</div><h3>Contacte i instal·lacions</h3><p>On som, com contactar a",
+        "Vicenç dels Horts es va fundar l’any 1978. Aquí incorporarem una cronologia amb els moments més importants, fotografies i records de l’entitat.'], board:['Junta directiva',''], sports:['Àrea esportiva',''], honours:['Palmarès','Aquí mostrarem els títols, ascensos, campionats i reconeixements aconseguits pels equips i per l’entitat.'], contact:['Contacte i instal·lacions','Afegirem l’adreça, el correu, el telèfon, les xarxes socials "
+      ]
+    }
+  },
+  "teams_section_excerpt": "<section class=\"view\" id=\"teams\"> <div class=\"page-title\"><div class=\"kicker\" data-ca=\"Futbol base i competició\" data-es=\"Fútbol base y competición\">Futbol base i competició</div><h1 data-ca=\"Els nostres equips\" data-es=\"Nuestros equipos\">Els nostres equips</h1><p data-ca=\"Descobreix els 25 equips de la Penya. Cada fitxa tindrà fotografia real, plantilla, cos tècnic i accés a la competició oficial.\" data-es=\"Descubre los 25 equipos de la Penya. Cada ficha tendrá fotografía real, plantilla, cuerpo técnico y acceso a la competición oficial.\">Descobreix els 25 equips de la Penya. Cada fitxa tindrà fotografia real, plantilla, cos tècnic i accés a la competició oficial.</p></div> <div class=\"team-filters\" id=\"teamFilters\"><button class=\"team-filter selected\" data-group=\"all\" data-ca=\"Tots\" data-es=\"Todos\">Tots</button><button class=\"team-filter\" data-group=\"masc\" data-ca=\"Masculí\" data-es=\"Masculino\">Masculí</button><button class=\"team-filter\" data-group=\"fem\" data-ca=\"Femení\" data-es=\"Femenino\">Femení</button><button class=\"team-filter\" data-group=\"genuine\" data-ca=\"Genuïns\" data-es=\"Genuinos\">Genuïns</button></div> <p class=\"team-count\" id=\"teamCount\"></p><div class=\"team-grid\" id=\"teamGrid\"></div> <div class=\"notice\" data-ca=\"Ja hi ha fotografies i plantilles reals dels equips disponibles. La resta de fotografies es completaran més endavant.\" data-es=\"Ya hay fotografías y plantillas reales de los equipos disponibles. Las fotografías restantes se completarán más adelante.\">Ja hi ha fotografies i plantilles reals dels equips disponibles. La resta de fotografies es completaran més endavant.</div> </section>"
+}
