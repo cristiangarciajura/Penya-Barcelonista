@@ -1,4 +1,35 @@
 {
   "version": 1,
-  "sections": []
+  "sections": [
+    {
+      "id": "history",
+      "name": "Història",
+      "content": "Els nostres orígens, els moments destacats i el camí des de 1978.",
+      "url": ""
+    },
+    {
+      "id": "board",
+      "name": "Junta directiva",
+      "content": "Les persones que representen i gestionen l'entitat.",
+      "url": ""
+    },
+    {
+      "id": "sports",
+      "name": "Àrea esportiva",
+      "content": "Direcció, coordinació i suport esportiu del club.",
+      "url": ""
+    },
+    {
+      "id": "honours",
+      "name": "Palmarès",
+      "content": "Títols, reconeixements i fites esportives del club.",
+      "url": ""
+    },
+    {
+      "id": "contact",
+      "name": "Contacte i instal·lacions",
+      "content": "On som, com contactar amb nosaltres i com formar part del club.",
+      "url": ""
+    }
+  ]
 }
