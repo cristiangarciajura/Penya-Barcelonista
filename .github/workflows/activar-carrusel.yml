@@ -3,6 +3,8 @@ on:
   push:
     paths:
       - '.github/workflows/activar-carrusel.yml'
+      - 'home-quick-links.js'
+      - 'home-quick-links.css'
   workflow_dispatch:
 permissions:
   contents: write
@@ -29,6 +31,12 @@ jobs:
               html=html.replace('</head>',css+hide+'</head>',1)
           if js not in html:
               html=html.replace('</body>',js+'</body>',1)
+          quick_css='<link rel="stylesheet" href="./home-quick-links.css?v=20261109-a">'
+          quick_js='<script src="./home-quick-links.js?v=20261109-a" defer></script>'
+          if 'home-quick-links.css' not in html:
+              html=html.replace('</head>',quick_css+'</head>',1)
+          if 'home-quick-links.js' not in html:
+              html=html.replace('</body>',quick_js+'</body>',1)
           p.write_text(html,encoding='utf-8')
           PY
       - name: Publicar cambios
