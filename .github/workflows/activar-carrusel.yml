@@ -1,0 +1,39 @@
+name: Activar carrusel de noticias
+on:
+  push:
+    paths:
+      - '.github/workflows/activar-carrusel.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  activar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: true
+      - name: Integrar carrusel sin reemplazar la web
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          p=Path('index.html')
+          html=p.read_text(encoding='utf-8')
+          css='<link rel="stylesheet" href="./news-carousel-enhancement.css">'
+          js='<script src="./news-carousel-enhancement.js" defer></script>'
+          hide='<style>body:has(#pbsv-news-carousel:not([hidden])) #pbsv-public-news{display:none!important}</style>'
+          if css not in html:
+              html=html.replace('</head>',css+hide+'</head>',1)
+          if js not in html:
+              html=html.replace('</body>',js+'</body>',1)
+          p.write_text(html,encoding='utf-8')
+          PY
+      - name: Publicar cambios
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html
+          if ! git diff --cached --quiet; then
+            git commit -m "Activar carrusel automático de noticias en portada"
+            git push
+          fi
