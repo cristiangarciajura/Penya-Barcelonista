@@ -1,0 +1,30 @@
+name: Analitzar targetes actuals del cap de setmana
+on:
+  push:
+    paths: ['.github/workflows/analitzar-partits.yml']
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  analitzar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extraure fragments de la portada
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,json
+          s=Path('index.html').read_text(encoding='utf-8')
+          hits=[]
+          for m in re.finditer(r'(?i)dissabte|diumenge|s[áa]bado|domingo|horaris|horarios',s):
+              if m.start()>400000: continue
+              hits.append({'term':m.group(),'at':m.start(),'fragment':s[max(0,m.start()-1300):m.start()+2400]})
+          Path('data/diagnostic-partits.json').write_text(json.dumps({'matches':hits[:25]},ensure_ascii=False,indent=2),encoding='utf-8')
+          PY
+      - name: Publicar diagnòstic
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/diagnostic-partits.json
+          if ! git diff --cached --quiet; then git commit -m "Diagnosticar targetes del cap de setmana"; git push; fi
