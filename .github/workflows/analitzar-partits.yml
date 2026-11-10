@@ -18,9 +18,9 @@ jobs:
           s=Path('index.html').read_text(encoding='utf-8')
           hits=[]
           for m in re.finditer(r'(?i)dissabte|diumenge|s[áa]bado|domingo|horaris|horarios',s):
-              if m.start()>400000: continue
-              hits.append({'term':m.group(),'at':m.start(),'fragment':s[max(0,m.start()-1300):m.start()+2400]})
-          Path('data/diagnostic-partits.json').write_text(json.dumps({'matches':hits[:25]},ensure_ascii=False,indent=2),encoding='utf-8')
+              if m.start()>len(s): continue
+              hits.append({'term':m.group(),'at':m.start(),'fragment':s[max(0,m.start()-800):m.start()+1700]})
+          Path('data/diagnostic-partits.json').write_text(json.dumps({'matches':hits[:16]},ensure_ascii=False,indent=2),encoding='utf-8')
           PY
       - name: Publicar diagnòstic
         run: |
