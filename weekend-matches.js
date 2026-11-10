@@ -3,11 +3,11 @@ const url='./data/partits-cap-setmana.json?v=';
 const normalize=s=>(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
 function candidates(){
  const home=document.querySelector('#home');if(!home)return [];
- return [...home.querySelectorAll('article,.match-card,.partit-card,.event-card')].filter(el=>/dissabte|sabado|sábado|diumenge|domingo/i.test(normalize(el.textContent).slice(0,350)));
+ return [...home.querySelectorAll('h1,h2,h3,h4')].filter(h=>/partits? de (dissabte|diumenge)|partidos? del (sabado|domingo)/i.test(normalize(h.textContent))).map(h=>h.closest('article,.match-card,.partit-card,.event-card,.news-card,.card')||h.parentElement?.parentElement).filter(Boolean);
 }
 function dayOf(el){const t=normalize(el.textContent.slice(0,350));return /dissabte|sabado/.test(t)?'saturday':/diumenge|domingo/.test(t)?'sunday':null}
 function apply(el,m,day){
- if(!m||!m.title&&!m.comment&&!m.image)return;
+ if(!m||(!m.title&&!m.comment&&!m.image))return;
  let box=el.querySelector('.pbsv-weekend-content');
  if(!box){box=document.createElement('div');box.className='pbsv-weekend-content';el.append(box)}
  box.replaceChildren();
