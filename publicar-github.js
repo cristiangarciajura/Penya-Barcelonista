@@ -1,7 +1,7 @@
 /* Publicació guiada: cap credencial ni token al navegador. */
 (function(){
  const repo='https://github.com/cristiangarciajura/Penya-Barcelonista/edit/main/data/';
- const files={'editor-equips.html':'equips.json','editor-club.html':'club.json','editor-noticies.html':'noticies.json','editor-patrocinadors.html':'patrocinadors.json'};
+ const files={'editor-equips.html':'equips.json','editor-club.html':'club.json','editor-noticies.html':'noticies.json','editor-patrocinadors.html':'patrocinadors.json','editor-partits.html':'partits-cap-setmana.json'};
  const page=location.pathname.split('/').pop(),file=files[page];
  if(!file)return;
  const section=document.createElement('section');section.id='publishGuide';
