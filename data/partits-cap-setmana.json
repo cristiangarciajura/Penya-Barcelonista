@@ -5,13 +5,13 @@
     "title": "Partits de dissabte",
     "time": "",
     "comment": "Consulta els enfrontaments, horaris i camps al cartell oficial.",
-    "image": "./assets/cartell-dissabte-20261107.jpg"
+    "image": "./assets/cartell-horaris-dissabte-original.jpg"
   },
   "sunday": {
     "date": "2026-11-08",
     "title": "Partits de diumenge",
     "time": "",
     "comment": "Consulta els enfrontaments, horaris i camps al cartell oficial.",
-    "image": "./assets/cartell-diumenge-20261107.jpg"
+    "image": "./assets/cartell-horaris-diumenge-original.jpg"
   }
 }

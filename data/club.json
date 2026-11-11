@@ -108,7 +108,7 @@
       "id": "pbsv-weekend-matches",
       "name": "Partits del cap de setmana",
       "content": "Dades internes dels cartells",
-      "detail": "{\"version\":1,\"saturday\":{\"date\":\"2026-11-07\",\"title\":\"Partits de dissabte\",\"time\":\"\",\"comment\":\"Consulta els enfrontaments, horaris i camps al cartell oficial.\",\"image\":\"./assets/cartell-dissabte-20261107.jpg\"},\"sunday\":{\"date\":\"2026-11-08\",\"title\":\"Partits de diumenge\",\"time\":\"\",\"comment\":\"Consulta els enfrontaments, horaris i camps al cartell oficial.\",\"image\":\"./assets/cartell-diumenge-20261107.jpg\"}}"
+      "detail": "{\"version\": 1, \"saturday\": {\"date\": \"2026-11-07\", \"title\": \"Partits de dissabte\", \"time\": \"\", \"comment\": \"Consulta els enfrontaments, horaris i camps al cartell oficial.\", \"image\": \"./assets/cartell-horaris-dissabte-original.jpg\"}, \"sunday\": {\"date\": \"2026-11-08\", \"title\": \"Partits de diumenge\", \"time\": \"\", \"comment\": \"Consulta els enfrontaments, horaris i camps al cartell oficial.\", \"image\": \"./assets/cartell-horaris-diumenge-original.jpg\"}}"
     }
   ]
 }
