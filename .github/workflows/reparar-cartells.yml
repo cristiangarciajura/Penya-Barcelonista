@@ -56,5 +56,13 @@ jobs:
           git add data/club.json data/partits-cap-setmana.json assets/cartell-horaris-*
           if ! git diff --cached --quiet; then
             git commit -m "Restaurar els cartells reals de dissabte i diumenge"
-            git push
+            for attempt in 1 2 3 4 5; do
+              git fetch origin main
+              git rebase origin/main || { git rebase --abort || true; echo "::error::Conflicte en sincronitzar main; no es força la publicació."; exit 1; }
+              if git push origin HEAD:main; then exit 0; fi
+              echo "Main ha canviat durant el push; reintent $attempt/5"
+              sleep 3
+            done
+            echo "::error::No s’ha pogut publicar després de cinc intents."
+            exit 1
           fi
