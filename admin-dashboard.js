@@ -26,7 +26,7 @@ function renderWeekendAlerts(data,failed){
  const today=penyaToday(),weekday=today.getUTCDay();
  // De dilluns a dimarts no es generen recordatoris. Dimecres-diumenge es comprova el dissabte i diumenge d'aquesta setmana.
  if(weekday===1||weekday===2){summary.textContent='Cap recordatori programat avui. La revisió comença dimecres.';return}
- const saturday=new Date(today);saturday.setUTCDate(today.getUTCDate()+(6-weekday+7)%7);
+ const saturday=new Date(today);saturday.setUTCDate(today.getUTCDate()+(weekday===0?-1:6-weekday));
  const sunday=new Date(saturday);sunday.setUTCDate(saturday.getUTCDate()+1);
  const targets=[['Dissabte',data?.saturday,isoUTC(saturday)],['Diumenge',data?.sunday,isoUTC(sunday)]];
  let pending=0;
