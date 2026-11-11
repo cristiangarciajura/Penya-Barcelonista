@@ -1,22 +1,22 @@
 (()=>{'use strict';
-const url='./data/partits-cap-setmana.json?v=';
-const normalize=s=>(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
-function candidates(){
- const home=document.querySelector('#home');if(!home)return [];
- return [...home.querySelectorAll('h1,h2,h3,h4')].filter(h=>/partits? de (dissabte|diumenge)|partidos? del (sabado|domingo)/i.test(normalize(h.textContent))).map(h=>h.closest('article,.match-card,.partit-card,.event-card,.news-card,.card')||h.parentElement?.parentElement).filter(Boolean);
+const norm=t=>(t||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase();
+const validImage=s=>/^(?:data:image\/(?:png|jpeg|webp|gif);base64,|https:\/\/|\.\/|assets\/)/i.test(s||'');
+function find(day){
+ const label=day==='saturday'?'dissabte':'diumenge';
+ const heading=[...document.querySelectorAll('#home h3')].find(h=>norm(h.textContent).trim()==='partits de '+label);
+ return heading?.closest('article.news-card')||null;
 }
-function dayOf(el){const t=normalize(el.textContent.slice(0,350));return /dissabte|sabado/.test(t)?'saturday':/diumenge|domingo/.test(t)?'sunday':null}
-function apply(el,m,day){
- if(!m||(!m.title&&!m.comment&&!m.image))return;
- let box=el.querySelector('.pbsv-weekend-content');
- if(!box){box=document.createElement('div');box.className='pbsv-weekend-content';el.append(box)}
- box.replaceChildren();
- if(m.image&&(/^(data:image\/(png|jpeg|webp|gif);base64,|https:\/\/|\.\/|assets\/)/i.test(m.image))){const img=document.createElement('img');img.src=m.image;img.alt=m.title||'Partit del cap de setmana';img.className='pbsv-weekend-photo';box.append(img)}
- if(m.title){const h=document.createElement('h3');h.textContent=m.title;box.append(h)}
- if(m.date||m.time){const p=document.createElement('p');p.className='pbsv-weekend-date';p.textContent=[m.date,m.time].filter(Boolean).join(' · ');box.append(p)}
- if(m.comment){const p=document.createElement('p');p.textContent=m.comment;box.append(p)}
- el.classList.add('pbsv-weekend-managed');
+function update(card,item,day){
+ if(!card||!item||(!item.title&&!item.image&&!item.comment))return;
+ const img=card.querySelector('img.news-photo');
+ if(img&&validImage(item.image)){img.src=item.image;img.alt='Cartell dels '+(item.title||'partits');}
+ const title=card.querySelector('.news-body h3');if(title&&item.title)title.textContent=item.title;
+ const paragraph=card.querySelector('.news-body p');if(paragraph&&item.comment)paragraph.textContent=item.comment;
+ const meta=card.querySelector('.news-body .meta');
+ if(meta&&item.date){const [y,m,d]=item.date.split('-');const months=['','GENER','FEBRER','MARÇ','ABRIL','MAIG','JUNY','JULIOL','AGOST','SETEMBRE','OCTUBRE','NOVEMBRE','DESEMBRE'];meta.textContent=Number(d)+' '+months[Number(m)]+' '+y;}
+ const open=card.querySelector('.photo-open');
+ if(open&&img){open.onclick=e=>{e.preventDefault();e.stopPropagation();const src=img.currentSrc||img.src;const w=window.open('','_blank');if(w){w.document.write('<!doctype html><title>Cartell del partit</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;background:#101c32;display:grid;place-items:center;min-height:100vh}img{max-width:100%;height:auto}</style><img alt="Cartell" src="'+src.replace(/"/g,'&quot;')+'">');w.document.close();}else window.location.href=src};}
 }
-async function init(){try{const res=await fetch(url+Date.now(),{cache:'no-store'});if(!res.ok)return;const data=await res.json();const cards=candidates();for(const card of cards){const day=dayOf(card);if(day)apply(card,data[day],day)}}catch(err){console.warn('Partits del cap de setmana:',err)}}
+async function init(){try{const r=await fetch('./data/partits-cap-setmana.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)return;const data=await r.json();for(const day of ['saturday','sunday'])update(find(day),data[day],day)}catch(e){console.warn('PBSV partits:',e)}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
