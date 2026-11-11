@@ -1,0 +1,24 @@
+/* Estil compartit de l'administració PBSV: no altera les dades ni la publicació. */
+:root{color-scheme:light}
+body{overflow-wrap:anywhere}
+main{width:100%;max-width:940px;margin-inline:auto}
+header{min-height:58px;display:flex;align-items:center}
+header a{font-weight:700;text-decoration:none}
+header a:focus-visible,button:focus-visible,.btn:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:3px solid #efbb4a;outline-offset:2px}
+button,.btn{min-height:44px;touch-action:manipulation;transition:filter .15s ease}
+button:hover,.btn:hover{filter:brightness(1.06)}
+button:disabled{opacity:.55;cursor:wait}
+input,textarea,select{max-width:100%;font-size:16px}
+input[type=file]{overflow:hidden}
+img{max-width:100%;height:auto}
+.panel,section{scroll-margin-top:16px}
+#status,.status{display:block;min-height:28px;line-height:1.5;overflow-wrap:anywhere}
+.pbsv-preview-toggle{display:inline-flex;align-items:center;gap:8px;border:1px solid #b8c6dc;background:#e7edf7;color:#153769;border-radius:10px;padding:10px 14px;font:700 14px system-ui;cursor:pointer}
+.pbsv-preview-wrap{border:1px solid #dce4f0;border-radius:14px;padding:14px;background:#f7f9fd;margin-top:12px}
+.pbsv-preview-wrap[hidden]{display:none}
+.pbsv-preview-wrap h3{margin:0 0 6px}
+.pbsv-preview-wrap .pbsv-preview-note{font-size:13px;color:#586980;margin:0 0 12px}
+.pbsv-preview-wrap .pbsv-preview-items{display:grid;gap:12px}
+.pbsv-preview-wrap .pbsv-preview-items>.item{background:white;border:1px solid #dce4f0;border-radius:10px;padding:12px;min-width:0}
+.pbsv-preview-wrap img{max-width:180px;max-height:130px;object-fit:contain}
+@media(max-width:640px){main{padding:14px 12px!important}section,.panel{padding:16px!important;margin:14px 0!important;border-radius:14px}h1{font-size:1.65rem;line-height:1.2}h2{font-size:1.3rem}button,.btn,.pbsv-preview-toggle{min-height:48px}input,textarea,select{font-size:16px!important}.toolbar{align-items:stretch}.toolbar input{min-width:0;width:100%}.person-row{grid-template-columns:minmax(0,1fr)!important}.person-row button{width:100%}img{max-width:100%}.news-preview{flex-wrap:wrap}.news-preview img{max-width:100%;height:auto}input[type=file]{width:100%}}
