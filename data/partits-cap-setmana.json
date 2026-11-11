@@ -1,17 +1,17 @@
 {
   "version": 1,
   "saturday": {
-    "date": "",
-    "title": "",
+    "date": "2026-11-20",
+    "title": "Presentació oficial · Temporada 2026/2027",
     "time": "",
-    "comment": "",
-    "image": ""
+    "comment": "20 de novembre, a partir de les 20:00, al Municipal La Barruana. Servei de bar, speaker i música fins a les 23:00.",
+    "image": "./assets/cartell-dissabte-20261107.jpg"
   },
   "sunday": {
-    "date": "",
-    "title": "",
+    "date": "2026-11-20",
+    "title": "Presentació oficial · Temporada 2026/2027",
     "time": "",
-    "comment": "",
-    "image": ""
+    "comment": "20 de novembre, a partir de les 20:00, al Municipal La Barruana. Servei de bar, speaker i música fins a les 23:00.",
+    "image": "./assets/cartell-diumenge-20261107.jpg"
   }
 }
