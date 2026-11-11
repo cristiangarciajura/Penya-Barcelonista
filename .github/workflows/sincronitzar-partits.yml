@@ -1,0 +1,58 @@
+name: Sincronitzar cartells actuals de la portada
+on:
+  push:
+    paths:
+      - '.github/workflows/sincronitzar-partits.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Importar cartells reals sense perdre contingut
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,json,base64,html
+          page=Path('index.html').read_text(encoding='utf-8')
+          path=Path('data/partits-cap-setmana.json')
+          data=json.loads(path.read_text(encoding='utf-8'))
+          months={'gener':'01','febrer':'02','març':'03','abril':'04','maig':'05','juny':'06','juliol':'07','agost':'08','setembre':'09','octubre':'10','novembre':'11','desembre':'12'}
+          for day,word,filename in [('saturday','dissabte','dissabte'),('sunday','diumenge','diumenge')]:
+              match=re.search(r'<article\b[^>]*class="[^"]*news-card[^"]*"[^>]*>\s*<img\b[^>]*>.*?<h3>\s*Partits de '+word+r'\s*</h3>.*?</article>',page,re.I|re.S)
+              if not match: raise SystemExit('No s\'ha trobat la targeta de '+word)
+              card=match.group()
+              image=re.search(r'<img\b[^>]*\bsrc="([^"]+)"',card,re.I|re.S)
+              if not image: raise SystemExit('Imatge absent: '+word)
+              src=html.unescape(image.group(1))
+              if src.startswith('data:image/'):
+                  img=re.match(r'data:image/(jpeg|png|webp|gif);base64,(.*)',src,re.I|re.S)
+                  if not img: raise SystemExit('Format imatge desconegut')
+                  ext={'jpeg':'jpg','png':'png','webp':'webp','gif':'gif'}[img.group(1).lower()]
+                  target=Path('assets')/('cartell-'+filename+'-20261107.'+ext)
+                  target.parent.mkdir(parents=True,exist_ok=True)
+                  target.write_bytes(base64.b64decode(img.group(2)))
+                  src='./'+str(target)
+              meta=re.search(r'<div class="meta">([^<]+)</div>',card,re.I)
+              date=''
+              if meta:
+                  date_match=re.search(r'(\d{1,2})\s+(\w+)\s+(\d{4})',meta.group(1),re.I)
+                  if date_match and date_match.group(2).lower() in months:
+                      date=date_match.group(3)+'-'+months[date_match.group(2).lower()]+'-'+date_match.group(1).zfill(2)
+              title=re.search(r'<h3>([^<]+)</h3>',card,re.I)
+              comment=re.search(r'<h3>[^<]+</h3>\s*<p>([^<]+)</p>',card,re.I)
+              if not data.get(day,{}).get('title') and not data.get(day,{}).get('image'):
+                  data[day]={'date':date,'title':html.unescape(title.group(1)) if title else 'Partits de '+word,'time':'','comment':html.unescape(comment.group(1)) if comment else '', 'image':src}
+          path.write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+      - name: Publicar cartells i dades
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/partits-cap-setmana.json assets/cartell-*
+          if ! git diff --cached --quiet; then
+            git commit -m "Sincronitzar cartells originals de dissabte i diumenge"
+            git push
+          fi
