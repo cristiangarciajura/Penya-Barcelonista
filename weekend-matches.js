@@ -17,6 +17,6 @@ function update(card,item,day){
  const open=card.querySelector('.photo-open');
  if(open&&img){open.onclick=e=>{e.preventDefault();e.stopPropagation();const src=img.currentSrc||img.src;const w=window.open('','_blank');if(w){w.document.write('<!doctype html><title>Cartell del partit</title><meta name="viewport" content="width=device-width,initial-scale=1"><style>body{margin:0;background:#101c32;display:grid;place-items:center;min-height:100vh}img{max-width:100%;height:auto}</style><img alt="Cartell" src="'+src.replace(/"/g,'&quot;')+'">');w.document.close();}else window.location.href=src};}
 }
-async function init(){try{const r=await fetch('./data/partits-cap-setmana.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)return;const data=await r.json();for(const day of ['saturday','sunday'])update(find(day),data[day],day)}catch(e){console.warn('PBSV partits:',e)}}
+async function init(){try{const r=await fetch('./data/club.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)return;const club=await r.json();const entry=club.sections?.find(x=>x.id==='pbsv-weekend-matches');if(!entry?.detail)return;const data=JSON.parse(entry.detail);for(const day of ['saturday','sunday'])update(find(day),data[day],day)}catch(e){console.warn('PBSV partits:',e)}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
