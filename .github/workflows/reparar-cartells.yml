@@ -1,0 +1,60 @@
+name: Reparar cartells de dissabte i diumenge
+on:
+  push:
+    paths:
+      - '.github/workflows/reparar-cartells.yml'
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  reparar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Extraure els dos cartells de les targetes correctes
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import re,json,base64,html
+          page=Path('index.html').read_text(encoding='utf-8')
+          path=Path('data/club.json')
+          club=json.loads(path.read_text(encoding='utf-8'))
+          record=next((s for s in club['sections'] if s.get('id')=='pbsv-weekend-matches'),None)
+          if not record: raise SystemExit('Falta el registre dels partits al club')
+          data=json.loads(record['detail'])
+          for day,word in [('saturday','dissabte'),('sunday','diumenge')]:
+              cards=re.findall(r'<article\b[^>]*class="[^"]*news-card[^"]*"[^>]*>.*?</article>',page,re.I|re.S)
+              matches=[card for card in cards if re.search(r'<h3>\s*Partits de '+word+r'\s*</h3>',card,re.I)]
+              if len(matches)!=1: raise SystemExit('Cal exactament una targeta de '+word+': '+str(len(matches)))
+              card=matches[0]
+              image=re.search(r'<img\b[^>]*\bsrc="([^"]+)"',card,re.I|re.S)
+              if not image: raise SystemExit('No hi ha cartell de '+word)
+              src=html.unescape(image.group(1))
+              if src.startswith('data:image/'):
+                  match=re.fullmatch(r'data:image/(jpeg|png|webp|gif);base64,([A-Za-z0-9+/=]+)',src,re.I|re.S)
+                  if not match: raise SystemExit('Imatge incorrecta: '+word)
+                  extension={'jpeg':'jpg','png':'png','webp':'webp','gif':'gif'}[match.group(1).lower()]
+                  destination=Path('assets')/('cartell-horaris-'+word+'-original.'+extension)
+                  destination.parent.mkdir(parents=True,exist_ok=True)
+                  destination.write_bytes(base64.b64decode(match.group(2),validate=True))
+                  if destination.stat().st_size<1000: raise SystemExit('Cartell buit: '+word)
+                  src='./'+str(destination)
+              elif not src.startswith(('./assets/','assets/','https://')):
+                  raise SystemExit('Ruta imatge no permesa: '+word)
+              data[day]['image']=src
+              print(word,src)
+          if data['saturday']['image']==data['sunday']['image']:
+              raise SystemExit('Els cartells de dissabte i diumenge no poden ser idèntics')
+          record['detail']=json.dumps(data,ensure_ascii=False)
+          path.write_text(json.dumps(club,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          Path('data/partits-cap-setmana.json').write_text(json.dumps(data,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
+          PY
+      - name: Guardar la reparació
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/club.json data/partits-cap-setmana.json assets/cartell-horaris-*
+          if ! git diff --cached --quiet; then
+            git commit -m "Restaurar els cartells reals de dissabte i diumenge"
+            git push
+          fi
