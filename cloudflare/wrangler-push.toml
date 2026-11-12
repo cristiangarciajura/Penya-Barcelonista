@@ -2,6 +2,8 @@ name = "pbsv-push"
 main = "push-placeholder.js"
 compatibility_date = "2026-11-01"
 workers_dev = true
+# Conserva variables y secretos configurados en Cloudflare durante despliegues desde GitHub.
+keep_vars = true
 
 [[d1_databases]]
 binding = "PUSH_DB"
