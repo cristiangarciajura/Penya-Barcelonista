@@ -52,7 +52,7 @@ export default {async fetch(req,env){
   if(!identityResponse.ok)return respond(JSON.stringify({error:'Sessió GitHub caducada.'}),401,{'Content-Type':'application/json'});
   const identity=await identityResponse.json();
   if(identity.login?.toLowerCase()!==OWNER.toLowerCase())return respond(JSON.stringify({error:'Accés denegat.'}),403,{'Content-Type':'application/json'});
-  if(!env.PUSH_SERVICE||!env.PUSH_INTERNAL_TOKEN)return respond(JSON.stringify({error:'Falta configurar la connexió privada entre administració i notificacions.'}),503,{'Content-Type':'application/json'});
+  if(!env.PUSH_SERVICE||!env.PUSH_INTERNAL_TOKEN)return respond(JSON.stringify({error:!env.PUSH_SERVICE?'Falta el Service Binding PUSH_SERVICE al Worker pbsv-admin.':'Falta el secret PUSH_INTERNAL_TOKEN al Worker pbsv-admin.'}),503,{'Content-Type':'application/json'});
   let data;try{data=await req.json()}catch{return respond(JSON.stringify({error:'JSON incorrecte.'}),400,{'Content-Type':'application/json'})}
   const title=String(data?.title||'').trim(),body=String(data?.body||'').trim();
   if(!title||title.length>90||!body||body.length>240)return respond(JSON.stringify({error:'Títol o missatge incorrectes.'}),400,{'Content-Type':'application/json'});
