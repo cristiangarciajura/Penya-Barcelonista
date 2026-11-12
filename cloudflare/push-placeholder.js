@@ -4,7 +4,7 @@ const ORIGIN='https://cristiangarciajura.github.io';
 const HOSTS=new Set(['fcm.googleapis.com','updates.push.services.mozilla.com','web.push.apple.com','api.push.apple.com']);
 const headers={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
 function response(data,status=200,cors=false){return new Response(JSON.stringify(data),{status,headers:{...headers,...(cors?{'access-control-allow-origin':ORIGIN,'vary':'Origin','access-control-allow-methods':'GET,POST,DELETE,OPTIONS','access-control-allow-headers':'Content-Type'}:{})}})}
-const enabled=env=>!!(env.PUSH_DB&&env.PUSH_VAPID_PUBLIC_KEY&&env.PUSH_TURNSTILE_SECRET&&env.PUSH_TURNSTILE_SITE_KEY);
+const enabled=env=>!!(env.PUSH_SUBSCRIPTIONS_ENABLED==='true'&&env.PUSH_DB&&env.PUSH_VAPID_PUBLIC_KEY&&env.PUSH_TURNSTILE_SECRET&&env.PUSH_TURNSTILE_SITE_KEY);
 function b64bytes(s){if(typeof s!=='string'||!/^[a-zA-Z0-9_-]+$/.test(s))return null;try{const t=atob(s.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-s.length%4)%4));return Uint8Array.from(t,c=>c.charCodeAt(0))}catch{return null}}
 function endpointValid(raw){try{const u=new URL(raw);return u.protocol==='https:'&&!u.username&&!u.password&&u.port===''&&u.hash===''&&u.href.length<2048&&HOSTS.has(u.hostname)}catch{return false}}
 function subscriptionValid(s){return s&&endpointValid(s.endpoint)&&b64bytes(s.keys?.p256dh)?.length===65&&b64bytes(s.keys?.auth)?.length===16}
