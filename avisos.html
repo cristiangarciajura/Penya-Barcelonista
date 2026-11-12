@@ -1,4 +1,4 @@
-<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07152d"><meta name="description" content="Avisos de partidos y eventos de la Penya Barcelonista"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./pbsv-icon.svg" type="image/svg+xml"><title>Avisos · Penya Barcelonista</title><style>:root{color-scheme:dark}body{font:16px system-ui,sans-serif;background:#07152d;color:#fff;margin:0;padding:20px}main{max-width:720px;margin:auto}a{color:#f2c51d}button{background:#f2c51d;color:#07152d;border:0;border-radius:10px;padding:12px 15px;font-weight:700;margin:6px 6px 6px 0;cursor:pointer}button.secondary{background:#284365;color:white}button.danger{background:#8f2c43;color:#fff}section{background:#12284a;padding:20px;border-radius:16px;margin:20px 0}p{line-height:1.5}.small{opacity:.8;font-size:14px}label{display:block;margin:12px 0}input,select{box-sizing:border-box;width:100%;background:#07152d;color:white;border:1px solid #557099;border-radius:8px;padding:12px;font:inherit}input[type=checkbox]{width:auto}li{padding:12px 0;border-bottom:1px solid #456;line-height:1.5}ul{padding-left:20px}#status{white-space:pre-wrap}h1{font-size:1.8rem}</style></head><body><main><a href="./index.html">← Volver a la web de la Penya</a><h1>🔔 Avisos de la Penya</h1><section><h2>Activar avisos en Android</h2><p>Permite las notificaciones y comprueba que llegan a tu móvil.</p><button id="enable">Activar notificaciones</button><button id="test" class="secondary">Enviar prueba</button><p id="status" role="status">Pulsa «Activar notificaciones».</p><p class="small">Puedes instalar esta pantalla desde Chrome: menú ⋮ → Añadir a pantalla de inicio / Instalar aplicación (si aparece).</p></section><section><h2>Notificacions push · Android i iPhone</h2><p id="pushCompatibility" role="status">Comprovant compatibilitat…</p><button id="checkPushServer" class="secondary" type="button">Comprovar connexió amb el servidor</button><p id="pushServerStatus" role="status" class="small">La subscripció real encara no està activada.</p><p class="small">Les proves locals d'aquesta pàgina no són enviaments push. La recepció amb l'app tancada s'activarà quan el servidor i les subscripcions estiguin configurats. A iPhone cal afegir l'app a la pantalla d'inici (iOS 16.4 o posterior).</p></section><section><h2>Mis preferencias</h2><label><input id="first" type="checkbox" checked> Avisos de partidos del primer equipo</label><label><input id="events" type="checkbox" checked> Avisos de eventos importantes</label><p class="small">Estas preferencias se guardan solo en este dispositivo.</p></section><section><h2>Calendario de avisos</h2><ul id="list"></ul><p class="small">Los eventos que añadas aquí son personales: no se publican para otros aficionados. Los recordatorios se comprueban únicamente mientras esta pantalla permanece abierta.</p></section><section><h2>Añadir partido o evento</h2><form id="form"><label>Tipo<select id="type"><option value="match">Partido del primer equipo</option><option value="event">Evento del club</option></select></label><label>Nombre / rival<input id="name" maxlength="150" required placeholder="Ej. Primer equipo vs rival"></label><label>Fecha y hora<input id="when" type="datetime-local" required></label><button type="submit">Guardar recordatorio</button></form></section><section><h2>Próxima fase</h2><p>Los avisos automáticos con Chrome cerrado necesitan un servidor de envío push y suscripciones. Esta versión no promete esa función todavía.</p></section></main><script>
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#07152d"><meta name="description" content="Avisos de partidos y eventos de la Penya Barcelonista"><link rel="manifest" href="./manifest.webmanifest"><link rel="icon" href="./pbsv-icon.svg" type="image/svg+xml"><title>Avisos · Penya Barcelonista</title><style>:root{color-scheme:dark}body{font:16px system-ui,sans-serif;background:#07152d;color:#fff;margin:0;padding:20px}main{max-width:720px;margin:auto}a{color:#f2c51d}button{background:#f2c51d;color:#07152d;border:0;border-radius:10px;padding:12px 15px;font-weight:700;margin:6px 6px 6px 0;cursor:pointer}button.secondary{background:#284365;color:white}button.danger{background:#8f2c43;color:#fff}section{background:#12284a;padding:20px;border-radius:16px;margin:20px 0}p{line-height:1.5}.small{opacity:.8;font-size:14px}label{display:block;margin:12px 0}input,select{box-sizing:border-box;width:100%;background:#07152d;color:white;border:1px solid #557099;border-radius:8px;padding:12px;font:inherit}input[type=checkbox]{width:auto}li{padding:12px 0;border-bottom:1px solid #456;line-height:1.5}ul{padding-left:20px}#status{white-space:pre-wrap}h1{font-size:1.8rem}</style></head><body><main><a href="./index.html">← Volver a la web de la Penya</a><h1>🔔 Avisos de la Penya</h1><section><h2>Activar avisos en Android</h2><p>Permite las notificaciones y comprueba que llegan a tu móvil.</p><button id="enable">Activar notificaciones</button><button id="test" class="secondary">Enviar prueba</button><p id="status" role="status">Pulsa «Activar notificaciones».</p><p class="small">Puedes instalar esta pantalla desde Chrome: menú ⋮ → Añadir a pantalla de inicio / Instalar aplicación (si aparece).</p></section><section><h2>Notificacions push · Android i iPhone</h2><p id="pushCompatibility" role="status">Comprovant compatibilitat…</p><button id="checkPushServer" class="secondary" type="button">Comprovar connexió amb el servidor</button><button id="subscribePush" type="button" hidden>Activar avisos push</button><button id="unsubscribePush" class="danger" type="button" hidden>Desactivar avisos push</button><p id="pushServerStatus" role="status" class="small">La subscripció real encara no està activada.</p><p class="small">Les proves locals d'aquesta pàgina no són enviaments push. La recepció amb l'app tancada s'activarà quan el servidor i les subscripcions estiguin configurats. A iPhone cal afegir l'app a la pantalla d'inici (iOS 16.4 o posterior).</p></section><section><h2>Mis preferencias</h2><label><input id="first" type="checkbox" checked> Avisos de partidos del primer equipo</label><label><input id="events" type="checkbox" checked> Avisos de eventos importantes</label><p class="small">Estas preferencias se guardan solo en este dispositivo.</p></section><section><h2>Calendario de avisos</h2><ul id="list"></ul><p class="small">Los eventos que añadas aquí son personales: no se publican para otros aficionados. Los recordatorios se comprueban únicamente mientras esta pantalla permanece abierta.</p></section><section><h2>Añadir partido o evento</h2><form id="form"><label>Tipo<select id="type"><option value="match">Partido del primer equipo</option><option value="event">Evento del club</option></select></label><label>Nombre / rival<input id="name" maxlength="150" required placeholder="Ej. Primer equipo vs rival"></label><label>Fecha y hora<input id="when" type="datetime-local" required></label><button type="submit">Guardar recordatorio</button></form></section><section><h2>Próxima fase</h2><p>Los avisos automáticos con Chrome cerrado necesitan un servidor de envío push y suscripciones. Esta versión no promete esa función todavía.</p></section></main><script>
 const KEY='pbsv-alerts-v2',PREF='pbsv-alert-prefs-v2',SENT='pbsv-alert-sent-v2';const status=document.getElementById('status');let reg;
 const defaultItems=[{id:'presentation-20261120',type:'event',title:'Presentación oficial temporada 2026/27 · Municipal La Barruana',when:'2026-11-20T20:00'}];
 function read(k,fallback){try{const v=JSON.parse(localStorage.getItem(k));return v??fallback}catch{return fallback}}
@@ -28,14 +28,62 @@ check();setInterval(check,60000);document.addEventListener('visibilitychange',()
  }catch{el.textContent='Dispositiu compatible. No s’ha pogut comprovar la subscripció actual.'}
 })();
 </script><script>
-document.getElementById('checkPushServer').addEventListener('click',async()=>{
- const el=document.getElementById('pushServerStatus');el.textContent='Comprovant el servei…';
+const PUSH_API='https://pbsv-push.cristiangarciajura.workers.dev';
+const pushStatus=document.getElementById('pushServerStatus');
+const subscribeBtn=document.getElementById('subscribePush');
+const unsubscribeBtn=document.getElementById('unsubscribePush');
+let pushPublicKey=null,pushRegistration=null,pushEnabled=false;
+function vapidBytes(encoded){
+ const padded=encoded.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-encoded.length%4)%4);
+ const decoded=atob(padded);return Uint8Array.from(decoded,c=>c.charCodeAt(0));
+}
+async function refreshPush(){
+ pushStatus.textContent='Comprovant el servei…';
+ subscribeBtn.hidden=true;unsubscribeBtn.hidden=true;
  try{
-  const response=await fetch('https://pbsv-push.cristiangarciajura.workers.dev/api/push/public-key',{mode:'cors',cache:'no-store'});
+  const response=await fetch(PUSH_API+'/api/push/public-key',{mode:'cors',cache:'no-store'});
   if(!response.ok)throw new Error('HTTP '+response.status);
   const data=await response.json();
   if(typeof data.publicKey!=='string'||!data.publicKey)throw new Error('Clau pública no disponible');
-  el.textContent='Connexió correcta i clau pública disponible. Encara no s’ha activat l’alta de dispositius ni l’enviament de notificacions.';
- }catch(e){el.textContent='No s’ha pogut verificar el servidor: '+e.message}
+  pushPublicKey=data.publicKey;
+  pushEnabled=data.subscriptionsEnabled===true;
+  if(!pushEnabled){pushStatus.textContent='Connexió correcta i clau pública disponible. Les subscripcions encara estan desactivades mentre preparem la seguretat.';return}
+  if(!('serviceWorker'in navigator)||!('PushManager'in window)||!('Notification'in window)){pushStatus.textContent='Aquest navegador no admet les notificacions push.';return}
+  const ios=/iPad|iPhone|iPod/.test(navigator.userAgent);
+  if(ios&&!window.matchMedia('(display-mode: standalone)').matches&&navigator.standalone!==true){pushStatus.textContent='A iPhone, afegeix primer la web a la pantalla d’inici des de Safari.';return}
+  pushRegistration=await navigator.serviceWorker.register('./pbsv-sw.js',{scope:'./'});
+  const existing=await pushRegistration.pushManager.getSubscription();
+  subscribeBtn.hidden=!!existing;unsubscribeBtn.hidden=!existing;
+  pushStatus.textContent=existing?'Aquest dispositiu ja té una subscripció push.':'Pots activar les notificacions push en aquest dispositiu.';
+ }catch(e){pushStatus.textContent='No s’ha pogut verificar el servidor: '+e.message}
+}
+document.getElementById('checkPushServer').addEventListener('click',refreshPush);
+subscribeBtn.addEventListener('click',async()=>{
+ if(!pushEnabled||!pushPublicKey||!pushRegistration)return;
+ subscribeBtn.disabled=true;
+ try{
+  const permission=await Notification.requestPermission();
+  if(permission!=='granted')throw Error('No has concedit el permís de notificacions.');
+  const sub=await pushRegistration.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:vapidBytes(pushPublicKey)});
+  const response=await fetch(PUSH_API+'/api/push/subscriptions',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify(sub.toJSON())});
+  if(!response.ok){await sub.unsubscribe();throw Error('El servidor no ha acceptat la subscripció (HTTP '+response.status+').')}
+  pushStatus.textContent='Notificacions push activades correctament.';
+  await refreshPush();
+ }catch(e){pushStatus.textContent='No s’ha pogut activar: '+e.message}
+ finally{subscribeBtn.disabled=false}
+});
+unsubscribeBtn.addEventListener('click',async()=>{
+ if(!pushEnabled||!pushRegistration)return;
+ unsubscribeBtn.disabled=true;
+ try{
+  const sub=await pushRegistration.pushManager.getSubscription();
+  if(!sub)return refreshPush();
+  const response=await fetch(PUSH_API+'/api/push/subscriptions',{method:'DELETE',headers:{'content-type':'application/json'},body:JSON.stringify({endpoint:sub.endpoint})});
+  if(!response.ok)throw Error('No s’ha pogut cancel·lar la subscripció al servidor.');
+  await sub.unsubscribe();
+  pushStatus.textContent='Notificacions desactivades.';
+  await refreshPush();
+ }catch(e){pushStatus.textContent='Error: '+e.message}
+ finally{unsubscribeBtn.disabled=false}
 });
 </script></body></html>
