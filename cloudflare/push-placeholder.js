@@ -24,6 +24,11 @@ export default {async fetch(req,env){
   let database=false;try{if(env.PUSH_DB){await env.PUSH_DB.prepare('SELECT 1 FROM push_subscriptions LIMIT 1').first();database=true}}catch{}
   return response({service:'pbsv-push',database,publicKeyConfigured:!!env.PUSH_VAPID_PUBLIC_KEY,privateKeyConfigured:!!env.PUSH_VAPID_PRIVATE_KEY,subscriptionsEnabled:enabled(env),sendingEnabled:false});
  }
+ if(u.pathname==='/api/push/admin/test'&&req.method==='POST'){
+  const auth=req.headers.get('Authorization')||'';
+  if(!env.PUSH_INTERNAL_TOKEN||auth!=='Bearer '+env.PUSH_INTERNAL_TOKEN)return response({error:'Accés denegat'},403);
+  return response({error:'El motor de lliurament Web Push encara no està desplegat. No s’ha enviat cap avís.'},503);
+ }
  if(!cors)return response({error:'Origen no permès'},403);
  if(req.method==='OPTIONS')return new Response(null,{status:204,headers:{...headers,'access-control-allow-origin':ORIGIN,'access-control-allow-methods':'GET,POST,DELETE,OPTIONS','access-control-allow-headers':'Content-Type','vary':'Origin'}});
  if(u.pathname==='/api/push/public-key'&&req.method==='GET'){
