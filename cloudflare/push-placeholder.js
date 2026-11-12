@@ -14,7 +14,7 @@ export default {
   if(url.pathname==='/api/push/public-key'){
    if(!sameOrigin)return reply({error:'Origin not allowed'},403);
    if(!env.PUSH_VAPID_PUBLIC_KEY)return reply({error:'Public key not configured'},503,true);
-   return reply({publicKey:env.PUSH_VAPID_PUBLIC_KEY},200,true);
+   return reply({publicKey:env.PUSH_VAPID_PUBLIC_KEY,subscriptionsEnabled:false},200,true);
   }
   return reply({service:'pbsv-push',status:'setup_pending'},503);
  }
