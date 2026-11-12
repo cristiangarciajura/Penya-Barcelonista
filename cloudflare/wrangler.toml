@@ -4,5 +4,9 @@ compatibility_date = "2026-11-01"
 workers_dev = true
 keep_vars = true
 
+[[services]]
+binding = "PUSH_SERVICE"
+service = "pbsv-push"
+
 # Les credencials OAuth i la clau de sessió es gestionen a Cloudflare.
 # keep_vars evita que els desplegaments de GitHub sobreescriguin les variables.
