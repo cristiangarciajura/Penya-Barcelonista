@@ -1,0 +1,14 @@
+<!doctype html>
+<html lang="ca"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; connect-src 'none'; form-action 'none'; base-uri 'none'">
+<title>Claus VAPID · PBSV</title><style>body{font:16px system-ui,sans-serif;max-width:700px;margin:24px auto;padding:0 18px;color:#17213a}button{padding:12px 18px;margin:8px 0;border:0;border-radius:9px;background:#123d83;color:white;font-weight:700}textarea{width:100%;box-sizing:border-box;min-height:90px;overflow-wrap:anywhere;padding:10px}label{display:block;margin-top:20px;font-weight:700}.warn{background:#fff3d8;padding:14px;border-radius:10px}small{color:#444}</style></head><body>
+<h1>Claus VAPID de la Penya</h1><p>Aquest generador crea les claus <strong>al teu navegador</strong>. No les envia a cap servidor ni les desa.</p>
+<p class="warn"><strong>Important:</strong> no comparteixis la clau privada al xat, a GitHub ni amb ningú. Desa-la només com a secret xifrat a Cloudflare. Si tanques aquesta pàgina abans de copiar-la, hauràs de generar un altre parell.</p>
+<button id="generate">Generar claus noves</button><p id="status" role="status"></p>
+<div id="output" hidden><label for="pub">Clau pública · PUSH_VAPID_PUBLIC_KEY</label><textarea id="pub" readonly></textarea><button id="copyPub">Copiar clau pública</button>
+<label for="priv">Clau privada · PUSH_VAPID_PRIVATE_KEY</label><textarea id="priv" readonly></textarea><button id="copyPriv">Copiar clau privada</button><p><small>Format: P-256, codificació base64url sense padding.</small></p></div>
+<script>
+const b64url=bytes=>{let s='';for(const b of bytes)s+=String.fromCharCode(b);return btoa(s).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'')};
+document.getElementById('generate').onclick=async()=>{const status=document.getElementById('status');try{if(!crypto.subtle)throw Error('Cal HTTPS');const pair=await crypto.subtle.generateKey({name:'ECDSA',namedCurve:'P-256'},true,['sign','verify']);const pub=new Uint8Array(await crypto.subtle.exportKey('raw',pair.publicKey));const priv=await crypto.subtle.exportKey('jwk',pair.privateKey);document.getElementById('pub').value=b64url(pub);document.getElementById('priv').value=priv.d;document.getElementById('output').hidden=false;status.textContent='Claus generades correctament al dispositiu.'}catch(e){status.textContent='No s’han pogut generar les claus: '+e.message}};
+for(const [btn,field] of [['copyPub','pub'],['copyPriv','priv']])document.getElementById(btn).onclick=async()=>{const input=document.getElementById(field);try{await navigator.clipboard.writeText(input.value);document.getElementById('status').textContent='Clau copiada.'}catch(e){input.select();document.getElementById('status').textContent='Selecciona i copia el text manualment.'}};
+</script></body></html>
