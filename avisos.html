@@ -70,7 +70,7 @@ async function refreshPush(){
   if(ios&&!window.matchMedia('(display-mode: standalone)').matches&&navigator.standalone!==true){pushStatus.textContent='A iPhone, afegeix primer la web a la pantalla d’inici des de Safari.';return}
   pushRegistration=await navigator.serviceWorker.register('./pbsv-sw.js',{scope:'./'});
   const existing=await pushRegistration.pushManager.getSubscription();
-  subscribeBtn.hidden=!!existing;unsubscribeBtn.hidden=!existing;
+  subscribeBtn.hidden=false;subscribeBtn.textContent=existing?'Confirmar registre al servidor':'Activar avisos push';unsubscribeBtn.hidden=!existing;
   pushStatus.textContent=existing?'Aquest dispositiu té una subscripció push al navegador. Encara no s’ha verificat si consta al servidor.':'Pots activar les notificacions push en aquest dispositiu.';
  }catch(e){pushStatus.textContent='No s’ha pogut verificar el servidor: '+e.message}
 }
@@ -82,11 +82,12 @@ subscribeBtn.addEventListener('click',async()=>{
   const token=await securityToken();
   const permission=await Notification.requestPermission();
   if(permission!=='granted')throw Error('No has concedit el permís de notificacions.');
-  const sub=await pushRegistration.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:vapidBytes(pushPublicKey)});
+  const existing=await pushRegistration.pushManager.getSubscription();
+  const sub=existing||await pushRegistration.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:vapidBytes(pushPublicKey)});
   const response=await fetch(PUSH_API+'/api/push/subscriptions',{method:'POST',headers:{'content-type':'application/json'},body:JSON.stringify({...sub.toJSON(),turnstileToken:token})});
-  if(!response.ok){await sub.unsubscribe();throw Error('El servidor no ha acceptat la subscripció (HTTP '+response.status+').')}
-  pushStatus.textContent='Notificacions push activades correctament.';
+  if(!response.ok){let details='';try{const err=await response.json();details=err.error||''}catch{}throw Error('El servidor no ha acceptat la subscripció (HTTP '+response.status+'). '+details)}
   await refreshPush();
+  pushStatus.textContent='Subscripció confirmada i desada correctament al servidor.';
  }catch(e){pushStatus.textContent='No s’ha pogut activar: '+e.message}
  finally{resetSecurity();subscribeBtn.disabled=false}
 });
@@ -101,8 +102,8 @@ unsubscribeBtn.addEventListener('click',async()=>{
   const response=await fetch(PUSH_API+'/api/push/subscriptions',{method:'DELETE',headers:{'content-type':'application/json'},body:JSON.stringify({endpoint:sub.endpoint,auth,turnstileToken:token})});
   if(!response.ok)throw Error('No s’ha pogut cancel·lar la subscripció al servidor.');
   await sub.unsubscribe();
-  pushStatus.textContent='Notificacions desactivades.';
   await refreshPush();
+  pushStatus.textContent='Subscripció cancel·lada correctament al servidor i al dispositiu.';
  }catch(e){pushStatus.textContent='Error: '+e.message}
  finally{resetSecurity();unsubscribeBtn.disabled=false}
 });
