@@ -2,3 +2,8 @@ name = "pbsv-push"
 main = "push-placeholder.js"
 compatibility_date = "2026-11-01"
 workers_dev = true
+
+[[d1_databases]]
+binding = "PUSH_DB"
+database_name = "pbsv-notificacions"
+database_id = "72cfee2a-b047-43f9-8834-5e605b413bbf"
