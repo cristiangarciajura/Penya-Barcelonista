@@ -52,12 +52,12 @@ export default {async fetch(req,env){
   if(!identityResponse.ok)return respond(JSON.stringify({error:'Sessió GitHub caducada.'}),401,{'Content-Type':'application/json'});
   const identity=await identityResponse.json();
   if(identity.login?.toLowerCase()!==OWNER.toLowerCase())return respond(JSON.stringify({error:'Accés denegat.'}),403,{'Content-Type':'application/json'});
-  if(!env.PUSH_INTERNAL_TOKEN)return respond(JSON.stringify({error:'Falta configurar la connexió privada entre administració i notificacions.'}),503,{'Content-Type':'application/json'});
+  if(!env.PUSH_SERVICE||!env.PUSH_INTERNAL_TOKEN)return respond(JSON.stringify({error:'Falta configurar la connexió privada entre administració i notificacions.'}),503,{'Content-Type':'application/json'});
   let data;try{data=await req.json()}catch{return respond(JSON.stringify({error:'JSON incorrecte.'}),400,{'Content-Type':'application/json'})}
   const title=String(data?.title||'').trim(),body=String(data?.body||'').trim();
   if(!title||title.length>90||!body||body.length>240)return respond(JSON.stringify({error:'Títol o missatge incorrectes.'}),400,{'Content-Type':'application/json'});
   try{
-   const upstream=await fetch('https://pbsv-push.cristiangarciajura.workers.dev/api/push/admin/test',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+env.PUSH_INTERNAL_TOKEN},body:JSON.stringify({title,body,url:'./avisos.html'})});
+   const upstream=await env.PUSH_SERVICE.fetch('https://pbsv-push.internal/api/push/admin/test',{method:'POST',headers:{'Content-Type':'application/json','Authorization':'Bearer '+env.PUSH_INTERNAL_TOKEN},body:JSON.stringify({title,body,url:'./avisos.html'})});
    const result=await upstream.text();
    return respond(result,upstream.status,{'Content-Type':'application/json'});
   }catch{return respond(JSON.stringify({error:'No es pot contactar amb el servidor de notificacions.'}),502,{'Content-Type':'application/json'})}
