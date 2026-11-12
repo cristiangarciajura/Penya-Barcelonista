@@ -1,21 +1,52 @@
-// PBSV: comprovacio de configuracio. Cap subscripcio ni enviament habilitat encara.
+// PBSV Web Push: subscripcions protegides per Turnstile, desactivades fins a configurar-lo.
+// Els enviaments administratius continuen desactivats.
 const ORIGIN='https://cristiangarciajura.github.io';
-function reply(data,status=200,origin=false){return new Response(JSON.stringify(data),{status,headers:{'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff',...(origin?{'access-control-allow-origin':ORIGIN,'vary':'Origin'}:{})}})}
-export default {
- async fetch(request,env){
-  const url=new URL(request.url);
-  const sameOrigin=request.headers.get('Origin')===ORIGIN;
-  if(request.method!=='GET')return reply({error:'Method not allowed'},405);
-  if(url.pathname==='/api/push/status'){
-   let database=false;
-   try{if(env.PUSH_DB){await env.PUSH_DB.prepare('SELECT 1 FROM push_subscriptions LIMIT 1').first();database=true}}catch{}
-   return reply({service:'pbsv-push',database,publicKeyConfigured:typeof env.PUSH_VAPID_PUBLIC_KEY==='string'&&env.PUSH_VAPID_PUBLIC_KEY.length>0,privateKeyConfigured:typeof env.PUSH_VAPID_PRIVATE_KEY==='string'&&env.PUSH_VAPID_PRIVATE_KEY.length>0,subscriptionsEnabled:false,sendingEnabled:false});
-  }
-  if(url.pathname==='/api/push/public-key'){
-   if(!sameOrigin)return reply({error:'Origin not allowed'},403);
-   if(!env.PUSH_VAPID_PUBLIC_KEY)return reply({error:'Public key not configured'},503,true);
-   return reply({publicKey:env.PUSH_VAPID_PUBLIC_KEY,subscriptionsEnabled:false},200,true);
-  }
-  return reply({service:'pbsv-push',status:'setup_pending'},503);
+const HOSTS=new Set(['fcm.googleapis.com','updates.push.services.mozilla.com','web.push.apple.com','api.push.apple.com']);
+const headers={'content-type':'application/json; charset=utf-8','cache-control':'no-store','x-content-type-options':'nosniff','referrer-policy':'no-referrer'};
+function response(data,status=200,cors=false){return new Response(JSON.stringify(data),{status,headers:{...headers,...(cors?{'access-control-allow-origin':ORIGIN,'vary':'Origin','access-control-allow-methods':'GET,POST,DELETE,OPTIONS','access-control-allow-headers':'Content-Type'}:{})}})}
+const enabled=env=>!!(env.PUSH_DB&&env.PUSH_VAPID_PUBLIC_KEY&&env.PUSH_TURNSTILE_SECRET&&env.PUSH_TURNSTILE_SITE_KEY);
+function b64bytes(s){if(typeof s!=='string'||!/^[a-zA-Z0-9_-]+$/.test(s))return null;try{const t=atob(s.replace(/-/g,'+').replace(/_/g,'/')+'='.repeat((4-s.length%4)%4));return Uint8Array.from(t,c=>c.charCodeAt(0))}catch{return null}}
+function endpointValid(raw){try{const u=new URL(raw);return u.protocol==='https:'&&!u.username&&!u.password&&u.port===''&&u.hash===''&&u.href.length<2048&&HOSTS.has(u.hostname)}catch{return false}}
+function subscriptionValid(s){return s&&endpointValid(s.endpoint)&&b64bytes(s.keys?.p256dh)?.length===65&&b64bytes(s.keys?.auth)?.length===16}
+async function sha(s){const hash=await crypto.subtle.digest('SHA-256',new TextEncoder().encode(s));return [...new Uint8Array(hash)].map(x=>x.toString(16).padStart(2,'0')).join('')}
+async function body(req){const size=Number(req.headers.get('content-length'));if(size>4096)throw Error('too_large');const txt=await req.text();if(txt.length>4096)throw Error('too_large');return JSON.parse(txt)}
+async function verifyTurnstile(token,env,req){
+ if(typeof token!=='string'||token.length<10||token.length>2048)return false;
+ const form=new FormData();form.set('secret',env.PUSH_TURNSTILE_SECRET);form.set('response',token);
+ const ip=req.headers.get('CF-Connecting-IP');if(ip)form.set('remoteip',ip);
+ const r=await fetch('https://challenges.cloudflare.com/turnstile/v0/siteverify',{method:'POST',body:form,signal:AbortSignal.timeout(5000)});
+ if(!r.ok)return false;const v=await r.json();
+ return v.success===true&&v.hostname==='cristiangarciajura.github.io';
+}
+export default {async fetch(req,env){
+ const u=new URL(req.url),origin=req.headers.get('Origin'),cors=origin===ORIGIN;
+ if(u.pathname==='/api/push/status'&&req.method==='GET'){
+  let database=false;try{if(env.PUSH_DB){await env.PUSH_DB.prepare('SELECT 1 FROM push_subscriptions LIMIT 1').first();database=true}}catch{}
+  return response({service:'pbsv-push',database,publicKeyConfigured:!!env.PUSH_VAPID_PUBLIC_KEY,privateKeyConfigured:!!env.PUSH_VAPID_PRIVATE_KEY,subscriptionsEnabled:enabled(env),sendingEnabled:false});
  }
-};
+ if(!cors)return response({error:'Origen no permès'},403);
+ if(req.method==='OPTIONS')return new Response(null,{status:204,headers:{...headers,'access-control-allow-origin':ORIGIN,'access-control-allow-methods':'GET,POST,DELETE,OPTIONS','access-control-allow-headers':'Content-Type','vary':'Origin'}});
+ if(u.pathname==='/api/push/public-key'&&req.method==='GET'){
+  if(!env.PUSH_VAPID_PUBLIC_KEY)return response({error:'Clau pública no configurada'},503,true);
+  return response({publicKey:env.PUSH_VAPID_PUBLIC_KEY,subscriptionsEnabled:enabled(env),turnstileSiteKey:enabled(env)?env.PUSH_TURNSTILE_SITE_KEY:null},200,true);
+ }
+ if(u.pathname==='/api/push/subscriptions'&&(req.method==='POST'||req.method==='DELETE')){
+  if(!enabled(env))return response({error:'Subscripcions no habilitades'},503,true);
+  if(!req.headers.get('content-type')?.toLowerCase().startsWith('application/json'))return response({error:'Content-Type incorrecte'},415,true);
+  let data;try{data=await body(req)}catch{return response({error:'Dades incorrectes'},400,true)}
+  if(!await verifyTurnstile(data?.turnstileToken,env,req))return response({error:'Verificació de seguretat fallida'},403,true);
+  if(req.method==='POST'){
+   if(!subscriptionValid(data))return response({error:'Subscripció no vàlida'},400,true);
+   const id=await sha(data.endpoint);
+   await env.PUSH_DB.prepare('INSERT INTO push_subscriptions (id,endpoint,p256dh,auth) VALUES (?,?,?,?) ON CONFLICT(endpoint) DO UPDATE SET p256dh=excluded.p256dh,auth=excluded.auth,updated_at=CURRENT_TIMESTAMP,disabled_at=NULL').bind(id,data.endpoint,data.keys.p256dh,data.keys.auth).run();
+   return response({ok:true},201,true);
+  }
+  if(!endpointValid(data?.endpoint)||b64bytes(data?.auth)?.length!==16)return response({error:'Dades incorrectes'},400,true);
+  const id=await sha(data.endpoint);
+  const row=await env.PUSH_DB.prepare('SELECT auth FROM push_subscriptions WHERE id=?').bind(id).first();
+  if(!row||row.auth!==data.auth)return response({error:'Subscripció no trobada'},404,true);
+  await env.PUSH_DB.prepare('UPDATE push_subscriptions SET disabled_at=CURRENT_TIMESTAMP WHERE id=?').bind(id).run();
+  return response({ok:true},200,true);
+ }
+ return response({error:'Ruta no disponible'},404,true);
+}};
