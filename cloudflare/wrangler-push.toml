@@ -1,4 +1,4 @@
 name = "pbsv-push"
-main = "cloudflare/push-placeholder.js"
+main = "push-placeholder.js"
 compatibility_date = "2026-11-01"
 workers_dev = true
