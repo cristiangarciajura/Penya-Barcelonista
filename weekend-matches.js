@@ -14,14 +14,19 @@ function showPoster(src,alt){
 function update(card,item,day){
  if(!card||!item||(!item.title&&!item.image&&!item.comment))return;
  const img=card.querySelector('img.news-photo');
- if(img&&validImage(item.image)){img.src=item.image;img.alt='Cartell dels '+(item.title||'partits');}
+ if(img&&validImage(item.image)){img.src=item.image;img.alt='Cartell dels '+(item.title||'partits');img.style.visibility='visible';img.dataset.currentPoster='yes';}
  const title=card.querySelector('.news-body h3');if(title&&item.title)title.textContent=item.title;
  const paragraph=card.querySelector('.news-body p');if(paragraph&&item.comment)paragraph.textContent=item.comment;
  const meta=card.querySelector('.news-body .meta');
  if(meta&&item.date){const [y,m,d]=item.date.split('-');const months=['','GENER','FEBRER','MARÇ','ABRIL','MAIG','JUNY','JULIOL','AGOST','SETEMBRE','OCTUBRE','NOVEMBRE','DESEMBRE'];meta.textContent=Number(d)+' '+months[Number(m)]+' '+y;}
  const open=card.querySelector('.photo-open');
- if(open&&img){open.onclick=e=>{e.preventDefault();e.stopPropagation();showPoster(img.currentSrc||img.src,img.alt||'Cartell dels partits');};}
+ if(open&&img){open.disabled=false;open.removeAttribute('aria-disabled');}
 }
-async function init(){try{const r=await fetch('./data/club.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)return;const club=await r.json();const entry=club.sections?.find(x=>x.id==='pbsv-weekend-matches');if(!entry?.detail)return;const data=JSON.parse(entry.detail);for(const day of ['saturday','sunday'])update(find(day),data[day],day)}catch(e){console.warn('PBSV partits:',e)}}
+function cards(){return ['saturday','sunday'].map(find).filter(Boolean)}
+function loading(card){const img=card.querySelector('img.news-photo');if(img){img.style.visibility='hidden';img.removeAttribute('data-current-poster')}const meta=card.querySelector('.news-body .meta');if(meta)meta.textContent='ACTUALITZANT';const p=card.querySelector('.news-body p');if(p)p.textContent='Carregant els partits actualitzats…';const btn=card.querySelector('.photo-open');if(btn){btn.disabled=true;btn.setAttribute('aria-disabled','true')}}
+function unavailable(card){const meta=card.querySelector('.news-body .meta');if(meta)meta.textContent='INFORMACIÓ PENDENT';const p=card.querySelector('.news-body p');if(p)p.textContent='No es poden consultar els cartells actualitzats ara mateix.';const img=card.querySelector('img.news-photo');if(img)img.style.visibility='hidden'}
+// Capture before the old inline page handlers, so only one viewer ever opens.
+document.addEventListener('click',e=>{const btn=e.target.closest?.('button.photo-open[data-poster]');if(!btn)return;e.preventDefault();e.stopImmediatePropagation();e.stopPropagation();if(btn.disabled)return;const img=btn.closest('article.news-card')?.querySelector('img.news-photo');if(img&&img.dataset.currentPoster==='yes')showPoster(img.currentSrc||img.src,img.alt||'Cartell dels partits')},true);
+async function init(){const all=cards();all.forEach(loading);try{const r=await fetch('./data/club.json?t='+Date.now(),{cache:'no-store'});if(!r.ok)throw Error('HTTP '+r.status);const club=await r.json();const entry=club.sections?.find(x=>x.id==='pbsv-weekend-matches');if(!entry?.detail)throw Error('Cartells no configurats');const data=JSON.parse(entry.detail);for(const day of ['saturday','sunday']){const card=find(day),item=data[day];if(item&&validImage(item.image))update(card,item,day);else if(card)unavailable(card)}}catch(e){all.forEach(unavailable);console.warn('PBSV partits:',e)}}
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
