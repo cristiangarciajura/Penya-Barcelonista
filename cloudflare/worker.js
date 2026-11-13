@@ -53,13 +53,13 @@ export default {async fetch(req,env){
   try{const r=await env.PUSH_SERVICE.fetch('https://pbsv-push.internal/api/push/admin/subscribers',{headers:{Authorization:'Bearer '+env.PUSH_INTERNAL_TOKEN}});return respond(await r.text(),r.status,{'Content-Type':'application/json'})}
   catch{return json({error:'No es poden consultar els dispositius.'},502)}
  }
- if(path==='/api/push/batches'&&req.method==='GET'){
+ if((path==='/api/push/batches'||path==='/api/push/audience')&&req.method==='GET'){
   const json=(data,status)=>respond(JSON.stringify(data),status,{'Content-Type':'application/json'});
   if(!s)return json({error:'Inicia sessió amb GitHub.'},401);
   const identityResponse=await github('/user',s.token);if(!identityResponse.ok)return json({error:'Sessió caducada.'},401);
   const identity=await identityResponse.json();if(identity.login?.toLowerCase()!==OWNER.toLowerCase())return json({error:'Accés denegat.'},403);
   if(!env.PUSH_SERVICE||!env.PUSH_INTERNAL_TOKEN)return json({error:'Connexió privada no configurada.'},503);
-  try{const r=await env.PUSH_SERVICE.fetch('https://pbsv-push.internal/api/push/admin/batches',{headers:{Authorization:'Bearer '+env.PUSH_INTERNAL_TOKEN}});return respond(await r.text(),r.status,{'Content-Type':'application/json'})}
+  try{const r=await env.PUSH_SERVICE.fetch('https://pbsv-push.internal/api/push/admin/'+(path.endsWith('/audience')?'audience':'batches'),{headers:{Authorization:'Bearer '+env.PUSH_INTERNAL_TOKEN}});return respond(await r.text(),r.status,{'Content-Type':'application/json'})}
   catch{return json({error:'No es pot consultar la cua.'},502)}
  }
  if(path==='/api/push/schedule'||path==='/api/push/schedule/cancel'||path==='/api/push/schedule/health'){
