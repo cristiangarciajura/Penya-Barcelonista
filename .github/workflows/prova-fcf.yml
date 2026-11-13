@@ -1,0 +1,50 @@
+name: Prova FCF - dos equips (sense publicar resultats)
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 8 * * 6'
+permissions:
+  contents: read
+jobs:
+  diagnosticar:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - name: Comprovar accessibilitat de les dues competicions
+        shell: bash
+        run: |
+          python3 - <<'PY'
+          import urllib.request, urllib.error, re, html, json, datetime
+          urls={
+            "Amateur A":"https://www.fcf.cat/ca/competicio/2026-2027/tercera-catalana/grup-12/resultats",
+            "Amateur Fem A":"https://www.fcf.cat/ca/competicio/2026-2027/segona-divisio-femeni/grup-5/resultats"
+          }
+          report={"checked_at_utc":datetime.datetime.now(datetime.timezone.utc).isoformat(),"teams":[]}
+          for name,url in urls.items():
+              item={"team":name,"url":url,"http_status":None,"bytes":0,"content_type":None,"contains_club_name":False,"error":None}
+              try:
+                  request=urllib.request.Request(url,headers={"User-Agent":"Mozilla/5.0 (compatible; PBSV-ResultatsPilot/0.1; diagnostic only)","Accept":"text/html"})
+                  with urllib.request.urlopen(request,timeout=18) as response:
+                      body=response.read(1500000)
+                      item["http_status"]=response.status
+                      item["content_type"]=response.headers.get("Content-Type")
+                      item["bytes"]=len(body)
+                      text=html.unescape(re.sub(r'<[^>]+>',' ',body.decode('utf-8','replace'))).lower()
+                      item["contains_club_name"]=bool(re.search(r'(sant vicen[cç]|penya barcelonista|p[ae]\\. barc)',text))
+              except urllib.error.HTTPError as exc:
+                  item["http_status"]=exc.code
+                  item["error"]="HTTP "+str(exc.code)
+              except Exception as exc:
+                  item["error"]=type(exc).__name__+": "+str(exc)[:150]
+              report["teams"].append(item)
+          with open("fcf-pilot-diagnostic.json","w",encoding="utf-8") as f:
+              json.dump(report,f,ensure_ascii=False,indent=2)
+          for item in report["teams"]:
+              print(item["team"],"HTTP",item["http_status"],"bytes",item["bytes"],"club_detectat",item["contains_club_name"],"error",item["error"])
+          print("Aquesta prova no publica resultats ni interpreta marcadors.")
+          PY
+      - uses: actions/upload-artifact@v4
+        with:
+          name: fcf-pilot-diagnostic
+          path: fcf-pilot-diagnostic.json
+          retention-days: 7
