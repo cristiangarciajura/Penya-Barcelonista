@@ -111,7 +111,7 @@ export default {async scheduled(event,env,ctx){ctx.waitUntil(runDue(env))},async
    let d;try{d=await body(req)}catch{return response({error:'Dades incorrectes'},400)}
    if(!validNotice(d))return response({error:'Avís incorrecte'},400);
    const due=new Date(d.dueAt);
-   if(typeof d.dueAt!=='string'||!/^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(?:\\.\\d{3})?Z$/.test(d.dueAt)||!Number.isFinite(due.getTime())||due.getTime()<Date.now()+120000||due.getTime()>Date.now()+365*86400000)return response({error:'Escull una data entre 2 minuts i 1 any en el futur'},400);
+   if(typeof d.dueAt!=='string'||!/^\d{4}-\d\d-\d\dT\d\d:\d\d:\d\d(?:\.\d{3})?Z$/.test(d.dueAt)||!Number.isFinite(due.getTime())||due.getTime()<Date.now()+120000||due.getTime()>Date.now()+365*86400000)return response({error:'Escull una data entre 2 minuts i 1 any en el futur'},400);
    const id=crypto.randomUUID();
    await env.PUSH_DB.prepare('INSERT INTO push_schedule (id,due_at,category,title,message,target) VALUES (?,?,?,?,?,?)').bind(id,due.toISOString(),d.category,d.title.trim(),d.message.trim(),d.target).run();
    return response({ok:true,id,dueAt:due.toISOString(),message:'Avís programat. El sistema comprova els enviaments cada minut.'},201);
