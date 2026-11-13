@@ -15,13 +15,13 @@ function update(card,item,day){
  if(card)card.setAttribute('aria-busy','false');
  if(!card||!item||(!item.title&&!item.image&&!item.comment))return;
  const img=card.querySelector('img.news-photo');
- if(img&&validImage(item.image)){img.src=item.image;img.alt='Cartell dels '+(item.title||'partits');img.style.visibility='visible';img.dataset.currentPoster='yes';}
+ if(img&&validImage(item.image)){img.style.visibility='hidden';img.removeAttribute('data-current-poster');img.alt='Cartell dels '+(item.title||'partits');img.decoding='async';const src=item.image;img.onload=()=>{if(img.src===src){img.dataset.currentPoster='yes';img.style.visibility='visible';const open=card.querySelector('.photo-open');if(open){open.disabled=false;open.removeAttribute('aria-disabled')}}};img.onerror=()=>{img.style.visibility='hidden';const open=card.querySelector('.photo-open');if(open){open.disabled=true;open.setAttribute('aria-disabled','true')}};img.src=src;if(img.complete&&img.naturalWidth)img.onload();}
  const title=card.querySelector('.news-body h3');if(title&&item.title)title.textContent=item.title;
  const paragraph=card.querySelector('.news-body p');if(paragraph&&item.comment)paragraph.textContent=item.comment;
  const meta=card.querySelector('.news-body .meta');
  if(meta&&item.date){const [y,m,d]=item.date.split('-');const months=['','GENER','FEBRER','MARÇ','ABRIL','MAIG','JUNY','JULIOL','AGOST','SETEMBRE','OCTUBRE','NOVEMBRE','DESEMBRE'];meta.textContent=Number(d)+' '+months[Number(m)]+' '+y;}
  const open=card.querySelector('.photo-open');
- if(open&&img){open.disabled=false;open.removeAttribute('aria-disabled');}
+ if(open){open.disabled=true;open.setAttribute('aria-disabled','true');if(img&&img.dataset.currentPoster==='yes'){open.disabled=false;open.removeAttribute('aria-disabled')}}
 }
 // Eliminar únicament l'avís antic de la portada; conservar els cartells i la resta del contingut.
 function removeOutdatedAgendaNotice(){
