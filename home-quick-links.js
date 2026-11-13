@@ -8,7 +8,7 @@ async function updateSponsorImages(){
   if(!response.ok)throw Error('No es poden carregar els patrocinadors');
   const data=await response.json();
   if(!Array.isArray(data.sponsors))return;
-  const items=data.sponsors.filter(s=>typeof s.name==='string'&&typeof s.url==='string'&&/^https:\/\//.test(s.url));
+  const items=data.sponsors.filter(s=>typeof s.name==='string'&&s.name.trim());
   if(!items.length)return;
   const cards=items.map(s=>{
    const card=document.createElement('article');card.className='pbsv-sponsor-card';
@@ -18,8 +18,9 @@ async function updateSponsorImages(){
    else logo.textContent=s.name;
    const body=document.createElement('div');body.className='pbsv-sponsor-content';
    const name=document.createElement('h3');name.textContent=s.name;
-   const link=document.createElement('a');link.href=s.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Visitar ↗';
-   body.append(name,link);card.append(logo,body);return card;
+   body.append(name);
+   if(typeof s.url==='string'&&/^https:\/\//i.test(s.url)){const link=document.createElement('a');link.href=s.url;link.target='_blank';link.rel='noopener noreferrer';link.textContent='Visitar ↗';body.append(link)}
+   card.append(logo,body);return card;
   });
   grid.replaceChildren(...cards);
  }catch(err){console.warn('PBSV sponsor logos:',err)}
