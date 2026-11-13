@@ -26,7 +26,7 @@ function update(card,item,day){
 function removeOutdatedAgendaNotice(){
  const home=document.getElementById('home');if(!home)return;
  const phrase='Agenda del cap de setmana del 7–8 de novembre de 2026. Aquests cartells són d\'aquesta jornada, no un calendari actualitzat automàticament.';
- const normalize=s=>(s||'').replace(/\\s+/g,' ').trim().replace(/\\u2013/g,'-');
+ const normalize=s=>(s||'').replace(/\s+/g,' ').trim().replace(/\u2013/g,'-');
  const expected=normalize(phrase);
  const walker=document.createTreeWalker(home,NodeFilter.SHOW_TEXT);
  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
@@ -35,7 +35,7 @@ function removeOutdatedAgendaNotice(){
   if(normalize(text).includes(expected)){
    const parent=node.parentElement;
    if(parent&&normalize(parent.textContent)===expected&&/^(P|SMALL|SPAN|DIV)$/.test(parent.tagName))parent.remove();
-   else node.nodeValue=text.replace(/Agenda del cap de setmana del 7[–-]8 de novembre de 2026\\.\\s*Aquests cartells són d.aquesta jornada, no un calendari actualitzat automàticament\\./u,'');
+   else node.nodeValue=text.replace(/Agenda del cap de setmana del 7[–-]8 de novembre de 2026\.\s*Aquests cartells són d.aquesta jornada, no un calendari actualitzat automàticament\./u,'');
   }
  }
 }
