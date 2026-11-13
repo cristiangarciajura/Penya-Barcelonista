@@ -13,11 +13,16 @@ jobs:
         env:
           BROWSERLESS_TOKEN: ${{ secrets.BROWSERLESS_TOKEN }}
         run: python3 scripts/captura-fcf-browserless.py
+      - name: Diagnosticar consultes de dades FCF
+        if: always()
+        env:
+          BROWSERLESS_TOKEN: ${{ secrets.BROWSERLESS_TOKEN }}
+        run: python3 scripts/diagnostic-fcf-browserless.py
       - name: Guardar captura per revisar-la
         if: always()
         uses: actions/upload-artifact@v4
         with:
           name: captura-fcf-amateur-a
-          path: captures-fcf/*.png
+          path: captures-fcf/*
           if-no-files-found: ignore
           retention-days: 2
