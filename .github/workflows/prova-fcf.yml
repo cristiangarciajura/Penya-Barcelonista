@@ -11,6 +11,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+      - name: Inspeccionar chunks Next.js de resultats
+        run: python3 scripts/diagnostic-fcf-chunks.py
       - name: Identificar scripts i fonts de dades de la FCF
         run: python3 scripts/diagnostic-fcf-assets.py
       - name: Analitzar estructura HTML i possibles dades de partits
