@@ -21,7 +21,7 @@ jobs:
           from pathlib import Path
           p=Path('index.html')
           html=p.read_text(encoding='utf-8')
-          if len(html.strip()) < 1000 or '<html' not in html.lower() or '</body>' not in html.lower() or '</head>' not in html.lower():
+          if len(html.strip()) < 50000 or '<html' not in html.lower() or '</html>' not in html.lower() or '</body>' not in html.lower() or '</head>' not in html.lower():
               raise SystemExit('ERROR: index.html no contiene una página HTML completa. Se cancela la publicación para proteger la portada.')
           import re
           html=re.sub(r'<link[^>]*news-carousel-enhancement[.]css[^>]*>', '', html)
