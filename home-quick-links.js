@@ -50,3 +50,28 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  const link=document.createElement('a');link.id='pbsv-install-card';link.href=new URL('./installar.html',document.baseURI).href;link.className='quick';link.style.cssText='display:block;text-decoration:none;color:inherit;cursor:pointer';
  const h=document.createElement('h3');h.textContent='📲 Instal·la l’app';const p=document.createElement('p');p.textContent='Porta la Penya al teu mòbil en un moment';link.append(h,p);grid.append(link);
  }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initInstall,{once:true});else initInstall();})();
+
+/* Retirar l'avís fix de la jornada del 7–8 de novembre, sense tocar els partits. */
+(()=>{'use strict';
+ const outdated=/Agenda del cap de setmana del 7\s*[–-]\s*8 de novembre de 2026[\s\S]*?no un calendari actualitzat automàticament\./iu;
+ function removeNotice(){
+  const home=document.getElementById('home');if(!home)return;
+  const walker=document.createTreeWalker(home,NodeFilter.SHOW_TEXT);
+  const nodes=[];while(walker.nextNode())nodes.push(walker.currentNode);
+  for(const node of nodes){
+   if(!outdated.test(node.textContent||''))continue;
+   let target=node.parentElement;
+   if(!target)return;
+   // Pujar només per contenidors que contenen exclusivament l'avís.
+   for(let i=0;i<4;i++){
+    const parent=target.parentElement;
+    if(!parent||parent===home||['MAIN','BODY','HTML'].includes(parent.tagName))break;
+    const text=(parent.textContent||'').replace(/\s+/g,' ').trim();
+    if(!outdated.test(text)||text.replace(outdated,'').trim())break;
+    target=parent;
+   }
+   target.remove();
+  }
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',removeNotice,{once:true});else removeNotice();
+})();
