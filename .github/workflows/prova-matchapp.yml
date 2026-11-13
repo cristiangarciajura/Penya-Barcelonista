@@ -1,0 +1,13 @@
+name: Prova Matchapp - Amateur A
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  diagnosticar:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprovar enllac public Matchapp Amateur A
+        run: python3 scripts/diagnostic-matchapp.py
