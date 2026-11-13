@@ -26,3 +26,18 @@ async function updateSponsorImages(){
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',updateSponsorImages,{once:true});else updateSponsorImages();
 })();
+
+/* PBSV: la campana del menú obre directament la subscripció push real. */
+(()=>{'use strict';
+ function initBell(){
+  const bell=document.getElementById('pbsvBell');if(!bell)return;
+  bell.setAttribute('aria-label','Activar o gestionar notificacions de la Penya');
+  bell.setAttribute('title','Notificacions de la Penya');
+  bell.removeAttribute('aria-haspopup');bell.removeAttribute('aria-controls');bell.removeAttribute('aria-expanded');
+  bell.addEventListener('click',event=>{
+   event.preventDefault();event.stopImmediatePropagation();
+   window.location.assign(new URL('./avisos.html',document.baseURI).href);
+  },true);
+ }
+ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initBell,{once:true});else initBell();
+})();
