@@ -38,6 +38,8 @@ async function dispatchNotice(env,d,id){
 async function runDue(env){
  if(!env.PUSH_DB||!env.PUSH_VAPID_PRIVATE_KEY||!env.PUSH_VAPID_PUBLIC_KEY)return;
  await ensureSchedule(env);
+ await env.PUSH_DB.prepare("CREATE TABLE IF NOT EXISTS push_cron_health (id INTEGER PRIMARY KEY CHECK(id=1), last_run TEXT NOT NULL)").run();
+ await env.PUSH_DB.prepare("INSERT INTO push_cron_health (id,last_run) VALUES (1,?) ON CONFLICT(id) DO UPDATE SET last_run=excluded.last_run").bind(new Date().toISOString()).run();
  const due=await env.PUSH_DB.prepare("SELECT * FROM push_schedule WHERE status='pending' AND due_at<=? ORDER BY due_at LIMIT 10").bind(new Date().toISOString()).all();
  for(const job of due.results||[]){
   const claim=await env.PUSH_DB.prepare("UPDATE push_schedule SET status='processing' WHERE id=? AND status='pending'").bind(job.id).run();
@@ -103,6 +105,11 @@ export default {async scheduled(event,env,ctx){ctx.waitUntil(runDue(env))},async
   if(!env.PUSH_INTERNAL_TOKEN||req.headers.get('Authorization')!=='Bearer '+env.PUSH_INTERNAL_TOKEN)return response({error:'Accés denegat'},403);
   if(!env.PUSH_DB)return response({error:'Base de dades no disponible'},503);
   try{await ensureSchedule(env)}catch{return response({error:'No es pot preparar la programació'},503)}
+  if(u.pathname==='/api/push/admin/schedule/health'&&req.method==='GET'){
+   let lastRun=null;try{const r=await env.PUSH_DB.prepare('SELECT last_run FROM push_cron_health WHERE id=1').first();lastRun=r?.last_run||null}catch{}
+   const q=await env.PUSH_DB.prepare("SELECT COUNT(*) AS count FROM push_schedule WHERE status='pending' AND due_at<=?").bind(new Date().toISOString()).first();
+   return response({lastRun,overdue:q?.count||0,serverTime:new Date().toISOString()});
+  }
   if(u.pathname==='/api/push/admin/schedule'&&req.method==='GET'){
    const q=await env.PUSH_DB.prepare('SELECT id,created_at,due_at,category,title,message,target,status,total,accepted,failed FROM push_schedule ORDER BY created_at DESC LIMIT 40').all();
    return response({items:q.results||[]});
