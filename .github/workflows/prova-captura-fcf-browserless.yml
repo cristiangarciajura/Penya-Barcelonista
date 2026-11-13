@@ -1,0 +1,23 @@
+name: Prova captura FCF amb Browserless
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  captura:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Capturar pàgina FCF amb Browserless
+        env:
+          BROWSERLESS_TOKEN: ${{ secrets.BROWSERLESS_TOKEN }}
+        run: python3 scripts/captura-fcf-browserless.py
+      - name: Guardar captura per revisar-la
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: captura-fcf-amateur-a
+          path: captures-fcf/*.png
+          if-no-files-found: ignore
+          retention-days: 2
