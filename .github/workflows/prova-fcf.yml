@@ -11,6 +11,12 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+      - name: Preparar navegador per llegir resultats renderitzats
+        run: |
+          python3 -m pip install playwright==1.56.0
+          python3 -m playwright install --with-deps chromium
+      - name: Cercar Penya al llistat de resultats renderitzat
+        run: python3 scripts/diagnostic-fcf-browser.py
       - name: Comprovar fitxa Amateur A FCF
         run: python3 scripts/diagnostic-fcf-equip-amateur.py
       - name: Provar resposta API de partits FCF
