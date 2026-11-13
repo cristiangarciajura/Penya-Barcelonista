@@ -41,6 +41,31 @@ export default {async fetch(req,env){
    return response({ok:true,message:'Prova enviada al dispositiu subscrit més recent. Comprova les notificacions del mòbil.',devices:1},200);
   }catch(e){return response({error:'No s’ha pogut enviar la prova: '+String(e?.message||'error inesperat').slice(0,140)},502)}
  }
+ if((u.pathname==='/api/push/admin/send'||u.pathname==='/api/push/admin/history')&&['GET','POST'].includes(req.method)){
+  if(!env.PUSH_INTERNAL_TOKEN||req.headers.get('Authorization')!=='Bearer '+env.PUSH_INTERNAL_TOKEN)return response({error:'Accés denegat'},403);
+  if(!env.PUSH_DB)return response({error:'Base de dades no disponible'},503);
+  try{await env.PUSH_DB.prepare("CREATE TABLE IF NOT EXISTS push_delivery_history (id TEXT PRIMARY KEY, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, category TEXT NOT NULL, title TEXT NOT NULL, message TEXT NOT NULL, target TEXT NOT NULL, total INTEGER NOT NULL, accepted INTEGER NOT NULL, failed INTEGER NOT NULL)").run()}catch{return response({error:'No es pot preparar l’historial de notificacions.'},503)}
+  if(u.pathname==='/api/push/admin/history'&&req.method==='GET'){
+   try{const rows=await env.PUSH_DB.prepare('SELECT id,created_at,category,title,message,target,total,accepted,failed FROM push_delivery_history ORDER BY created_at DESC LIMIT 30').all();return response({items:rows.results||[]})}catch{return response({error:'No es pot consultar l’historial.'},503)}
+  }
+  if(u.pathname!=='/api/push/admin/send'||req.method!=='POST')return response({error:'Mètode no permès'},405);
+  if(!env.PUSH_VAPID_PUBLIC_KEY||!env.PUSH_VAPID_PRIVATE_KEY)return response({error:'Claus VAPID no configurades'},503);
+  let data;try{data=await body(req)}catch{return response({error:'Dades incorrectes'},400)}
+  const title=String(data?.title||'').trim(),message=String(data?.message||'').trim();
+  const category=String(data?.category||''),target=String(data?.target||'');
+  const targets=new Set(['./index.html','./index.html#noticies','./index.html#partits','./index.html#club','./avisos.html']);
+  if(!title||title.length>90||!message||message.length>240||!['match','news','event','urgent'].includes(category)||!targets.has(target))return response({error:'Dades de l’avís incorrectes'},400);
+  let rows;
+  try{const q=await env.PUSH_DB.prepare('SELECT id,endpoint,p256dh,auth FROM push_subscriptions WHERE disabled_at IS NULL ORDER BY updated_at DESC LIMIT 21').all();rows=q.results||[]}catch{return response({error:'No es poden consultar els dispositius'},503)}
+  if(!rows.length)return response({error:'No hi ha dispositius subscrits'},404);
+  if(rows.length>20)return response({error:'Hi ha més de 20 dispositius. Enviament aturat per seguretat fins a habilitar lots.'},409);
+  const id=crypto.randomUUID();let accepted=0,failed=0;
+  for(const row of rows){
+   try{const result=await sendWebPush(row,{title,body:message,url:target,tag:'pbsv-'+id},env);if(result.ok)accepted++;else{failed++;if(result.expired)await env.PUSH_DB.prepare('UPDATE push_subscriptions SET disabled_at=CURRENT_TIMESTAMP WHERE id=?').bind(row.id).run()}}catch{failed++}
+  }
+  try{await env.PUSH_DB.prepare('INSERT INTO push_delivery_history (id,category,title,message,target,total,accepted,failed) VALUES (?,?,?,?,?,?,?,?)').bind(id,category,title,message,target,rows.length,accepted,failed).run()}catch{return response({error:'Enviament processat, però no s’ha pogut desar l’historial.',accepted,failed},500)}
+  return response({ok:failed===0,id,total:rows.length,accepted,failed,message:'Acceptats pel servei push: '+accepted+' de '+rows.length+'. Això no confirma la visualització al mòbil.'},200);
+ }
  if(!cors)return response({error:'Origen no permès'},403);
  if(req.method==='OPTIONS')return new Response(null,{status:204,headers:{...headers,'access-control-allow-origin':ORIGIN,'access-control-allow-methods':'GET,POST,DELETE,OPTIONS','access-control-allow-headers':'Content-Type','vary':'Origin'}});
  if(u.pathname==='/api/push/public-key'&&req.method==='GET'){
