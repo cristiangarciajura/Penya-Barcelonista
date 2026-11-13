@@ -44,7 +44,7 @@ export default {async fetch(req,env){
  if(path==='/auth/logout')return respond(null,302,{'Location':origin+'/','Set-Cookie':cookie('pbsv_session','',0)});
  const s=await session(req,env);
  if(path==='/api/me')return respond(JSON.stringify({authenticated:!!s,login:s?.login||null}),200,{'Content-Type':'application/json'});
- if(path==='/api/push/schedule'||path==='/api/push/schedule/cancel'){
+ if(path==='/api/push/schedule'||path==='/api/push/schedule/cancel'||path==='/api/push/schedule/health'){
   const method=req.method;
   if(!['GET','POST'].includes(method)||path.endsWith('/cancel')&&method!=='POST')return respond('Method not allowed',405);
   const json=(data,status)=>respond(JSON.stringify(data),status,{'Content-Type':'application/json'});
@@ -56,7 +56,7 @@ export default {async fetch(req,env){
   let payload;
   if(method==='POST'){try{const raw=await req.text();if(raw.length>4096)return json({error:'Dades massa grans'},413);payload=JSON.parse(raw)}catch{return json({error:'JSON incorrecte'},400)}}
   try{
-   const upstream=await env.PUSH_SERVICE.fetch('https://pbsv-push.internal/api/push/admin/schedule'+(path.endsWith('/cancel')?'/cancel':''),{method,headers:{Authorization:'Bearer '+env.PUSH_INTERNAL_TOKEN,...(method==='POST'?{'Content-Type':'application/json'}:{})},...(method==='POST'?{body:JSON.stringify(payload)}:{})});
+   const upstream=await env.PUSH_SERVICE.fetch('https://pbsv-push.internal/api/push/admin/schedule'+(path.endsWith('/cancel')?'/cancel':path.endsWith('/health')?'/health':''),{method,headers:{Authorization:'Bearer '+env.PUSH_INTERNAL_TOKEN,...(method==='POST'?{'Content-Type':'application/json'}:{})},...(method==='POST'?{body:JSON.stringify(payload)}:{})});
    return respond(await upstream.text(),upstream.status,{'Content-Type':'application/json'});
   }catch{return json({error:'No es pot contactar amb el servidor de notificacions.'},502)}
  }
