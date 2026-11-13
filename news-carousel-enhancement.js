@@ -7,6 +7,19 @@ section.id=ID;
 section.className='pbsv-carousel';
 section.hidden=true;
 section.innerHTML='<div class="pbsv-carousel-head"><h2>Últimes notícies</h2><span class="pbsv-carousel-counter"></span></div><div class="pbsv-carousel-stage" aria-live="off"></div><div class="pbsv-carousel-nav"><div class="pbsv-carousel-dots"></div><div><button type="button" class="pbsv-carousel-prev" aria-label="Notícia anterior">‹</button><button type="button" class="pbsv-carousel-next" aria-label="Notícia següent">›</button></div></div><div class="pbsv-carousel-progress"><span></span></div>';
+// Ajustaments mòbils aïllats: no modifiquen els estils globals de la portada.
+const mobileStyle=document.createElement('style');
+mobileStyle.textContent=`@media (max-width:640px){
+#pbsv-news-carousel .pbsv-carousel-prev,#pbsv-news-carousel .pbsv-carousel-next{min-width:44px;min-height:44px;touch-action:manipulation}
+#pbsv-news-carousel .pbsv-carousel-read{min-height:44px;touch-action:manipulation}
+#pbsv-news-carousel .pbsv-carousel-dots button{min-width:24px;min-height:32px;touch-action:manipulation}
+.pbsv-news-modal-dialog{max-height:calc(100dvh - 24px);overflow-y:auto;overscroll-behavior:contain}
+.pbsv-news-modal-close{min-width:44px;min-height:44px;touch-action:manipulation}
+.pbsv-news-modal-image{max-width:100%;height:auto;object-fit:contain}
+}
+@media(prefers-reduced-motion:reduce){#pbsv-news-carousel .pbsv-carousel-progress span{animation:none!important}}`;
+document.head.append(mobileStyle);
+const reducedMotion=window.matchMedia('(prefers-reduced-motion: reduce)');
 const modal=document.createElement('div');
 modal.className='pbsv-news-modal';
 modal.hidden=true;
@@ -49,9 +62,9 @@ function paint(){
  count.textContent=(pos+1)+' / '+items.length;
  dots.replaceChildren();items.forEach((_,i)=>{const b=document.createElement('button');b.type='button';b.className=i===pos?'active':'';b.setAttribute('aria-label','Notícia '+(i+1));b.setAttribute('aria-current',String(i===pos));b.onclick=()=>move(i);dots.append(b)});
  bar.style.animation='none';void bar.offsetWidth;
- if(items.length>1&&!paused&&!document.hidden)bar.style.animation='pbsv-carousel-fill 10s linear forwards';
+ if(items.length>1&&!paused&&!document.hidden&&!reducedMotion.matches)bar.style.animation='pbsv-carousel-fill 10s linear forwards';
 }
-function start(){stop();if(items.length>1&&!paused&&!document.hidden)timer=setInterval(()=>{pos=(pos+1)%items.length;paint()},10000)}
+function start(){stop();if(items.length>1&&!paused&&!document.hidden&&!reducedMotion.matches)timer=setInterval(()=>{pos=(pos+1)%items.length;paint()},10000)}
 function move(i){pos=(i+items.length)%items.length;paint();start()}
 section.querySelector('.pbsv-carousel-prev').onclick=()=>move(pos-1);
 section.querySelector('.pbsv-carousel-next').onclick=()=>move(pos+1);
