@@ -11,6 +11,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+      - name: Comprovar fitxa Amateur A FCF
+        run: python3 scripts/diagnostic-fcf-equip-amateur.py
       - name: Provar resposta API de partits FCF
         run: python3 scripts/diagnostic-fcf-api.py
       - name: Localitzar endpoints de resultats FCF
