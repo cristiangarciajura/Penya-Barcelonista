@@ -36,7 +36,7 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
   bell.removeAttribute('aria-haspopup');bell.removeAttribute('aria-controls');bell.removeAttribute('aria-expanded');
   bell.addEventListener('click',event=>{
    event.preventDefault();event.stopImmediatePropagation();
-   window.location.assign(new URL('./avisos.html',document.baseURI).href);
+   const url=new URL('./avisos.html',document.baseURI);url.searchParams.set('v','20261113-2');window.location.assign(url.href);
   },true);
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initBell,{once:true});else initBell();
