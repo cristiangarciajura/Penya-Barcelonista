@@ -2,3 +2,9 @@
 /* No mostrar mai cartells incrustats antics mentre es consulta la jornada vigent. */
 #home article.news-card:has(.photo-open[data-poster]) img.news-photo:not([data-current-poster="yes"]){visibility:hidden!important}
 #home article.news-card:has(.photo-open[data-poster]) .photo-open:disabled{opacity:.55;pointer-events:none}
+
+/* Evitar flaixos de la jornada anterior fins que s'hagin validat les dades. */
+#home article.news-card:has(.photo-open[data-poster]):not([aria-busy="false"]) .news-body .meta,
+#home article.news-card:has(.photo-open[data-poster]):not([aria-busy="false"]) .news-body p{visibility:hidden}
+#home article.news-card:has(.photo-open[data-poster]):not([aria-busy="false"]) .photo-open{pointer-events:none;opacity:.55}
+#home article.news-card:has(.photo-open[data-poster]) img.news-photo{content-visibility:auto}
