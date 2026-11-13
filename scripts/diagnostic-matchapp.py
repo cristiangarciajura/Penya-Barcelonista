@@ -51,6 +51,7 @@ try:
         print("Conté", repr(term), "HTML:", term.casefold() in body.casefold(), "text visible:", term.casefold() in text.casefold())
     print("Text visible:", text[:600])
     print("Enllaços públics:", parser.links[:15])
+    print("HTML complet (pàgina petita):", body[:3000])
 except urllib.error.HTTPError as exc:
     print("HTTP error:", exc.code)
 except urllib.error.URLError as exc:
