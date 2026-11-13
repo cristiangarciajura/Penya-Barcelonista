@@ -41,3 +41,11 @@ if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',
  }
  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initBell,{once:true});else initBell();
 })();
+
+/* Accés discret a la instal·lació, sense alterar la navegació existent. */
+(()=>{'use strict';function initInstall(){
+ if(window.matchMedia('(display-mode: standalone)').matches||navigator.standalone===true)return;
+ const grid=document.querySelector('#home .quick-grid');if(!grid||document.getElementById('pbsv-install-card'))return;
+ const link=document.createElement('a');link.id='pbsv-install-card';link.href=new URL('./installar.html',document.baseURI).href;link.className='quick';link.style.cssText='display:block;text-decoration:none;color:inherit;cursor:pointer';
+ const h=document.createElement('h3');h.textContent='📲 Instal·la l’app';const p=document.createElement('p');p.textContent='Porta la Penya al teu mòbil en un moment';link.append(h,p);grid.append(link);
+ }if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',initInstall,{once:true});else initInstall();})();
