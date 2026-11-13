@@ -34,11 +34,11 @@ jobs:
           if js not in html:
               html=html.replace('</body>',js+'</body>',1)
           quick_css='<link rel="stylesheet" href="./home-quick-links.css?v=20261109-a">'
-          quick_js='<script src="./home-quick-links.js?v=20261109-a" defer></script>'
+          quick_js='<script src="./home-quick-links.js?v=20261113-remove-agenda" defer></script>'
           if 'home-quick-links.css' not in html:
               html=html.replace('</head>',quick_css+'</head>',1)
-          if 'home-quick-links.js' not in html:
-              html=html.replace('</body>',quick_js+'</body>',1)
+          html=re.sub(r'<script[^>]*home-quick-links[.]js[^>]*>\\s*</script>', '', html)
+          html=html.replace('</body>',quick_js+'</body>',1)
           if '</body>' not in html.lower() or '</head>' not in html.lower():
               raise SystemExit('ERROR: HTML inválido tras integrar recursos; no se guarda ningún cambio.')
           p.write_text(html,encoding='utf-8')
