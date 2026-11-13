@@ -29,7 +29,7 @@ try:
         print("Content-Type:", resp.headers.get("Content-Type"))
         print("Recursos fallits:", resp.headers.get("X-Failed-Resource-Count", "desconegut"))
         print("Fulls d'estil fallits:", resp.headers.get("X-Failed-Stylesheet-Count", "desconegut"))
-        if not content.startswith(b"\\x89PNG\\r\\n\\x1a\\n"):
+        if not content.startswith(bytes([137, 80, 78, 71, 13, 10, 26, 10])):
             print("No s'ha rebut una imatge PNG. Cos:", content[:180].decode("utf-8", "replace"))
             sys.exit(1)
         pathlib.Path("captures-fcf").mkdir(exist_ok=True)
