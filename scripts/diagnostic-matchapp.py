@@ -58,3 +58,17 @@ except urllib.error.URLError as exc:
     print("Error de xarxa:", str(exc.reason)[:150])
 except Exception as exc:
     print("Error:", type(exc).__name__, str(exc)[:150])
+
+print("\\n--- Destí públic de la redirecció ---")
+try:
+    req = urllib.request.Request("https://get.matchapp.es/", headers={"User-Agent": "Mozilla/5.0", "Accept": "text/html"})
+    with urllib.request.urlopen(req, timeout=20) as response:
+        dest = response.read(100000).decode("utf-8", "replace")
+        print("HTTP destí:", response.status)
+        print("URL final destí:", response.url)
+        print("Content-Type destí:", response.headers.get("Content-Type"))
+        print("HTML destí (primers 2500 caràcters):", dest[:2500])
+except urllib.error.HTTPError as exc:
+    print("HTTP error destí:", exc.code)
+except Exception as exc:
+    print("Error destí:", type(exc).__name__, str(exc)[:150])
