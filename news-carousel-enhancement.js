@@ -78,10 +78,11 @@ document.addEventListener('visibilitychange',()=>{if(document.hidden)stop();else
 function init(){
  const home=document.getElementById('home')||document.querySelector('main');if(!home)return;
  home.prepend(section);document.body.append(modal);
+ section.hidden=false;stage.textContent='Carregant les últimes notícies…';stage.setAttribute('aria-busy','true');stage.style.cssText='display:flex;align-items:center;justify-content:center;color:#475569;font-weight:600';
  const key='pbsv-news-cache-v2';
- function apply(d){const next=(Array.isArray(d)?d:Array.isArray(d.noticias)?d.noticias:Array.isArray(d.noticies)?d.noticies:[]).filter(n=>n&&n.portada!==false&&n.activa!==false&&typeof n.titulo==='string'&&n.titulo.trim()).sort((a,b)=>String(b.fecha||'').localeCompare(String(a.fecha||'')));if(!next.length){items=[];section.hidden=true;stop();return}items=next;pos=Math.min(pos,items.length-1);section.hidden=false;paint();start();if(requestedStory&&!deepLinkOpened){const index=items.findIndex(n=>String(n.id||n.titulo)===requestedStory);if(index>=0){deepLinkOpened=true;pos=index;paint();openModal(items[index])}}}
+ function apply(d){const next=(Array.isArray(d)?d:Array.isArray(d.noticias)?d.noticias:Array.isArray(d.noticies)?d.noticies:[]).filter(n=>n&&n.portada!==false&&n.activa!==false&&typeof n.titulo==='string'&&n.titulo.trim()).sort((a,b)=>String(b.fecha||'').localeCompare(String(a.fecha||'')));if(!next.length){items=[];section.hidden=true;stop();return}items=next;pos=Math.min(pos,items.length-1);section.hidden=false;stage.removeAttribute('aria-busy');stage.style.cssText='';paint();start();if(requestedStory&&!deepLinkOpened){const index=items.findIndex(n=>String(n.id||n.titulo)===requestedStory);if(index>=0){deepLinkOpened=true;pos=index;paint();openModal(items[index])}}}
  try{const saved=sessionStorage.getItem(key);if(saved){const entry=JSON.parse(saved);if(entry&&Date.now()-entry.time<120000&&entry.data)apply(entry.data)}}catch{}
- fetch('./data/noticies.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Noticias no disponibles');return r.json()}).then(d=>{try{sessionStorage.setItem(key,JSON.stringify({time:Date.now(),data:d}))}catch{}apply(d)}).catch(e=>console.warn('Carrusel PBSV:',e));
+ fetch('./data/noticies.json',{cache:'no-cache'}).then(r=>{if(!r.ok)throw Error('Noticias no disponibles');return r.json()}).then(d=>{try{sessionStorage.setItem(key,JSON.stringify({time:Date.now(),data:d}))}catch{}apply(d)}).catch(e=>{if(!items.length){section.hidden=true;stage.removeAttribute('aria-busy')}console.warn('Carrusel PBSV:',e)});
 }
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',init,{once:true});else init();
 })();
