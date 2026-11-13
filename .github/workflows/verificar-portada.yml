@@ -1,0 +1,33 @@
+name: Verificar integridad de la portada
+on:
+  push:
+    paths:
+      - 'index.html'
+      - '.github/workflows/verificar-portada.yml'
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  verificar:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Comprobar que la portada no esté vacía ni truncada
+        run: |
+          python3 - <<'PY'
+          from pathlib import Path
+          import sys
+          p = Path("index.html")
+          if not p.is_file():
+              sys.exit("ERROR: falta index.html")
+          size = p.stat().st_size
+          print(f"Tamaño de index.html: {size:,} bytes")
+          if size < 50000:
+              sys.exit("ERROR: portada sospechosamente pequeña; revisar antes de publicar")
+          html = p.read_text(encoding="utf-8")
+          lower = html.lower()
+          for marker in ("<!doctype html", "<html", "<head", "</head>", "<body", "</body>", "</html>"):
+              if marker not in lower:
+                  sys.exit(f"ERROR: falta estructura HTML: {marker}")
+          print("OK: portada presente y estructura HTML reconocible")
+          PY
