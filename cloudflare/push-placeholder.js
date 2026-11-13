@@ -35,22 +35,62 @@ async function dispatchNotice(env,d,id){
  await env.PUSH_DB.prepare('INSERT INTO push_delivery_history (id,category,title,message,target,total,accepted,failed) VALUES (?,?,?,?,?,?,?,?)').bind(id,d.category,d.title,d.message,d.target,rows.length,accepted,failed).run();
  return {total:rows.length,accepted,failed};
 }
+async function ensureBatches(env){
+ await env.PUSH_DB.prepare("CREATE TABLE IF NOT EXISTS push_batches (id TEXT PRIMARY KEY, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, category TEXT NOT NULL, title TEXT NOT NULL, message TEXT NOT NULL, target TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'pending', cursor TEXT NOT NULL DEFAULT '', total INTEGER NOT NULL, processed INTEGER NOT NULL DEFAULT 0, accepted INTEGER NOT NULL DEFAULT 0, failed INTEGER NOT NULL DEFAULT 0, finished_at TEXT)").run();
+ await env.PUSH_DB.prepare("CREATE TABLE IF NOT EXISTS push_batch_attempts (batch_id TEXT NOT NULL, subscription_id TEXT NOT NULL, PRIMARY KEY(batch_id,subscription_id))").run();
+}
+async function enqueueBatch(env,d,id){
+ await ensureBatches(env);
+ const q=await env.PUSH_DB.prepare('SELECT COUNT(*) AS n FROM push_subscriptions WHERE disabled_at IS NULL').first();
+ const total=Number(q?.n||0);
+ if(!total)throw Error('No hi ha dispositius subscrits');
+ await env.PUSH_DB.prepare('INSERT INTO push_batches (id,category,title,message,target,total) VALUES (?,?,?,?,?,?)').bind(id,d.category,d.title,d.message,d.target,total).run();
+ return total;
+}
+async function processBatches(env){
+ await ensureBatches(env);
+ const jobs=await env.PUSH_DB.prepare("SELECT * FROM push_batches WHERE status IN ('pending','processing') ORDER BY created_at LIMIT 3").all();
+ for(const job of jobs.results||[]){
+  await env.PUSH_DB.prepare("UPDATE push_batches SET status='processing' WHERE id=? AND status='pending'").bind(job.id).run();
+  const q=await env.PUSH_DB.prepare("SELECT id,endpoint,p256dh,auth FROM push_subscriptions WHERE disabled_at IS NULL AND id>? ORDER BY id LIMIT 10").bind(job.cursor).all();
+  const rows=q.results||[];let accepted=0,failed=0,processed=0,cursor=job.cursor;
+  for(const row of rows){
+   cursor=row.id;
+   // Reserva cada destinatari abans d'enviar: no repetir-lo si el cron es reinicia.
+   const claim=await env.PUSH_DB.prepare('INSERT OR IGNORE INTO push_batch_attempts (batch_id,subscription_id) VALUES (?,?)').bind(job.id,row.id).run();
+   if(!claim.meta?.changes)continue;
+   processed++;
+   try{const r=await sendWebPush(row,{title:job.title,body:job.message,url:job.target,tag:'pbsv-'+job.id},env);if(r.ok)accepted++;else{failed++;if(r.expired)await env.PUSH_DB.prepare('UPDATE push_subscriptions SET disabled_at=CURRENT_TIMESTAMP WHERE id=?').bind(row.id).run()}}catch{failed++}
+  }
+  await env.PUSH_DB.prepare('UPDATE push_batches SET cursor=?,processed=processed+?,accepted=accepted+?,failed=failed+? WHERE id=?').bind(cursor,processed,accepted,failed,job.id).run();
+  if(rows.length<10){
+   const current=await env.PUSH_DB.prepare('SELECT * FROM push_batches WHERE id=?').bind(job.id).first();
+   await env.PUSH_DB.prepare("UPDATE push_batches SET status=?,finished_at=CURRENT_TIMESTAMP WHERE id=?").bind(current.failed?'partial':'sent',job.id).run();
+   await env.PUSH_DB.prepare('INSERT OR IGNORE INTO push_delivery_history (id,category,title,message,target,total,accepted,failed) VALUES (?,?,?,?,?,?,?,?)').bind(job.id,job.category,job.title,job.message,job.target,current.processed,current.accepted,current.failed).run();
+   await env.PUSH_DB.prepare("UPDATE push_schedule SET status=?,total=?,accepted=?,failed=?,finished_at=CURRENT_TIMESTAMP WHERE id=? AND status='processing'").bind(current.failed?'partial':'sent',current.processed,current.accepted,current.failed,job.id).run();
+  }
+ }
+}
 async function runDue(env){
  if(!env.PUSH_DB||!env.PUSH_VAPID_PRIVATE_KEY||!env.PUSH_VAPID_PUBLIC_KEY)return;
  await ensureSchedule(env);
  await env.PUSH_DB.prepare("CREATE TABLE IF NOT EXISTS push_cron_health (id INTEGER PRIMARY KEY CHECK(id=1), last_run TEXT NOT NULL)").run();
  await env.PUSH_DB.prepare("INSERT INTO push_cron_health (id,last_run) VALUES (1,?) ON CONFLICT(id) DO UPDATE SET last_run=excluded.last_run").bind(new Date().toISOString()).run();
+ await env.PUSH_DB.prepare("CREATE TABLE IF NOT EXISTS push_delivery_history (id TEXT PRIMARY KEY, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, category TEXT NOT NULL, title TEXT NOT NULL, message TEXT NOT NULL, target TEXT NOT NULL, total INTEGER NOT NULL, accepted INTEGER NOT NULL, failed INTEGER NOT NULL)").run();
  const due=await env.PUSH_DB.prepare("SELECT * FROM push_schedule WHERE status='pending' AND due_at<=? ORDER BY due_at LIMIT 10").bind(new Date().toISOString()).all();
  for(const job of due.results||[]){
   const claim=await env.PUSH_DB.prepare("UPDATE push_schedule SET status='processing' WHERE id=? AND status='pending'").bind(job.id).run();
   if(!claim.meta?.changes)continue;
   try{
+   const count=await env.PUSH_DB.prepare('SELECT COUNT(*) AS n FROM push_subscriptions WHERE disabled_at IS NULL').first();
+   if(Number(count?.n||0)>20){await enqueueBatch(env,job,job.id);continue}
    const r=await dispatchNotice(env,job,job.id);
    await env.PUSH_DB.prepare("UPDATE push_schedule SET status=?,total=?,accepted=?,failed=?,finished_at=CURRENT_TIMESTAMP WHERE id=?").bind(r.failed?'partial':'sent',r.total,r.accepted,r.failed,job.id).run();
   }catch{
    await env.PUSH_DB.prepare("UPDATE push_schedule SET status='failed',finished_at=CURRENT_TIMESTAMP WHERE id=?").bind(job.id).run();
   }
  }
+ await processBatches(env);
 }
 
 export default {async scheduled(event,env,ctx){ctx.waitUntil(runDue(env))},async fetch(req,env){
