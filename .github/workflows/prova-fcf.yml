@@ -11,6 +11,8 @@ jobs:
     timeout-minutes: 5
     steps:
       - uses: actions/checkout@v4
+      - name: Provar resposta API de partits FCF
+        run: python3 scripts/diagnostic-fcf-api.py
       - name: Localitzar endpoints de resultats FCF
         run: python3 scripts/diagnostic-fcf-endpoints.py
       - name: Inspeccionar chunks Next.js de resultats
