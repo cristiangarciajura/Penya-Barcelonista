@@ -21,6 +21,8 @@ jobs:
           from pathlib import Path
           p=Path('index.html')
           html=p.read_text(encoding='utf-8')
+          if len(html.strip()) < 1000 or '<html' not in html.lower() or '</body>' not in html.lower() or '</head>' not in html.lower():
+              raise SystemExit('ERROR: index.html no contiene una página HTML completa. Se cancela la publicación para proteger la portada.')
           import re
           html=re.sub(r'<link[^>]*news-carousel-enhancement[.]css[^>]*>', '', html)
           html=re.sub(r'<script[^>]*news-carousel-enhancement[.]js[^>]*>\s*</script>', '', html)
@@ -37,6 +39,8 @@ jobs:
               html=html.replace('</head>',quick_css+'</head>',1)
           if 'home-quick-links.js' not in html:
               html=html.replace('</body>',quick_js+'</body>',1)
+          if '</body>' not in html.lower() or '</head>' not in html.lower():
+              raise SystemExit('ERROR: HTML inválido tras integrar recursos; no se guarda ningún cambio.')
           p.write_text(html,encoding='utf-8')
           PY
       - name: Publicar cambios
