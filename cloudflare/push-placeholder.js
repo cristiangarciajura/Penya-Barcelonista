@@ -116,6 +116,13 @@ export default {async scheduled(event,env,ctx){ctx.waitUntil(runDue(env))},async
    return response({ok:true,message:'Prova enviada al dispositiu subscrit més recent. Comprova les notificacions del mòbil.',devices:1},200);
   }catch(e){return response({error:'No s’ha pogut enviar la prova: '+String(e?.message||'error inesperat').slice(0,140)},502)}
  }
+ if(u.pathname==='/api/push/admin/batches'&&req.method==='GET'){
+  if(!env.PUSH_INTERNAL_TOKEN||req.headers.get('Authorization')!=='Bearer '+env.PUSH_INTERNAL_TOKEN)return response({error:'Accés denegat'},403);
+  if(!env.PUSH_DB)return response({error:'Base de dades no disponible'},503);
+  await ensureBatches(env);
+  const q=await env.PUSH_DB.prepare('SELECT id,created_at,title,status,total,processed,accepted,failed FROM push_batches ORDER BY created_at DESC LIMIT 30').all();
+  return response({items:q.results||[]});
+ }
  if((u.pathname==='/api/push/admin/send'||u.pathname==='/api/push/admin/history')&&['GET','POST'].includes(req.method)){
   if(!env.PUSH_INTERNAL_TOKEN||req.headers.get('Authorization')!=='Bearer '+env.PUSH_INTERNAL_TOKEN)return response({error:'Accés denegat'},403);
   if(!env.PUSH_DB)return response({error:'Base de dades no disponible'},503);
@@ -133,7 +140,10 @@ export default {async scheduled(event,env,ctx){ctx.waitUntil(runDue(env))},async
   let rows;
   try{const q=await env.PUSH_DB.prepare('SELECT id,endpoint,p256dh,auth FROM push_subscriptions WHERE disabled_at IS NULL ORDER BY updated_at DESC LIMIT 21').all();rows=q.results||[]}catch{return response({error:'No es poden consultar els dispositius'},503)}
   if(!rows.length)return response({error:'No hi ha dispositius subscrits'},404);
-  if(rows.length>20)return response({error:'Hi ha més de 20 dispositius. Enviament aturat per seguretat fins a habilitar lots.'},409);
+  if(rows.length>20){
+   try{const id=crypto.randomUUID(),total=await enqueueBatch(env,{title,message,category,target},id);return response({ok:true,queued:true,id,total,message:'Enviament afegit a la cua per a '+total+' dispositius. Es processarà en lots de 10.'},202)}
+   catch(e){return response({error:'No s’ha pogut crear la cua: '+String(e?.message||'error')},503)}
+  }
   const id=crypto.randomUUID();let accepted=0,failed=0;
   for(const row of rows){
    try{const result=await sendWebPush(row,{title,body:message,url:target,tag:'pbsv-'+id},env);if(result.ok)accepted++;else{failed++;if(result.expired)await env.PUSH_DB.prepare('UPDATE push_subscriptions SET disabled_at=CURRENT_TIMESTAMP WHERE id=?').bind(row.id).run()}}catch{failed++}
