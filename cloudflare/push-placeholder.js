@@ -18,7 +18,40 @@ async function verifyTurnstile(token,env,req){
  if(!r.ok)return false;const v=await r.json();
  return v.success===true&&v.hostname==='cristiangarciajura.github.io';
 }
-export default {async fetch(req,env){
+
+const TARGETS=new Set(['./index.html','./index.html#noticies','./index.html#partits','./index.html#club','./avisos.html']);
+function validNotice(d){return d&&typeof d.title==='string'&&d.title.trim().length>0&&d.title.trim().length<=90&&typeof d.message==='string'&&d.message.trim().length>0&&d.message.trim().length<=240&&['match','news','event','urgent'].includes(d.category)&&TARGETS.has(d.target)}
+async function ensureSchedule(env){
+ await env.PUSH_DB.prepare("CREATE TABLE IF NOT EXISTS push_schedule (id TEXT PRIMARY KEY, created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP, due_at TEXT NOT NULL, category TEXT NOT NULL, title TEXT NOT NULL, message TEXT NOT NULL, target TEXT NOT NULL, status TEXT NOT NULL DEFAULT 'pending', total INTEGER, accepted INTEGER, failed INTEGER, finished_at TEXT)").run();
+}
+async function dispatchNotice(env,d,id){
+ const q=await env.PUSH_DB.prepare('SELECT id,endpoint,p256dh,auth FROM push_subscriptions WHERE disabled_at IS NULL ORDER BY updated_at DESC LIMIT 21').all();
+ const rows=q.results||[];
+ if(rows.length>20)throw Error('Més de 20 dispositius: enviament aturat fins a habilitar lots');
+ let accepted=0,failed=0;
+ for(const row of rows){
+  try{const r=await sendWebPush(row,{title:d.title,body:d.message,url:d.target,tag:'pbsv-'+id},env);if(r.ok)accepted++;else{failed++;if(r.expired)await env.PUSH_DB.prepare('UPDATE push_subscriptions SET disabled_at=CURRENT_TIMESTAMP WHERE id=?').bind(row.id).run()}}catch{failed++}
+ }
+ await env.PUSH_DB.prepare('INSERT INTO push_delivery_history (id,category,title,message,target,total,accepted,failed) VALUES (?,?,?,?,?,?,?,?)').bind(id,d.category,d.title,d.message,d.target,rows.length,accepted,failed).run();
+ return {total:rows.length,accepted,failed};
+}
+async function runDue(env){
+ if(!env.PUSH_DB||!env.PUSH_VAPID_PRIVATE_KEY||!env.PUSH_VAPID_PUBLIC_KEY)return;
+ await ensureSchedule(env);
+ const due=await env.PUSH_DB.prepare("SELECT * FROM push_schedule WHERE status='pending' AND due_at<=? ORDER BY due_at LIMIT 10").bind(new Date().toISOString()).all();
+ for(const job of due.results||[]){
+  const claim=await env.PUSH_DB.prepare("UPDATE push_schedule SET status='processing' WHERE id=? AND status='pending'").bind(job.id).run();
+  if(!claim.meta?.changes)continue;
+  try{
+   const r=await dispatchNotice(env,job,job.id);
+   await env.PUSH_DB.prepare("UPDATE push_schedule SET status=?,total=?,accepted=?,failed=?,finished_at=CURRENT_TIMESTAMP WHERE id=?").bind(r.failed?'partial':'sent',r.total,r.accepted,r.failed,job.id).run();
+  }catch{
+   await env.PUSH_DB.prepare("UPDATE push_schedule SET status='failed',finished_at=CURRENT_TIMESTAMP WHERE id=?").bind(job.id).run();
+  }
+ }
+}
+
+export default {async scheduled(event,env,ctx){ctx.waitUntil(runDue(env))},async fetch(req,env){
  const u=new URL(req.url),origin=req.headers.get('Origin'),cors=origin===ORIGIN;
  if(u.pathname==='/api/push/status'&&req.method==='GET'){
   let database=false;try{if(env.PUSH_DB){await env.PUSH_DB.prepare('SELECT 1 FROM push_subscriptions LIMIT 1').first();database=true}}catch{}
@@ -65,6 +98,31 @@ export default {async fetch(req,env){
   }
   try{await env.PUSH_DB.prepare('INSERT INTO push_delivery_history (id,category,title,message,target,total,accepted,failed) VALUES (?,?,?,?,?,?,?,?)').bind(id,category,title,message,target,rows.length,accepted,failed).run()}catch{return response({error:'Enviament processat, però no s’ha pogut desar l’historial.',accepted,failed},500)}
   return response({ok:failed===0,id,total:rows.length,accepted,failed,message:'Acceptats pel servei push: '+accepted+' de '+rows.length+'. Això no confirma la visualització al mòbil.'},200);
+ }
+ if(u.pathname.startsWith('/api/push/admin/schedule')){
+  if(!env.PUSH_INTERNAL_TOKEN||req.headers.get('Authorization')!=='Bearer '+env.PUSH_INTERNAL_TOKEN)return response({error:'Accés denegat'},403);
+  if(!env.PUSH_DB)return response({error:'Base de dades no disponible'},503);
+  try{await ensureSchedule(env)}catch{return response({error:'No es pot preparar la programació'},503)}
+  if(u.pathname==='/api/push/admin/schedule'&&req.method==='GET'){
+   const q=await env.PUSH_DB.prepare('SELECT id,created_at,due_at,category,title,message,target,status,total,accepted,failed FROM push_schedule ORDER BY created_at DESC LIMIT 40').all();
+   return response({items:q.results||[]});
+  }
+  if(u.pathname==='/api/push/admin/schedule'&&req.method==='POST'){
+   let d;try{d=await body(req)}catch{return response({error:'Dades incorrectes'},400)}
+   if(!validNotice(d))return response({error:'Avís incorrecte'},400);
+   const due=new Date(d.dueAt);
+   if(typeof d.dueAt!=='string'||!/^\\d{4}-\\d\\d-\\d\\dT\\d\\d:\\d\\d:\\d\\d(?:\\.\\d{3})?Z$/.test(d.dueAt)||!Number.isFinite(due.getTime())||due.getTime()<Date.now()+120000||due.getTime()>Date.now()+365*86400000)return response({error:'Escull una data entre 2 minuts i 1 any en el futur'},400);
+   const id=crypto.randomUUID();
+   await env.PUSH_DB.prepare('INSERT INTO push_schedule (id,due_at,category,title,message,target) VALUES (?,?,?,?,?,?)').bind(id,due.toISOString(),d.category,d.title.trim(),d.message.trim(),d.target).run();
+   return response({ok:true,id,dueAt:due.toISOString(),message:'Avís programat. El sistema comprova els enviaments cada minut.'},201);
+  }
+  if(u.pathname==='/api/push/admin/schedule/cancel'&&req.method==='POST'){
+   let d;try{d=await body(req)}catch{return response({error:'Dades incorrectes'},400)}
+   if(typeof d?.id!=='string'||!/^[a-f0-9-]{36}$/.test(d.id))return response({error:'Identificador incorrecte'},400);
+   const r=await env.PUSH_DB.prepare("UPDATE push_schedule SET status='cancelled' WHERE id=? AND status='pending'").bind(d.id).run();
+   return response({ok:!!r.meta?.changes,message:r.meta?.changes?'Programació cancel·lada':'Ja no es pot cancel·lar aquest avís'},r.meta?.changes?200:409);
+  }
+  return response({error:'Mètode no permès'},405);
  }
  if(!cors)return response({error:'Origen no permès'},403);
  if(req.method==='OPTIONS')return new Response(null,{status:204,headers:{...headers,'access-control-allow-origin':ORIGIN,'access-control-allow-methods':'GET,POST,DELETE,OPTIONS','access-control-allow-headers':'Content-Type','vary':'Origin'}});
