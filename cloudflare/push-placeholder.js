@@ -124,6 +124,14 @@ export default {async scheduled(event,env,ctx){ctx.waitUntil(runDue(env))},async
    return response({total:Number(q?.total||0),active:Number(q?.active||0),inactive:Number(q?.inactive||0),updatedAt:new Date().toISOString()});
   }catch{return response({error:'No es poden consultar les subscripcions'},503)}
  }
+ if(u.pathname==='/api/push/admin/audience'&&req.method==='GET'){
+  if(!env.PUSH_INTERNAL_TOKEN||req.headers.get('Authorization')!=='Bearer '+env.PUSH_INTERNAL_TOKEN)return response({error:'Accés denegat'},403);
+  if(!env.PUSH_DB)return response({error:'Base de dades no disponible'},503);
+  try{
+   const r=await env.PUSH_DB.prepare("SELECT COUNT(*) AS total, SUM(CASE WHEN disabled_at IS NULL THEN 1 ELSE 0 END) AS active, SUM(CASE WHEN disabled_at IS NOT NULL THEN 1 ELSE 0 END) AS inactive FROM push_subscriptions").first();
+   return response({total:Number(r?.total||0),active:Number(r?.active||0),inactive:Number(r?.inactive||0),updatedAt:new Date().toISOString()});
+  }catch{return response({error:'No es pot consultar el nombre de dispositius'},503)}
+ }
  if(u.pathname==='/api/push/admin/batches'&&req.method==='GET'){
   if(!env.PUSH_INTERNAL_TOKEN||req.headers.get('Authorization')!=='Bearer '+env.PUSH_INTERNAL_TOKEN)return response({error:'Accés denegat'},403);
   if(!env.PUSH_DB)return response({error:'Base de dades no disponible'},503);
