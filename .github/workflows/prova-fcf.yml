@@ -10,6 +10,9 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 5
     steps:
+      - uses: actions/checkout@v4
+      - name: Analitzar estructura HTML i possibles dades de partits
+        run: python3 scripts/diagnostic-fcf-pilot.py
       - name: Comprovar accessibilitat de les dues competicions
         shell: bash
         run: |
