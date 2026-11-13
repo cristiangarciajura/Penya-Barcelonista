@@ -44,6 +44,15 @@ export default {async fetch(req,env){
  if(path==='/auth/logout')return respond(null,302,{'Location':origin+'/','Set-Cookie':cookie('pbsv_session','',0)});
  const s=await session(req,env);
  if(path==='/api/me')return respond(JSON.stringify({authenticated:!!s,login:s?.login||null}),200,{'Content-Type':'application/json'});
+ if(path==='/api/push/subscribers'&&req.method==='GET'){
+  const json=(data,status)=>respond(JSON.stringify(data),status,{'Content-Type':'application/json'});
+  if(!s)return json({error:'Inicia sessió amb GitHub.'},401);
+  const identityResponse=await github('/user',s.token);if(!identityResponse.ok)return json({error:'Sessió caducada.'},401);
+  const identity=await identityResponse.json();if(identity.login?.toLowerCase()!==OWNER.toLowerCase())return json({error:'Accés denegat.'},403);
+  if(!env.PUSH_SERVICE||!env.PUSH_INTERNAL_TOKEN)return json({error:'Connexió privada no configurada.'},503);
+  try{const r=await env.PUSH_SERVICE.fetch('https://pbsv-push.internal/api/push/admin/subscribers',{headers:{Authorization:'Bearer '+env.PUSH_INTERNAL_TOKEN}});return respond(await r.text(),r.status,{'Content-Type':'application/json'})}
+  catch{return json({error:'No es poden consultar els dispositius.'},502)}
+ }
  if(path==='/api/push/batches'&&req.method==='GET'){
   const json=(data,status)=>respond(JSON.stringify(data),status,{'Content-Type':'application/json'});
   if(!s)return json({error:'Inicia sessió amb GitHub.'},401);
