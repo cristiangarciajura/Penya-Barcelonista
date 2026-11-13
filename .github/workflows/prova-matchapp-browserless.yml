@@ -1,0 +1,23 @@
+name: Prova final Matchapp amb Browserless
+on:
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  prova:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v4
+      - name: Diagnosticar web Matchapp
+        env:
+          BROWSERLESS_TOKEN: ${{ secrets.BROWSERLESS_TOKEN }}
+        run: python3 scripts/diagnostic-matchapp-browserless.py
+      - name: Guardar informe Matchapp
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: diagnostic-matchapp-browserless
+          path: captures-matchapp/*.json
+          if-no-files-found: ignore
+          retention-days: 2
