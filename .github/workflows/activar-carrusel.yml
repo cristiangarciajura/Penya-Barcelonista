@@ -30,12 +30,12 @@ jobs:
           import re
           # Versions explícites: la PWA no ha de servir scripts antics.
           resources=[
-              ('news-carousel-enhancement.css','<link rel="stylesheet" href="./news-carousel-enhancement.css?v=20261113-mobile2">','head'),
-              ('news-carousel-enhancement.js','<script src="./news-carousel-enhancement.js?v=20261113-mobile2" defer></script>','body'),
-              ('weekend-matches.css','<link rel="stylesheet" href="./weekend-matches.css?v=20261113-mobile2">','head'),
-              ('weekend-matches.js','<script src="./weekend-matches.js?v=20261113-mobile2" defer></script>','body'),
-              ('home-quick-links.css','<link rel="stylesheet" href="./home-quick-links.css?v=20261113-mobile2">','head'),
-              ('home-quick-links.js','<script src="./home-quick-links.js?v=20261113-mobile2" defer></script>','body'),
+              ('news-carousel-enhancement.css','<link rel="stylesheet" href="./news-carousel-enhancement.css?v=20261113-mobile3">','head'),
+              ('news-carousel-enhancement.js','<script src="./news-carousel-enhancement.js?v=20261113-mobile3" defer></script>','body'),
+              ('weekend-matches.css','<link rel="stylesheet" href="./weekend-matches.css?v=20261113-mobile3">','head'),
+              ('weekend-matches.js','<script src="./weekend-matches.js?v=20261113-mobile3" defer></script>','body'),
+              ('home-quick-links.css','<link rel="stylesheet" href="./home-quick-links.css?v=20261113-mobile3">','head'),
+              ('home-quick-links.js','<script src="./home-quick-links.js?v=20261113-mobile3" defer></script>','body'),
           ]
           for filename,tag,place in resources:
               html=re.sub(r'<script\b[^>]*'+re.escape(filename)+r'[^>]*>\s*</script>|<link\b[^>]*'+re.escape(filename)+r'[^>]*>', '', html, flags=re.I)
