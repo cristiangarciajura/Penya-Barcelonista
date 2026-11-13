@@ -9,6 +9,7 @@ on:
       - 'news-carousel-enhancement.css'
       - 'weekend-matches.js'
       - 'weekend-matches.css'
+      - 'directe-cap-setmana-link.js'
   workflow_dispatch:
 permissions:
   contents: write
@@ -36,6 +37,7 @@ jobs:
               ('weekend-matches.js','<script src="./weekend-matches.js?v=20261113-mobile3" defer></script>','body'),
               ('home-quick-links.css','<link rel="stylesheet" href="./home-quick-links.css?v=20261113-mobile3">','head'),
               ('home-quick-links.js','<script src="./home-quick-links.js?v=20261113-mobile3" defer></script>','body'),
+              ('directe-cap-setmana-link.js','<script src="./directe-cap-setmana-link.js?v=20261113-beta1" defer></script>','body'),
           ]
           for filename,tag,place in resources:
               html=re.sub(r'<script\b[^>]*'+re.escape(filename)+r'[^>]*>\s*</script>|<link\b[^>]*'+re.escape(filename)+r'[^>]*>', '', html, flags=re.I)
