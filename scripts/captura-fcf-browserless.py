@@ -15,7 +15,9 @@ endpoint = "https://production-sfo.browserless.io/screenshot?" + urlencode({"tok
 payload = json.dumps({
     "url": target,
     "options": {"type": "png", "fullPage": True},
-    "gotoOptions": {"waitUntil": "domcontentloaded", "timeout": 30000},
+    "gotoOptions": {"waitUntil": "networkidle2", "timeout": 30000},
+    "waitForFunction": {"fn": "() => /SANT ANDREU DE LA BARCA|SANT VICENÇ HORTS|Pª BARC/i.test(document.body.innerText)", "timeout": 18000},
+    "bestAttempt": True,
 }).encode()
 req = urllib.request.Request(endpoint, data=payload, headers={
     "Content-Type": "application/json",
