@@ -44,6 +44,22 @@ export default {async fetch(req,env){
  if(path==='/auth/logout')return respond(null,302,{'Location':origin+'/','Set-Cookie':cookie('pbsv_session','',0)});
  const s=await session(req,env);
  if(path==='/api/me')return respond(JSON.stringify({authenticated:!!s,login:s?.login||null}),200,{'Content-Type':'application/json'});
+ if(path==='/api/push/schedule'||path==='/api/push/schedule/cancel'){
+  const method=req.method;
+  if(!['GET','POST'].includes(method)||path.endsWith('/cancel')&&method!=='POST')return respond('Method not allowed',405);
+  const json=(data,status)=>respond(JSON.stringify(data),status,{'Content-Type':'application/json'});
+  if(method==='POST'&&(req.headers.get('Origin')!==origin||req.headers.get('X-PBSV-Action')!=='push-schedule'))return json({error:'Origen no permès'},403);
+  if(!s)return json({error:'Inicia sessió amb GitHub.'},401);
+  const identityResponse=await github('/user',s.token);if(!identityResponse.ok)return json({error:'Sessió GitHub caducada.'},401);
+  const identity=await identityResponse.json();if(identity.login?.toLowerCase()!==OWNER.toLowerCase())return json({error:'Accés denegat.'},403);
+  if(!env.PUSH_SERVICE||!env.PUSH_INTERNAL_TOKEN)return json({error:'Connexió privada no configurada.'},503);
+  let payload;
+  if(method==='POST'){try{const raw=await req.text();if(raw.length>4096)return json({error:'Dades massa grans'},413);payload=JSON.parse(raw)}catch{return json({error:'JSON incorrecte'},400)}}
+  try{
+   const upstream=await env.PUSH_SERVICE.fetch('https://pbsv-push.internal/api/push/admin/schedule'+(path.endsWith('/cancel')?'/cancel':''),{method,headers:{Authorization:'Bearer '+env.PUSH_INTERNAL_TOKEN,...(method==='POST'?{'Content-Type':'application/json'}:{})},...(method==='POST'?{body:JSON.stringify(payload)}:{})});
+   return respond(await upstream.text(),upstream.status,{'Content-Type':'application/json'});
+  }catch{return json({error:'No es pot contactar amb el servidor de notificacions.'},502)}
+ }
  if(path==='/api/push/send'||path==='/api/push/history'){
   const sending=path==='/api/push/send';
   if(req.method!==(sending?'POST':'GET'))return respond('Method not allowed',405);
