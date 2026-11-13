@@ -18,7 +18,6 @@ export default async ({page}) => {
    links:[...document.querySelectorAll('a[href]')].slice(0,15).map(a=>({text:a.innerText.slice(0,60),href:a.href.split('?')[0]})),
    deepLinks:[...document.querySelectorAll('a[href]')].filter(a=>/^(intent:|matchapp:|market:)/.test(a.href)).length
  }));
- await page.screenshot({path:'/tmp/matchapp.png',fullPage:true});
  return {data:{status,error,info,navigation:navigation.slice(-25)},type:'application/json'};
 };
 """
