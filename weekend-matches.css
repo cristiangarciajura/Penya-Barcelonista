@@ -1,1 +1,4 @@
 #home .pbsv-weekend-managed > :not(.pbsv-weekend-content){display:none!important}#home .pbsv-weekend-content{display:grid;gap:10px}#home .pbsv-weekend-photo{display:block;width:100%;max-height:280px;object-fit:cover;border-radius:12px}#home .pbsv-weekend-content h3{margin:0}#home .pbsv-weekend-date{font-weight:700;opacity:.8}
+/* No mostrar mai cartells incrustats antics mentre es consulta la jornada vigent. */
+#home article.news-card:has(.photo-open[data-poster]) img.news-photo:not([data-current-poster="yes"]){visibility:hidden!important}
+#home article.news-card:has(.photo-open[data-poster]) .photo-open:disabled{opacity:.55;pointer-events:none}
